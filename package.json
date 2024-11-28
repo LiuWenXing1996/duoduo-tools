@@ -1,0 +1,72 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm",
+    "commit": "commit",
+    "test": "echo 1"
+  },
+  "dependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
+    "@iconify/json": "^2.2.273",
+    "@monaco-editor/loader": "^1.4.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@types/figlet": "^1.7.0",
+    "@types/opencc-js": "^1.0.3",
+    "@vueuse/core": "^11.2.0",
+    "@vueuse/nuxt": "^11.2.0",
+    "camelcase": "^8.0.0",
+    "change-case": "^5.4.4",
+    "cnchar": "^3.2.6",
+    "cnchar-trad": "^3.2.6",
+    "copy-to-clipboard": "^3.3.3",
+    "crypto-js": "^4.2.0",
+    "figlet": "^1.8.0",
+    "lorem-ipsum": "^2.0.8",
+    "monaco-editor": "^0.52.0",
+    "naive-ui": "2.38.2",
+    "nitropack": "^2.9.7",
+    "nodemailer": "^6.9.16",
+    "nuxt": "^3.13.0",
+    "nuxtjs-naive-ui": "1.0.1",
+    "opencc-js": "^1.0.5",
+    "pinyin-pro": "^3.26.0",
+    "qr-code-styling": "^1.8.4",
+    "radash": "^12.1.0",
+    "tailwindcss": "^3.4.14",
+    "uuid": "^11.0.3",
+    "vue": "latest",
+    "vue-request": "^2.0.4",
+    "vue-router": "latest",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.4.0",
+    "@commitlint/prompt-cli": "19.4.1",
+    "@commitlint/types": "^19.4.0",
+    "@nuxt/icon": "^1.6.1",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@types/crypto-js": "^4.2.2",
+    "@types/nodemailer": "^6.4.16",
+    "@vue-macros/common": "^1.15.0",
+    "husky": "^9.1.6",
+    "less": "^4.2.0",
+    "perfect-debounce": "^1.0.0",
+    "prisma-zod-generator": "^0.8.13",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-vue-components": "^0.27.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "conventional-changelog-conventionalcommits": "^8.0.0"
+    }
+  }
+}
