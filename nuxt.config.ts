@@ -27,9 +27,6 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
   ],
   routeRules: {
-    "/**/**": { ssr: false },
-    "/system/**": { ssr: false },
-    "/tools-old/**": { ssr: false },
     "/tools/**": { ssr: false },
   },
   vite: {
@@ -74,5 +71,5 @@ export default defineNuxtConfig({
         recursive: true,
       });
     },
-  },
+  }
 });

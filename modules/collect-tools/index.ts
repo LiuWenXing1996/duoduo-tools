@@ -138,4 +138,12 @@ ${toolFileInfoList
       scanFiles();
     }
   });
+
+  nuxt.hook("prerender:routes", async (ctx) => {
+    const allRoutes: string[] = toolFileInfoList.map((e) => e.name);
+    for (const name of allRoutes) {
+      ctx.routes.add(`/tools/${name}`);
+    }
+    ctx.routes.add(`/tools`);
+  });
 });
