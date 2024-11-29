@@ -21,7 +21,7 @@
                                 })
                             }">
                                 <template #icon>
-                                    <svg-icon name="common/add"></svg-icon>
+                                    <svg-icon name="common-add"></svg-icon>
                                 </template>
                             </n-button>
                         </div>
@@ -57,7 +57,7 @@
                             model.colorStops = newColorStops
                         }">
                             <template #icon>
-                                <svg-icon name="common/delete" />
+                                <svg-icon name="common-delete" />
                             </template>
                         </n-button>
                     </div>

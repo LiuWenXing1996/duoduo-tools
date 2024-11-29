@@ -50,7 +50,7 @@
                                                 model.customDictionary.push({ from: '', to: '' })
                                             }">
                                                 <template #icon>
-                                                    <svg-icon name="common/add"></svg-icon>
+                                                    <svg-icon name="common-add"></svg-icon>
                                                 </template>
                                             </n-button>
                                             <n-button strong secondary circle size="tiny" @click.capture="(e) => {
@@ -64,7 +64,7 @@
                                                 model.customDictionary = newCustomDictionary
                                             }">
                                                 <template #icon>
-                                                    <svg-icon name="bx:transfer-alt" />
+                                                    <svg-icon name="common-transfer" />
                                                 </template>
                                             </n-button>
                                             <n-button strong secondary circle size="tiny" @click="() => {
@@ -80,7 +80,7 @@
                                                 <template #icon>
                                                     <svg-icon :class="{
                                                         'text-primary': !(model.customDictionary.find(e => !e.disabled))
-                                                    }" name="fe:disabled" />
+                                                    }" name="common-disabled" />
                                                 </template>
                                             </n-button>
                                         </n-space>
@@ -95,7 +95,7 @@
                                             <n-input v-model:value="item.from"></n-input>
                                         </n-form-item>
                                     </div>
-                                    <svg-icon name="lets-icons:transfer-long-right" />
+                                    <svg-icon name="common-transfer-long" />
                                     <div class="w-[50%] ml-[5px]">
                                         <n-form-item :show-label="false" label-placement="left" :show-feedback="false">
                                             <n-input v-model:value="item.to"></n-input>
@@ -110,7 +110,7 @@
                                             item.to = from
                                         }">
                                             <template #icon>
-                                                <svg-icon name="bx:transfer-alt" />
+                                                <svg-icon name="common-transfer" />
                                             </template>
                                         </n-button>
                                         <n-button strong secondary circle size="tiny" @click="() => {
@@ -119,7 +119,7 @@
                                             <template #icon>
                                                 <svg-icon :class="{
                                                     'text-primary': item.disabled
-                                                }" name="fe:disabled" />
+                                                }" name="common-disabled" />
                                             </template>
                                         </n-button>
                                         <n-button strong secondary circle size="tiny"
@@ -130,7 +130,7 @@
                                                 model.customDictionary = newCustomDictionary
                                             }">
                                             <template #icon>
-                                                <svg-icon name="common/delete" />
+                                                <svg-icon name="common-delete" />
                                             </template>
                                         </n-button>
                                     </n-space>

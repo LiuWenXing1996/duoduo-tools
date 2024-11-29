@@ -8,7 +8,7 @@
                     </span>
                     <n-tooltip trigger="hover" placement="right-start">
                         <template #trigger>
-                            <svg-icon class="ml-[2px] pb-[5px] text-[12px]" name="common/info" />
+                            <svg-icon class="ml-[2px] pb-[5px] text-[12px]" name="common-info" />
                         </template>
                         <div>
                             设置圆角会将二维码
