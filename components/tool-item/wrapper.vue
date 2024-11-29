@@ -1,11 +1,11 @@
 <template>
     <div :class="[
-        'size-full flex flex-col ',
+        'size-full flex flex-col-reverse ',
         vertical ? '' : 'md:flex-row'
     ]">
         <div :class="[
-            'w-full h-[50%] mb-[5px] rounded-[12px] border p-[10px]  ',
-            vertical ? '' : 'md:w-[50%] md:h-full md:mr-[5px] md:mb-[0px]',
+            'w-full h-[50%] mt-[5px] rounded-[12px] border p-[10px]  ',
+            vertical ? '' : 'md:w-[50%] md:h-full md:mr-[5px] md:mt-[0px]',
             verticalTopClass
         ]">
             <custom-scrollbar out-bar>
@@ -32,8 +32,8 @@
             </custom-scrollbar>
         </div>
         <div :class="[
-            'w-full h-[50%] mt-[5px]  rounded-[12px] border ',
-            vertical ? '' : 'md:w-[50%] md:h-full md:ml-[5px] md:mt-[0px]',
+            'w-full h-[50%] mb-[5px]  rounded-[12px] border ',
+            vertical ? '' : 'md:w-[50%] md:h-full md:ml-[5px] md:mb-[0px]',
             verticalBottomClass
         ]">
             <div class="size-full flex flex-col p-[10px]">
