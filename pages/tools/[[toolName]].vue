@@ -13,7 +13,7 @@
                 </div>
                 <div class="pr-[10px] flex">
                     <theme-button />
-                    <a href="https://github.com/LiuWenXing1996/web-tools" target="_blank"
+                    <a href="https://github.com/LiuWenXing1996/duoduo-tools" target="_blank"
                         :class="`h-full items-center justify-center flex pl-[2px]`">
                         <normal-icon name="mdi:github"
                             class="cursor-pointer  rounded-[6px] hover:bg-hoverColor"></normal-icon>
@@ -79,7 +79,7 @@ const router = useRouter();
 const home = router.resolve("/")
 const editTabs = useEditTabs();
 const title = computed(() => {
-    const mainTitle = "Web-Tools"
+    const mainTitle = "多多益善"
     const tool = findTool(editTabs.currentTabName.value || "")
     return `${tool?.meta?.title ? `${tool?.meta?.title} - ` : ''}${mainTitle}`
 })

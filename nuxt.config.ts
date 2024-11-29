@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     rootAttrs: {
       style: "height:100%;width:100%;",
     },
-    // baseURL: "/web-tools/",
     buildAssetsDir: "/static/",
   },
   // 如果要要在移动端浏览器调试网页，请打开配置

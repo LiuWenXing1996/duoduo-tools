@@ -1,6 +1,8 @@
-# Web Tools
+# DuoDuo Tools
 
-[预览](https://liuwenxing.tech/)
+多多益善工具箱，一个希望实现很多工具的工具箱
+
+[预览](https://duoduo.work/)
 
 # TODO
 

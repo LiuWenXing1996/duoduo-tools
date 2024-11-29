@@ -3,7 +3,7 @@ import { useStorage } from "@vueuse/core";
 const store = useStorage<{
   currentTabName: string | undefined;
   openedTabNames: string[];
-}>("web-tools-edit-tabs", {
+}>("duoduo-tools-edit-tabs", {
   currentTabName: undefined,
   openedTabNames: [],
 });
