@@ -1,6 +1,8 @@
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import { cpSync } from "node:fs";
+import path from "node:path";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -59,5 +61,18 @@ export default defineNuxtConfig({
   },
   experimental: {
     payloadExtraction: false,
+  },
+  hooks: {
+    "nitro:build:public-assets": (nitro) => {
+      console.log("nitro:build:public-assets");
+      const targetDir = path.join(
+        nitro.options.output.publicDir,
+        "static/node_modules/monaco-editor/min/vs"
+      );
+      console.log({ targetDir });
+      cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
+        recursive: true,
+      });
+    },
   },
 });
