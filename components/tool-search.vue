@@ -1,18 +1,11 @@
 <template>
     <div class="w-[200px]">
-        <n-auto-complete v-model:value="selectVal" placeholder="搜索工具" :options="toolsSearchOptions" clear-after-select
-            blur-after-select @select="handleSearch" />
-        <!-- <n-select placeholder="搜索工具" :show-checkmark="false" filterable :value="selectVal" :options="toolsSearchOptions"
-            @update:value="v => {
-                // TODO:封装Ta
-                console.log({ v })
-                selectVal = undefined
-                editTabs.addTab(v)
-            }" /> -->
+        <n-auto-complete v-model:value="selectVal" :placeholder="`搜索工具(共${allTools.length}个)`"
+            :options="toolsSearchOptions" clear-after-select blur-after-select @select="handleSearch" />
     </div>
 </template>
 <script setup lang="ts">
-import type { AutoCompleteOption, SelectOption } from 'naive-ui';
+import type { AutoCompleteOption } from 'naive-ui';
 import { pinyin } from 'pinyin-pro';
 
 const editTabs = useEditTabs();
