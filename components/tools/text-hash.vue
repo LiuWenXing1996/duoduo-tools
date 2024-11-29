@@ -37,7 +37,7 @@
                                 <template #trigger>
                                     <div class=" inline-flex">
                                         <svg-icon class="ml-[2px] pb-[5px] text-[12px] cursor-pointer"
-                                            name="material-symbols:content-copy" @click="handleCopy(text.result)" />
+                                            name="common/copy" @click="handleCopy(text.result)" />
                                     </div>
                                 </template>
                                 {{ `点击复制` }}

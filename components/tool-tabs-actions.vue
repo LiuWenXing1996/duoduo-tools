@@ -3,7 +3,7 @@
         <div
             class="flex justify-center items-center h-[24px] w-[24px] cursor-pointer  rounded-[6px] hover:bg-hoverColor">
             <svg-icon class="origin-center -rotate-90" size="16"
-                name="material-symbols-light:arrow-back-ios-new-rounded"></svg-icon>
+                name="tool-tabs-actions-arrow"></svg-icon>
         </div>
     </n-dropdown>
     <DefinePreferenceTemplate v-slot="{ iconName, label }">
@@ -27,7 +27,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:refresh-rounded",
+                    iconName: "tool-tabs-actions-refresh",
                     label: "刷新当前",
                 })
             },
@@ -36,7 +36,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:cancel-outline-rounded",
+                    iconName: "tool-tabs-actions-close",
                     label: "关闭当前",
                 })
             },
@@ -45,7 +45,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:tab-close-inactive-outline-rounded",
+                    iconName: "tool-tabs-actions-close-other",
                     label: "关闭其他",
                 })
             },
@@ -54,7 +54,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:tab-close-outline-rounded",
+                    iconName: "tool-tabs-actions-close-all",
                     label: "关闭所有",
                 })
             },

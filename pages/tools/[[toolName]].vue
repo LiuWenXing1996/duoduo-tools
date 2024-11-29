@@ -5,7 +5,7 @@
                 <div class="flex h-full items-center">
                     <a :href="home.href" target="_blank"
                         :class="`w-[50px] h-full items-center justify-center flex border-r hover:text-primary`">
-                        <normal-icon name="ri:tools-fill" class="cursor-pointer border rounded-[6px]"></normal-icon>
+                        <normal-icon name="logo" class="cursor-pointer border rounded-[6px]"></normal-icon>
                     </a>
                     <div class="ml-[10px]">
                         <tool-search />
@@ -15,7 +15,7 @@
                     <theme-button />
                     <a href="https://github.com/LiuWenXing1996/duoduo-tools" target="_blank"
                         :class="`h-full items-center justify-center flex pl-[2px]`">
-                        <normal-icon name="mdi:github"
+                        <normal-icon name="github"
                             class="cursor-pointer  rounded-[6px] hover:bg-hoverColor"></normal-icon>
                     </a>
                 </div>

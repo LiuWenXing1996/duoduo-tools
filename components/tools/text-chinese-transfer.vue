@@ -50,7 +50,7 @@
                                                 model.customDictionary.push({ from: '', to: '' })
                                             }">
                                                 <template #icon>
-                                                    <svg-icon name="material-symbols:add"></svg-icon>
+                                                    <svg-icon name="common/add"></svg-icon>
                                                 </template>
                                             </n-button>
                                             <n-button strong secondary circle size="tiny" @click.capture="(e) => {
@@ -130,7 +130,7 @@
                                                 model.customDictionary = newCustomDictionary
                                             }">
                                             <template #icon>
-                                                <svg-icon name="material-symbols:delete" />
+                                                <svg-icon name="common/delete" />
                                             </template>
                                         </n-button>
                                     </n-space>

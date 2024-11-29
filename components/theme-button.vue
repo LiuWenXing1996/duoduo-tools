@@ -1,8 +1,8 @@
 <template>
     <n-dropdown trigger="click" :options="options" @select="handleSelect" v-model:value="theme.preference.value">
-        <normal-icon v-if="theme.isDark.value" name="material-symbols:nightlight-badge-rounded"
+        <normal-icon v-if="theme.isDark.value" name="theme-dark-mode"
             class="cursor-pointer rounded-[6px] hover:bg-hoverColor"></normal-icon>
-        <normal-icon v-else name="material-symbols:light-mode-outline"
+        <normal-icon v-else name="theme-light-mode"
             class="cursor-pointer rounded-[6px] hover:bg-hoverColor"></normal-icon>
     </n-dropdown>
     <DefinePreferenceTemplate v-slot="{ iconName, label }">
@@ -25,7 +25,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:light-mode-outline",
+                    iconName: "theme-light-mode",
                     label: "亮色模式",
                 })
             },
@@ -34,7 +34,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:nightlight-badge-rounded",
+                    iconName: "theme-dark-mode",
                     label: "暗色模式",
                 })
             },
@@ -43,7 +43,7 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
-                    iconName: "material-symbols:laptop-mac-outline",
+                    iconName: "theme-system-mode",
                     label: "跟随系统",
                 })
             },

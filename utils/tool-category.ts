@@ -11,15 +11,15 @@ export interface ToolCategoryMeta {
 
 export const ToolCategoryMap: Record<ToolCategory, ToolCategoryMeta> = {
   [ToolCategory.dev]: {
-    icon: "iconoir:laptop-dev-mode",
+    icon: "tool-category-dev",
     title: "开发者工具",
   },
   [ToolCategory.text]: {
-    icon: "iconoir:text-square",
+    icon: "tool-category-text",
     title: "文本工具",
   },
   [ToolCategory.picture]: {
-    icon: "material-symbols:imagesmode-outline-rounded",
+    icon: "tool-category-img",
     title: "图片工具",
   },
 };

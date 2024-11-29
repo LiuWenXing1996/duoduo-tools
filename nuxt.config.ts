@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   //   host: "0",
   // },
   modules: [
-    "@nuxt/icon",
+    "nuxt-icons",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
     "@nuxtjs/color-mode",
@@ -54,18 +54,6 @@ export default defineNuxtConfig({
     },
   },
   pages: true,
-  icon: {
-    // mode: "svg",
-    serverBundle: {
-      collections: ["ep", "ic", "ri", "material-symbols", "iconoir"],
-    },
-    customCollections: [
-      {
-        prefix: "custom",
-        dir: "./assets/icons",
-      },
-    ],
-  },
   colorMode: {
     preference: "system",
   },

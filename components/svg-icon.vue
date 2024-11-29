@@ -1,7 +1,7 @@
 <template>
   <span class="flex items-center">
     <n-icon :size="size" :color="color" :depth="depth">
-      <icon :name="name" />
+      <nuxt-icon :name="name" :filled="!unFilled" />
     </n-icon>
   </span>
 </template>
