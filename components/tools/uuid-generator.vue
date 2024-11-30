@@ -4,7 +4,7 @@
             <n-form :model="model">
                 <tool-item-input-fieldset>
                     <template #label>
-                        文本
+                        配置
                     </template>
                     <n-form-item path="version" first>
                         <template #label>
