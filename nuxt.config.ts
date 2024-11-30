@@ -49,7 +49,7 @@ export default defineNuxtConfig({
       }),
     ],
     ssr: {
-      noExternal: ["naive-ui", "date-fns", "crypto-js"],
+      noExternal: ["naive-ui", "date-fns", "crypto-js", "vueuc"],
     },
   },
   pages: true,
@@ -71,5 +71,5 @@ export default defineNuxtConfig({
         recursive: true,
       });
     },
-  }
+  },
 });
