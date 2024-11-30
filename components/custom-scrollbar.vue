@@ -14,11 +14,40 @@
 defineSlots<{
     default(): any
 }>()
-defineProps<{
-    outBar?: boolean
+const props = defineProps<{
+    outBar?: boolean,
+    bottom?: number
 }>()
+const bottomPx = computed(() => `${props.bottom}px`)
 </script>
 <style lang="less" scoped>
+.custom-n-scrollbar {
+    :deep(> .n-scrollbar) {
+        >.n-scrollbar-rail {
+            bottom: v-bind(bottomPx);
+        }
+
+        >.n-scrollbar-rail--vertical {
+            margin-bottom: 10px;
+            width: 4px;
+
+            .n-scrollbar-rail__scrollbar {
+                width: 4px;
+            }
+        }
+
+        >.n-scrollbar-rail--horizontal {
+            margin-right: 10px;
+            height: 4px;
+
+            .n-scrollbar-rail__scrollbar {
+                height: 4px;
+            }
+        }
+    }
+
+}
+
 .custom-n-scrollbar.out-bar {
     :deep(> .n-scrollbar) {
         padding-bottom: 10px;

@@ -47,6 +47,7 @@
     "vue": "latest",
     "vue-request": "^2.0.4",
     "vue-router": "latest",
+    "vueuc": "^0.4.64",
     "zod": "^3.23.8"
   },
   "devDependencies": {

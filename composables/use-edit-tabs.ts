@@ -7,9 +7,22 @@ const store = useStorage<{
   currentTabName: undefined,
   openedTabNames: [],
 });
+watch(
+  () => store.value.currentTabName,
+  () => {
+    const router = useRouter();
+    console.log(router);
+    if (store.value.currentTabName) {
+      nextTick(() => {
+        router.push(`/tools/${store.value.currentTabName}`);
+      });
+    } else {
+      router.push(`/tools`);
+    }
+  }
+);
 
 export const useEditTabs = () => {
-  const router = useRouter();
   const openedTabNames = computed(() => [...store.value.openedTabNames]);
   const currentTabName = computed(() => store.value.currentTabName);
   const addTab = (name: string) => {
@@ -25,9 +38,13 @@ export const useEditTabs = () => {
   const removeTab = (name: string) => {
     const oldOpenedTabNames = [...store.value.openedTabNames];
     const newOpenedTabNames = oldOpenedTabNames.filter((e) => e !== name);
+    const newCurrentTabName =
+      currentTabName.value === name
+        ? newOpenedTabNames[0]
+        : currentTabName.value;
     store.value = {
       openedTabNames: newOpenedTabNames,
-      currentTabName: newOpenedTabNames[0],
+      currentTabName: newCurrentTabName,
     };
   };
   const activeTab = (name: string) => {
@@ -54,16 +71,7 @@ export const useEditTabs = () => {
       currentTabName: undefined,
     };
   };
-  watch(
-    () => store.value.currentTabName,
-    () => {
-      if (store.value.currentTabName) {
-        router.push(`/tools/${store.value.currentTabName}`);
-      } else {
-        router.push(`/tools`);
-      }
-    }
-  );
+
   return {
     openedTabNames,
     currentTabName,
