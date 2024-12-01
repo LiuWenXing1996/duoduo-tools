@@ -40,7 +40,7 @@
             </n-form>
         </template>
         <template #output>
-            <div class=" break-words">{{ textRes }}</div>
+            <div class="break-all">{{ textRes }}</div>
         </template>
         <template #actions>
             <n-space>
