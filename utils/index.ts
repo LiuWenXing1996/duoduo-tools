@@ -71,6 +71,28 @@ export const sortByPinyin = <T>(
   return sortedList;
 };
 
+export const validatePassword = (str: string) => {
+  if (!str) {
+    return false;
+  }
+  if (str.length < 8) {
+    return false;
+  }
+  const regex = /^[a-zA-Z0-9]*$/;
+  return regex.test(str);
+};
+
+export const validateUserName = (str: string) => {
+  if (!str) {
+    return false;
+  }
+  if (str.length < 4) {
+    return false;
+  }
+  const regex = /^[a-zA-Z0-9\u4E00-\u9FA5]*$/;
+  return regex.test(str);
+};
+
 export function downloadURI(uri: string, name: string): void {
   const link = document.createElement("a");
   link.download = name;

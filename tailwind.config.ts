@@ -8,6 +8,8 @@ export default <Partial<Config>>{
         primaryActiveBg: "rgb(from var(--naive-primary-color) r g b / 0.1)",
         secondary: "var(--naive-button-color2)",
         hoverColor: "var(--naive-hover-color)",
+        bgLight: "var(--bg-light)",
+        bgDark: "var(--bg-dark)",
       },
     },
   },

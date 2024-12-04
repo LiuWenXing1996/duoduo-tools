@@ -119,11 +119,6 @@ ${toolFileInfoList
       as: "ToolName",
       from: resolver.resolve(`runtime/names`),
     },
-    {
-      name: "defineToolMeta",
-      as: "defineToolMeta",
-      from: resolver.resolve("runtime/define"),
-    },
   ]);
   await scanFiles();
   nuxt.hook("builder:watch", async (event, path, ...rest) => {

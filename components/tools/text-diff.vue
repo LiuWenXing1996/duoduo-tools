@@ -60,6 +60,9 @@ watch([
     () => monacoLoader.lib.value,
     () => editorContainerRef.value
 ], ([monaco, editorContainer]) => {
+    if (editor) {
+        return
+    }
 
     if (monaco && editorContainer) {
         editor = monaco.editor.createDiffEditor(editorContainer, {

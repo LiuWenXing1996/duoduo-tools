@@ -5,9 +5,9 @@ export const useMonacoLoader = () => {
   const home = router.resolve("/static/node_modules/monaco-editor/min/vs");
   loader.config({
     "vs/nls": { availableLanguages: { "*": "zh-cn" } },
-    paths: {
-      vs: home.href,
-    },
+    // paths: {
+    //   vs: home.href,
+    // },
   });
   const store = shallowRef<{
     lib: Monaco | undefined;

@@ -58,6 +58,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     payloadExtraction: false,
+    asyncContext: true,
   },
   hooks: {
     "nitro:build:public-assets": (nitro) => {
@@ -71,5 +72,27 @@ export default defineNuxtConfig({
         recursive: true,
       });
     },
+  },
+  autoImportTypes: {
+    dirs: [
+      {
+        path: "~/components",
+        import: "Props",
+        prefix: "",
+        suffix: "ComponentProps",
+      },
+      {
+        path: "~/components",
+        import: "Model",
+        prefix: "",
+        suffix: "ComponentModel",
+      },
+      {
+        path: "~/server/api",
+        import: "Params",
+        prefix: "",
+        suffix: "ApiParams",
+      },
+    ],
   },
 });

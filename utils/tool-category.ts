@@ -2,11 +2,13 @@ export enum ToolCategory {
   dev = "dev",
   text = "text",
   picture = "picture",
+  admin = "admin",
 }
 
 export interface ToolCategoryMeta {
   icon: string;
   title: string;
+  auth?: ToolMetaAuth;
 }
 
 export const ToolCategoryMap: Record<ToolCategory, ToolCategoryMeta> = {
@@ -21,5 +23,10 @@ export const ToolCategoryMap: Record<ToolCategory, ToolCategoryMeta> = {
   [ToolCategory.picture]: {
     icon: "tool-category-img",
     title: "图片工具",
+  },
+  [ToolCategory.admin]: {
+    icon: "tool-category-admin",
+    auth: ToolMetaAuth.admin,
+    title: "后台工具",
   },
 };

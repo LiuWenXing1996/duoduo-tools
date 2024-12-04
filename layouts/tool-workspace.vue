@@ -18,6 +18,7 @@
                         <normal-icon name="github"
                             class="cursor-pointer  rounded-[6px] hover:bg-hoverColor"></normal-icon>
                     </a>
+                    <user-avatar />
                 </div>
             </div>
             <div class="h-[calc(100%-50px)] flex">
@@ -73,6 +74,12 @@
                             <div class="h-[calc(100%-40px)] w-full">
                                 <div class="size-full p-[10px]">
                                     <slot></slot>
+                                    <!-- 此处直接渲染内容，具体原因参照[pages/tools/toolName] -->
+                                    <template v-for="item in editTabs.openedTabNames.value">
+                                        <div class="size-full" v-show="item === editTabs.currentTabName.value">
+                                            <tool-item-render :name="item" />
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </template>
@@ -93,9 +100,14 @@
 <script setup lang="ts">
 import type { SelectOption } from 'naive-ui';
 import { XScroll } from 'vueuc'
+import { first } from 'radash';
 const router = useRouter();
+const route = useRoute();
 const home = router.resolve("/")
 const editTabs = useEditTabs();
+const toolName = computed(
+    () => first(arraify(route.params.toolName)) || undefined
+);
 const title = computed(() => {
     const mainTitle = "多多益善"
     const tool = findTool(editTabs.currentTabName.value || "")
@@ -104,21 +116,47 @@ const title = computed(() => {
 useHead({
     title: title
 })
+const currentUser = useCurrentUser();
+
 const allTools = getAllTools();
-const sideBarOptions = sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name).map(([name, meta]) => {
-    const toolList = allTools.filter(tool => tool.meta?.category === name);
-    const toolListSorted = sortByPinyin(toolList, (val) => val.meta?.title || val.name);
-    const list: SelectOption[] = toolListSorted.map(tool => {
-        return {
-            label: tool.meta?.title || tool.name,
-            value: tool.name
-        }
-    })
-    return {
-        name,
-        ...meta,
-        list
-    }
+const sideBarOptions = computed(() => {
+    const user = currentUser.current.value;
+    return sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name)
+        .filter(([name, meta]) => {
+            if (!meta.auth) {
+                return true
+            }
+            if (meta.auth === ToolMetaAuth.user) {
+                if (user) {
+                    return true
+                }
+            }
+            if (meta.auth === ToolMetaAuth.admin) {
+                if (user && (user.isAdmin || user?.isSuper)) {
+                    return true
+                }
+            }
+            if (meta.auth === ToolMetaAuth.super) {
+                if (user && user?.isSuper) {
+                    return true
+                }
+            }
+            return false
+        }).map(([name, meta]) => {
+            const toolList = allTools.filter(tool => tool.meta?.category === name);
+            const toolListSorted = sortByPinyin(toolList, (val) => val.meta?.title || val.name);
+            const list: SelectOption[] = toolListSorted.map(tool => {
+                return {
+                    label: tool.meta?.title || tool.name,
+                    value: tool.name
+                }
+            })
+            return {
+                name,
+                ...meta,
+                list
+            }
+        })
 })
 const toolTabs = computed(() => {
     return editTabs.openedTabNames.value.map(toolName => {
@@ -132,5 +170,15 @@ const toolTabs = computed(() => {
 const hasOpenedTabs = computed(() => {
     return editTabs.openedTabNames.value.length > 0
 })
+watch(toolName, () => {
+    if (toolName.value) {
+        if (toolName.value !== editTabs.currentTabName.value) {
+            editTabs.addTab(toolName.value)
+        }
+    }
+}, {
+    immediate: true
+})
+
 
 </script>

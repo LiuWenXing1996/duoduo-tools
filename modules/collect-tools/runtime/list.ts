@@ -1,6 +1,5 @@
 import { list } from "#build/collect-tools/list";
 import type { VNodeChild } from "vue";
-import type { ToolMeta } from "./define";
 
 export interface Tool {
   name: string;

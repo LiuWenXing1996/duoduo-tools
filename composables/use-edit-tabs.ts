@@ -11,10 +11,11 @@ watch(
   () => store.value.currentTabName,
   () => {
     const router = useRouter();
-    console.log(router);
     if (store.value.currentTabName) {
       nextTick(() => {
-        router.push(`/tools/${store.value.currentTabName}`);
+        router.push({
+          path: `/tools/${store.value.currentTabName}`,
+        });
       });
     } else {
       router.push(`/tools`);
