@@ -1,9 +1,11 @@
 import { list } from "#build/collect-tools/list";
-import type { VNodeChild } from "vue";
+import type { Component, VNodeChild } from "vue";
 
 export interface Tool {
   name: string;
-  content: () => VNodeChild;
+  content: () => Promise<{
+    default: Component;
+  }>;
   meta?: ToolMeta;
 }
 

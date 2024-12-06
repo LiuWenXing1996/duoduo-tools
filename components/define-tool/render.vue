@@ -1,12 +1,12 @@
 <template>
     <div class="size-full">
-        <n-spin :show="loading" size="small" class="size-full" :content-class="[
+        <n-spin :show="loading || contentComponentRequest.loading.value" size="small" class="size-full" :content-class="[
             'size-full',
             loading ? '!opacity-0' : ''
         ].join(' ')">
             <template v-if="tool">
                 <template v-if="hasAuth">
-                    <component :is="tool.content"></component>
+                    <component :is="contentComponentRequest.data.value"></component>
                 </template>
                 <template v-else>
                     <div class="size-full flex items-center justify-center">
@@ -31,12 +31,32 @@ const loadingKeep = useAutoBoolean({
     time: 600,
     init: false
 })
+const editTabs = useEditTabs()
+const loaded = ref(false);
 loadingKeep.toggle()
 const toolRenderInjectHelper = useToolRenderInjectHelper();
 toolRenderInjectHelper.provide(refs.name)
 const tool = computed(() => {
     return findTool(props.name)
 });
+const contentComponentRequest = useCustomRequest(async () => {
+    console.log(`load ${props.name}`)
+    if (!tool.value?.content) {
+        return undefined
+    }
+    const res = (await tool.value.content()).default;
+    return res
+})
+
+watch(() => editTabs.currentTabName.value, (currentTabNameValue) => {
+    if (currentTabNameValue === props.name && loaded.value == false) {
+        loaded.value = true;
+        contentComponentRequest.runAsync()
+    }
+}, {
+    immediate: true
+})
+
 const currentUser = useCurrentUser();
 const loading = computed(() => {
     return loadingKeep.content.value || currentUser.userRequest.loading.value

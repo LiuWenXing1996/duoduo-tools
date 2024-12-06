@@ -15,6 +15,7 @@ import path from "node:path";
 export interface ToolFileInfo {
   name: string;
   filepath: string;
+  targetPath: string;
 }
 
 const listFiles = async (dir?: string) => {
@@ -34,6 +35,8 @@ const listFiles = async (dir?: string) => {
 
 export default defineNuxtModule(async (options, nuxt) => {
   const resolver = createResolver(import.meta.url);
+  const buildDir = nuxt.options.buildDir;
+  const outDir = "./collect-tools";
   enum contentFiles {
     "names" = "collect-tools/names.ts",
     "list" = "collect-tools/list.ts",
@@ -48,7 +51,7 @@ export default defineNuxtModule(async (options, nuxt) => {
     write: true,
     getContents: () => {
       const formatComponentName = (name: string) => {
-        const fullName = `${contentComponentDirName}-${name}`;
+        const fullName = `Lazy-${contentComponentDirName}-${name}`;
         const pascalCaseName = camelcase(fullName, {
           pascalCase: true,
         });
@@ -65,7 +68,8 @@ export const list = [
     ?.map((e) => {
       return `{
       name: "${e.name}",
-      content: () => h(${formatComponentName(e.name)}),
+      // content: () => h(${formatComponentName(e.name)}),
+      content:()=>import('${e.targetPath}'),
       meta:${formatComponentName(e.name)}.toolMeta
   }`;
     })
@@ -92,12 +96,17 @@ ${toolFileInfoList
 
   const scanFiles = debounce(async () => {
     const files = await listFiles(contentComponentPath);
+
     toolFileInfoList = files.map((f) => {
+      const targetPath = path.relative(path.join(buildDir, outDir), f);
       return {
         name: path.basename(f, path.extname(f)),
         filepath: f,
+        targetPath,
       };
     });
+    console.log({ files, toolFileInfoList });
+
     await updateTemplates({
       filter: (e) =>
         e.filename === contentFiles.list || e.filename === contentFiles.names,
