@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DEPLOY_SERVER_PASSWORD }}
           port: ${{ secrets.DEPLOY_SERVER_PORT }}
           source: "release-${{ env.TIME }}.tgz"
-          target: "~/home/duoduo-tools/release-list"
+          target: "/home/duoduo-tools/release-list"
           timeout: 1000s
       - name: start app on server
         uses: appleboy/ssh-action@v1.2.0
@@ -46,6 +46,6 @@ jobs:
           password: ${{ secrets.DEPLOY_SERVER_PASSWORD }}
           port: ${{ secrets.DEPLOY_SERVER_PORT }}
           script: |
-            cd ~/home/duoduo-tools
+            cd /home/duoduo-tools
             mkdir ./app
             tar zxvf ./release-list/release-${{ env.TIME }}.tgz -C ./app
