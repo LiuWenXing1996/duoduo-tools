@@ -64,17 +64,17 @@ export default defineNuxtConfig({
     asyncContext: true,
   },
   hooks: {
-    "nitro:build:public-assets": (nitro) => {
-      console.log("nitro:build:public-assets");
-      const targetDir = path.join(
-        nitro.options.output.publicDir,
-        "static/node_modules/monaco-editor/min/vs"
-      );
-      console.log({ targetDir });
-      cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
-        recursive: true,
-      });
-    },
+    // "nitro:build:public-assets": (nitro) => {
+    //   console.log("nitro:build:public-assets");
+    //   const targetDir = path.join(
+    //     nitro.options.output.publicDir,
+    //     "static/node_modules/monaco-editor/min/vs"
+    //   );
+    //   console.log({ targetDir });
+    //   cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
+    //     recursive: true,
+    //   });
+    // },
   },
   autoImportTypes: {
     dirs: [
