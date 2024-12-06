@@ -49,3 +49,5 @@ jobs:
             cd /home/duoduo-tools
             mkdir ./app
             tar zxvf ./release-list/release-${{ env.TIME }}.tgz -C ./app
+            pm2 reload ecosystem.config.cjs
+
