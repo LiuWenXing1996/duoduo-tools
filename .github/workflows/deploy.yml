@@ -24,7 +24,7 @@ jobs:
         run: pnpm build
       - name: set time
         run: |
-          TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d-%H:%M:%S')"
+          TIME="$(TZ='Asia/Shanghai' date +'%Y%m%d%H%M%S')"
           echo "TIME=$TIME" >> $GITHUB_ENV
       - name: zip
         run: tar -zcvf release-${{ env.TIME }}.tgz -C .output .
