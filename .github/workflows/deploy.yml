@@ -1,8 +1,8 @@
-name: docs
+name: deploy
 on:
   workflow_dispatch:
 jobs:
-  docs:
+  deploy:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
