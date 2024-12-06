@@ -4,7 +4,7 @@ on:
 jobs:
   deploy:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04.1
     steps:
       - name: checkout code repository
         uses: actions/checkout@v3
@@ -13,7 +13,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22.12.0
       - name: install pnpm
         run: npm i pnpm@latest -g
       - name: setup pnpm config
