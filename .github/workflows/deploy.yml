@@ -37,6 +37,7 @@ jobs:
           port: ${{ secrets.DEPLOY_SERVER_PORT }}
           source: "release-${{ env.TIME }}.tgz"
           target: "~/home/duoduo-tools/release-list"
+          timeout: 1000s
       - name: start app on server
         uses: appleboy/ssh-action@v1.2.0
         with:
