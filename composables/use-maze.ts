@@ -1,4 +1,4 @@
-import { random, range, shuffle } from "radash";
+import { range, shuffle } from "radash";
 
 export class MazePoint {
   row: number;
@@ -33,14 +33,14 @@ export class MazeDraw {
     const col = this.maze.col;
     const space = this.space;
     const margin = this.margin;
-    canvas.width = col * 2 * space + margin * 2;
-    canvas.height = row * 2 * space + margin * 2;
+    canvas.width = row * 2 * space + margin * 2;
+    canvas.height = col * 2 * space + margin * 2;
   }
   calcPointPxLocate(point: MazePoint) {
     const space = this.space;
     return {
-      x: point.col * 2 * space,
-      y: point.row * 2 * space,
+      x: point.row * 2 * space,
+      y: point.col * 2 * space,
     };
   }
   drawBg(color: string) {
@@ -120,9 +120,9 @@ export class MazeDraw {
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.moveTo(margin, margin);
-    ctx.lineTo(margin + col * 2 * space, margin);
-    ctx.lineTo(margin + col * 2 * space, margin + row * 2 * space);
-    ctx.lineTo(margin, margin + row * 2 * space);
+    ctx.lineTo(margin + row * 2 * space, margin);
+    ctx.lineTo(margin + row * 2 * space, margin + col * 2 * space);
+    ctx.lineTo(margin, margin + col * 2 * space);
     ctx.closePath();
     ctx.stroke();
   }
