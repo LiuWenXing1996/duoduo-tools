@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        文本
-                    </template>
+                <define-tool-area label="文本">
                     <n-form-item path="text" first>
                         <template #label>
                             <div class="inline-flex">
@@ -16,7 +13,7 @@
                         </template>
                         <n-input clearable placeholder="输入单词" v-model:value="model.text" />
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -55,7 +52,7 @@
                 </n-descriptions-item>
             </n-descriptions>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script lang="ts">
 export const methods: {

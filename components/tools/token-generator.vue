@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        配置
-                    </template>
+                <define-tool-area label="配置">
                     <n-form-item path="withUppercase" first label="大写字母">
                         <n-switch v-model:value="model.withUppercase" />
                     </n-form-item>
@@ -21,7 +18,7 @@
                     <n-form-item path="length" first label="长度">
                         <n-input-number v-model:value="model.length" :min="1" :step="8" />
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -35,7 +32,7 @@
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import { shuffle } from 'radash';

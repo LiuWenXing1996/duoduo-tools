@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        配置
-                    </template>
+                <define-tool-area label="配置">
                     <n-form-item path="count" first label="段落数量">
                         <n-input-number v-model:value="model.count" :min="1" />
                     </n-form-item>
@@ -33,7 +30,7 @@
                             </n-space>
                         </n-radio-group>
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -46,7 +43,7 @@
                 <n-button size="small" @click="handleCopy">复制</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script lang="ts">
 export type Model = {

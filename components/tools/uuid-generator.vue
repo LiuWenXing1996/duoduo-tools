@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        配置
-                    </template>
+                <define-tool-area label="配置">
                     <n-form-item path="version" first>
                         <template #label>
                             <div class="inline-flex">
@@ -48,7 +45,7 @@
                             <n-input v-model:value="model.options.name"></n-input>
                         </n-form-item>
                     </template>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -86,7 +83,7 @@
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script lang="ts">
 export type Model = {

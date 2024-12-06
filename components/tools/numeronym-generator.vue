@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        文本
-                    </template>
+                <define-tool-area label="文本">
                     <n-form-item path="text" first>
                         <template #label>
                             <div class="inline-flex">
@@ -16,7 +13,7 @@
                         </template>
                         <n-input clearable placeholder="输入文本" v-model:value="model.text" />
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -29,7 +26,7 @@
                 <n-button size="small" @click="handleCopy">复制</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script lang="ts">
 export type Model = {

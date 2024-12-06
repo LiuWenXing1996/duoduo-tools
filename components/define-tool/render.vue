@@ -1,6 +1,9 @@
 <template>
     <div class="size-full">
-        <n-spin :show="currentUser.userRequest.loading.value" size="small" class="size-full" content-class="size-full">
+        <n-spin :show="loading" size="small" class="size-full" :content-class="[
+            'size-full',
+            loading ? '!opacity-0' : ''
+        ].join(' ')">
             <template v-if="tool">
                 <template v-if="hasAuth">
                     <component :is="tool.content"></component>
@@ -24,12 +27,20 @@ const props = defineProps<{
     name: string
 }>()
 const refs = toRefs(props)
+const loadingKeep = useAutoBoolean({
+    time: 600,
+    init: false
+})
+loadingKeep.toggle()
 const toolRenderInjectHelper = useToolRenderInjectHelper();
 toolRenderInjectHelper.provide(refs.name)
 const tool = computed(() => {
     return findTool(props.name)
 });
 const currentUser = useCurrentUser();
+const loading = computed(() => {
+    return loadingKeep.content.value || currentUser.userRequest.loading.value
+})
 const noAuthTip = computed(() => {
     const toolAuth = tool.value?.meta?.auth;
     if (toolAuth === ToolMetaAuth.user) {
@@ -51,24 +62,19 @@ const hasAuth = computed(() => {
     if (toolAuth === ToolMetaAuth.user) {
         if (currentUser.current.value) {
             return true
-        } else {
-            return false
         }
     }
     if (toolAuth === ToolMetaAuth.admin) {
         if (currentUser.current.value && (currentUser.current.value.isAdmin || currentUser.current.value.isSuper)) {
             return true
-        } else {
-            return false
         }
     }
 
     if (toolAuth === ToolMetaAuth.super) {
         if (currentUser.current.value && currentUser.current.value.isSuper) {
             return true
-        } else {
-            return false
         }
     }
+    return false
 })
 </script>

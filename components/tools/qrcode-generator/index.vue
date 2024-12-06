@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        内容
-                    </template>
+                <define-tool-area label="内容">
                     <n-form-item path="data" first label="文本">
                         <n-input clearable placeholder="输入内容" v-model:value="model.data" type="textarea" :rows="3" />
                     </n-form-item>
@@ -33,37 +30,22 @@
                     <n-form-item path="errorCorrectionLevel" first label="纠错级别">
                         <n-select v-model:value="model.errorCorrectionLevel" :options="errorCorrectionLevelOptions" />
                     </n-form-item>
-                </tool-item-input-fieldset>
-                <tool-item-input-fieldset>
-                    <template #label>
-                        图标
-                    </template>
+                </define-tool-area>
+                <define-tool-area label="图标">
                     <tools-qrcode-generator-logo-options-form ref="logoOptions" />
-                </tool-item-input-fieldset>
-                <tool-item-input-fieldset>
-                    <template #label>
-                        背景
-                    </template>
+                </define-tool-area>
+                <define-tool-area label="背景">
                     <tools-qrcode-generator-background-options-form ref="backgroundOptions" />
-                </tool-item-input-fieldset>
-                <tool-item-input-fieldset>
-                    <template #label>
-                        信息点
-                    </template>
+                </define-tool-area>
+                <define-tool-area label="信息点">
                     <tools-qrcode-generator-dots-options-form ref="dotsOptions" />
-                </tool-item-input-fieldset>
-                <tool-item-input-fieldset>
-                    <template #label>
-                        定位点
-                    </template>
+                </define-tool-area>
+                <define-tool-area label="定位点">
                     <tools-qrcode-generator-corners-options-form ref="cornersOptions" />
-                </tool-item-input-fieldset>
-                <tool-item-input-fieldset>
-                    <template #label>
-                        定位点边框
-                    </template>
+                </define-tool-area>
+                <define-tool-area label="定位点边框">
                     <tools-qrcode-generator-corners-square-options-form ref="cornersSquareOptions" />
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -85,7 +67,7 @@
                 <n-button size="small" @click="scaleSub">缩小</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';

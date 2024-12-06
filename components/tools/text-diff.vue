@@ -1,6 +1,20 @@
 <template>
-    <tool-item-wrapper vertical output-label="对比" output-auto-scroll-disabled vertical-top-class="!h-[20%]"
-        vertical-bottom-class="!h-[80%]">
+    <define-tool-wrapper :vertical="{
+        enabled: true,
+        top: {
+            class: '!h-[20%]'
+        },
+        bottom: {
+            class: '!h-[80%]'
+        }
+    }" :output="{
+        scroll: {
+            disabled: true
+        },
+        area: {
+            label: '对比'
+        }
+    }">
         <template #output>
             <div class="relative size-full ">
                 <div class="absolute top-0 bottom-0 left-0 right-0">
@@ -10,7 +24,7 @@
                 </div>
             </div>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import type * as monacoType from 'monaco-editor';

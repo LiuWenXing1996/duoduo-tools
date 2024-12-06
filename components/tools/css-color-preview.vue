@@ -1,15 +1,12 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        颜色
-                    </template>
+                <define-tool-area label="颜色">
                     <n-form-item label="输入" path="color" first>
                         <n-input clearable placeholder="输入合法色值" v-model:value="model.color" />
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -22,7 +19,7 @@
                 <n-empty description="无效色值" />
             </template>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';

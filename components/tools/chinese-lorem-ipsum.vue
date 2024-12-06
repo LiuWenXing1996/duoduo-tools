@@ -1,11 +1,8 @@
 <template>
-    <tool-item-wrapper>
+    <define-tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <tool-item-input-fieldset>
-                    <template #label>
-                        配置
-                    </template>
+                <define-tool-area label="配置">
                     <n-form-item path="type" first label="文字类型">
                         <n-radio-group v-model:value="model.type">
                             <n-space>
@@ -24,7 +21,7 @@
                     <n-form-item path="withPunctuation" first label="包含标点符号">
                         <n-switch v-model:value="model.withPunctuation" />
                     </n-form-item>
-                </tool-item-input-fieldset>
+                </define-tool-area>
             </n-form>
         </template>
         <template #output>
@@ -37,7 +34,7 @@
                 <n-button size="small" @click="handleCopy">复制</n-button>
             </n-space>
         </template>
-    </tool-item-wrapper>
+    </define-tool-wrapper>
 </template>
 <script lang="ts">
 export type Model = {
