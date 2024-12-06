@@ -48,6 +48,9 @@ export default defineNuxtConfig({
         resolvers: [NaiveUiResolver()],
       }),
     ],
+    build: {
+      minify: false,
+    },
     ssr: {
       noExternal: ["naive-ui", "date-fns", "crypto-js", "vueuc"],
     },
