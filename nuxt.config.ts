@@ -3,6 +3,7 @@ import Components from "unplugin-vue-components/vite";
 import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import { cpSync } from "node:fs";
 import path from "node:path";
+import { build } from "nitropack";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -80,6 +81,17 @@ export default defineNuxtConfig({
   pages: true,
   colorMode: {
     preference: "system",
+  },
+  build: {
+    transpile:
+      process.env.NODE_ENV === "production"
+        ? [
+            "naive-ui",
+            "vueuc",
+            "@css-render/vue3-ssr",
+            "@juggle/resize-observer",
+          ]
+        : ["@juggle/resize-observer"],
   },
   experimental: {
     payloadExtraction: false,
