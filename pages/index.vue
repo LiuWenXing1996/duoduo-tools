@@ -1,8 +1,8 @@
 <template>
-  <div>开启minify</div>
+  <div></div>
 </template>
 <script setup lang="ts">
-// definePageMeta({
-//   redirect: "/tools"
-// })
+definePageMeta({
+  redirect: "/tools"
+})
 </script>
