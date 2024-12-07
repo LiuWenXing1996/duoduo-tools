@@ -114,7 +114,7 @@ export type { ${dir.import} as ${typeName}} from "${targetPath}"`;
   }, 25);
 
   await scanFiles();
-  nuxt.hook("builder:watch", async (event, changePath, ...rest) => {
+  nuxt.hook("builder:watch", async (event, changePath) => {
     const srcDir = nuxt.options.srcDir;
     const absoluteChangePath = path.resolve(srcDir, changePath);
     // console.log({

@@ -1,5 +1,5 @@
 import { list } from "#build/collect-tools/list";
-import type { Component, VNodeChild } from "vue";
+import type { Component } from "vue";
 
 export interface Tool {
   name: string;

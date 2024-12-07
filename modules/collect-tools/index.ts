@@ -33,6 +33,13 @@ const listFiles = async (dir?: string) => {
   return files;
 };
 
+const isSub = (parent: string, dir: string) => {
+  const relative = path.relative(parent, dir);
+  return Boolean(
+    relative && !relative.startsWith("..") && !path.isAbsolute(relative)
+  );
+};
+
 export default defineNuxtModule(async (options, nuxt) => {
   const resolver = createResolver(import.meta.url);
   const buildDir = nuxt.options.buildDir;
@@ -51,7 +58,7 @@ export default defineNuxtModule(async (options, nuxt) => {
     write: true,
     getContents: () => {
       const formatComponentName = (name: string) => {
-        const fullName = `Lazy-${contentComponentDirName}-${name}`;
+        const fullName = `${contentComponentDirName}-${name}`;
         const pascalCaseName = camelcase(fullName, {
           pascalCase: true,
         });
@@ -60,7 +67,9 @@ export default defineNuxtModule(async (options, nuxt) => {
       return `import { h } from "vue";
 ${toolFileInfoList
   ?.map((e) => {
-    return `import {${formatComponentName(e.name)} } from "#components"`;
+    return `import {${formatComponentName(
+      `${e.name}-meta`
+    )} } from "#components"`;
   })
   .join(";\n")}
 export const list = [
@@ -68,9 +77,8 @@ export const list = [
     ?.map((e) => {
       return `{
       name: "${e.name}",
-      // content: () => h(${formatComponentName(e.name)}),
-      content:()=>import('${e.targetPath}'),
-      meta:${formatComponentName(e.name)}.toolMeta
+      content:()=>import('${path.join(e.targetPath, "./content.vue")}'),
+      meta:${formatComponentName(`${e.name}-meta`)} 
   }`;
     })
     .join(",\n")}
@@ -105,7 +113,7 @@ ${toolFileInfoList
         targetPath,
       };
     });
-    console.log({ files, toolFileInfoList });
+    // console.log({ files, toolFileInfoList });
 
     await updateTemplates({
       filter: (e) =>
@@ -130,16 +138,21 @@ ${toolFileInfoList
     },
   ]);
   await scanFiles();
-  nuxt.hook("builder:watch", async (event, path, ...rest) => {
-    // console.log({
-    //   event,
-    //   path,
-    //   rest,
-    // });
-    // console.log(`collect-tools-watch:${path}`);
-    if (path.startsWith(`components/${contentComponentDirName}`)) {
-      // console.log(`collect-tools-watch:re scan`);
-      scanFiles();
+  nuxt.hook("builder:watch", async (event, changePath) => {
+    const srcDir = nuxt.options.srcDir;
+    const absoluteChangePath = path.resolve(srcDir, changePath);
+    if (isSub(contentComponentPath, absoluteChangePath)) {
+      if (
+        event === "add" ||
+        event === "addDir" ||
+        event === "unlink" ||
+        event === "unlinkDir"
+      ) {
+        console.log(
+          `collect-tools listen ${absoluteChangePath} ${event}, will restart nuxt`
+        );
+        return nuxt.callHook("restart");
+      }
     }
   });
 

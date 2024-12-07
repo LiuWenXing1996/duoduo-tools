@@ -59,17 +59,17 @@ export default defineNuxtConfig({
   colorMode: {
     preference: "system",
   },
-  build: {
-    transpile:
-      process.env.NODE_ENV === "production"
-        ? [
-            "naive-ui",
-            "vueuc",
-            "@css-render/vue3-ssr",
-            "@juggle/resize-observer",
-          ]
-        : ["@juggle/resize-observer"],
-  },
+  // build: {
+  //   transpile:
+  //     process.env.NODE_ENV === "production"
+  //       ? [
+  //           "naive-ui",
+  //           "vueuc",
+  //           "@css-render/vue3-ssr",
+  //           "@juggle/resize-observer",
+  //         ]
+  //       : ["@juggle/resize-observer"],
+  // },
   experimental: {
     payloadExtraction: false,
     asyncContext: true,
