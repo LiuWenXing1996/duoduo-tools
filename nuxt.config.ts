@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/color-mode",
   ],
+  ssr: false,
   routeRules: {
     "/tools/**": { ssr: false },
   },
