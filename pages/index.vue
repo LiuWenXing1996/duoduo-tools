@@ -1,5 +1,5 @@
 <template>
-  <div>sssss gzip</div>
+  <div>sssss gzip yichu noExternal</div>
 </template>
 <script setup lang="ts">
 // definePageMeta({

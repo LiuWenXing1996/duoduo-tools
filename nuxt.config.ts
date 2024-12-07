@@ -78,7 +78,7 @@ export default defineNuxtConfig({
       },
     },
     ssr: {
-      noExternal: ["naive-ui", "date-fns", "crypto-js", "vueuc"],
+      // noExternal: ["naive-ui", "date-fns", "crypto-js", "vueuc"],
     },
   },
   pages: true,
