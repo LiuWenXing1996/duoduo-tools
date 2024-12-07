@@ -1,5 +1,5 @@
 <template>
-  <div>移除 manualChunks</div>
+  <div>开启minify</div>
 </template>
 <script setup lang="ts">
 // definePageMeta({

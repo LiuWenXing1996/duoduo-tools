@@ -6,7 +6,6 @@ import path from "node:path";
 import { build } from "nitropack";
 import viteCompression from "vite-plugin-compression";
 
-
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
@@ -54,31 +53,7 @@ export default defineNuxtConfig({
       }),
     ],
     build: {
-      minify: false,
-      rollupOptions: {
-        output: {
-          /**
-           * 1.以对象的方式使用
-           * 将 lodash 模块打包成一个 chunk，名称是 lodash
-           */
-          // manualChunks: {
-          //   lodash: ["lodash"],
-          // },
-
-          /**
-           * 2.以函数的形式使用
-           * 将第三方包全部打包在一个chunk中，名称叫 vendor
-           */
-          // manualChunks(id, { getModuleInfo, getModuleIds }) {
-          //   if (id.includes("node_modules")) {
-          //     return "vendor";
-          //   }
-          // },
-        },
-      },
-    },
-    ssr: {
-      // noExternal: ["naive-ui", "date-fns", "crypto-js", "vueuc"],
+      minify: true,
     },
   },
   pages: true,
