@@ -73,7 +73,8 @@
     "perfect-debounce": "^1.0.0",
     "prisma-zod-generator": "^0.8.13",
     "unplugin-auto-import": "^0.18.3",
-    "unplugin-vue-components": "^0.27.4"
+    "unplugin-vue-components": "^0.27.4",
+    "vite-plugin-compression": "^0.5.1"
   },
   "pnpm": {
     "overrides": {

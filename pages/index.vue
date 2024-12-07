@@ -1,5 +1,5 @@
 <template>
-  <div>sssss</div>
+  <div>sssss gzip</div>
 </template>
 <script setup lang="ts">
 // definePageMeta({
