@@ -1,5 +1,5 @@
 <template>
-  <div>sssss gzip yichu noExternal</div>
+  <div>移除 manualChunks</div>
 </template>
 <script setup lang="ts">
 // definePageMeta({

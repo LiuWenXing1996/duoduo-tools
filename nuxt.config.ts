@@ -69,11 +69,11 @@ export default defineNuxtConfig({
            * 2.以函数的形式使用
            * 将第三方包全部打包在一个chunk中，名称叫 vendor
            */
-          manualChunks(id, { getModuleInfo, getModuleIds }) {
-            if (id.includes("node_modules")) {
-              return "vendor";
-            }
-          },
+          // manualChunks(id, { getModuleInfo, getModuleIds }) {
+          //   if (id.includes("node_modules")) {
+          //     return "vendor";
+          //   }
+          // },
         },
       },
     },
