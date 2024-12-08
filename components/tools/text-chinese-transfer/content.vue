@@ -142,7 +142,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
@@ -161,7 +161,6 @@ export type Model = {
 </script>
 <script setup lang="ts">
 import * as _OpenCC from 'opencc-js';
-import copy from 'copy-to-clipboard';
 const OpenCC = _OpenCC as any
 const initialText = `悟空道：“师父又来了。怎么叫做‘水中捞月’？”
 悟空道：「師父又來了。怎麼叫做『水中撈月』？」`
@@ -177,7 +176,7 @@ const model = reactive<Model>({
         { from: '’', to: '』' },
     ]
 })
-const message = useMessage()
+const copy = useCopy()
 const toTypeOptions = defineSelectOptionList<Record<Model['toType'], unknown>>({
     traditional: { label: "转繁体" },
     simplified: { label: "转简体" },
@@ -223,15 +222,6 @@ const textRes = computedAsync(() => {
     const result: string = converter(text);
     return result
 })
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>
 <style lang="less" scoped>
 .custom-n-form-item {

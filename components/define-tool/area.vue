@@ -20,7 +20,7 @@
                     <template v-if="slots.actions">
                         <div class="ml-[2px] p-[2px]">
                             <slot name="actions"></slot>
-                        </div>ƒ
+                        </div>
                     </template>
                 </div>
             </legend>

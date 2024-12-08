@@ -23,7 +23,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button @click="handleCopy">
+                <n-button @click="copy(textRes)">
                     复制
                 </n-button>
             </n-space>
@@ -32,9 +32,8 @@
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';
-import copy from 'copy-to-clipboard';
 
-const message = useMessage()
+const copy = useCopy()
 const initialText = `移除重复行
 重复行
 重复行
@@ -62,15 +61,6 @@ const textRes = computed(() => {
     const linesUniq = Array.from(new Set(lines))
     return linesUniq.join("\n")
 })
-
-const handleCopy = () => {
-    const res = copy(textRes.value);
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 
 const rules: FormRules = {
     text: [

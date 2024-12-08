@@ -19,13 +19,12 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import bcrypt from "bcryptjs";
 export type Model = {
     text: string,
@@ -37,19 +36,11 @@ const model = reactive<Model>({
     text: initialText,
     saltRounds: 1,
 })
-const message = useMessage()
+const copy = useCopy()
 const textRes = computed(() => {
     const text = model.text || "";
     const saltRounds = model.saltRounds;
     const result = bcrypt.hashSync(text, saltRounds);
     return result
 })
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

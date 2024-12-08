@@ -41,14 +41,13 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import { AES, RC4, Rabbit, TripleDES } from "crypto-js"
-import copy from 'copy-to-clipboard';
 import { EncryptType } from "./utils";
 export type Model = {
     text: string,
@@ -57,7 +56,7 @@ export type Model = {
 }
 
 const initialText = '123456'
-const message = useMessage()
+const copy = useCopy();
 const typeOptions = defineSelectOptionList<Record<EncryptType, unknown>>({
     [EncryptType.AES]: { label: EncryptType.AES },
     [EncryptType.RC4]: { label: EncryptType.RC4 },
@@ -90,13 +89,4 @@ const textRes = computed(() => {
     const res = methods[type]?.(text, key)
     return res
 })
-const handleCopy = () => {
-    const res = copy(textRes.value);
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>

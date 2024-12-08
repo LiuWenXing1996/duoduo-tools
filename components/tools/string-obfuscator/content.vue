@@ -37,13 +37,12 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 export type Model = {
     text: string,
     keepFirst: number;
@@ -60,7 +59,7 @@ const model = reactive<Model>({
     replacementChar: "*",
     keepSpace: true,
 })
-const message = useMessage()
+const copy = useCopy()
 const textRes = computedAsync(() => {
     const text = model.text || "";
     const keepSpace = model.keepSpace;
@@ -77,12 +76,4 @@ const textRes = computedAsync(() => {
         .join('');
     return result
 })
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

@@ -23,13 +23,12 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 export type Model = {
     text: string,
 }
@@ -38,8 +37,7 @@ const initialText = `numeronym`
 const model = reactive<Model>({
     text: initialText,
 })
-const message = useMessage()
-
+const copy = useCopy()
 const textRes = computedAsync(() => {
     const text = model.text || "";
     const wordLength = text.length;
@@ -48,14 +46,4 @@ const textRes = computedAsync(() => {
     }
     return `${text.at(0)}${wordLength - 2}${text.at(-1)}`;
 })
-
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>

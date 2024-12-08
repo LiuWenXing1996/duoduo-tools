@@ -23,7 +23,7 @@
                         <define-tool-area label="公钥" class="h-[50%]" fold-disabled>
                             <template #actions>
                                 <svg-icon name="common-copy" class="cursor-pointer"
-                                    @click="handleCopy(genRequest.data.value?.publicKeyPem || '')"></svg-icon>
+                                    @click="copy(genRequest.data.value?.publicKeyPem || '')"></svg-icon>
                             </template>
                             <custom-scrollbar>
                                 <div class=" whitespace-pre-wrap">
@@ -34,7 +34,7 @@
                         <define-tool-area label="私钥" class="h-[50%]" fold-disabled>
                             <template #actions>
                                 <svg-icon name="common-copy" class="cursor-pointer"
-                                    @click="handleCopy(genRequest.data.value?.privateKeyPem || '')"></svg-icon>
+                                    @click="copy(genRequest.data.value?.privateKeyPem || '')"></svg-icon>
                             </template>
                             <custom-scrollbar>
                                 <div class="whitespace-pre-wrap">
@@ -54,7 +54,6 @@
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import type { FormRules } from 'naive-ui';
 import { pki } from 'node-forge';
 // @ts-ignore
@@ -84,7 +83,7 @@ const generateKeyPair = async (bits: number) => {
         privateKeyPem: pki.privateKeyToPem(privateKey),
     };
 }
-
+const copy = useCopy()
 const model = reactive<Model>({
     bits: 2048,
 })
@@ -122,15 +121,4 @@ const rules: FormRules = {
 onMounted(() => {
     genRequest.runAsync()
 })
-
-const message = useMessage()
-
-const handleCopy = (val: string) => {
-    const res = copy(val || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

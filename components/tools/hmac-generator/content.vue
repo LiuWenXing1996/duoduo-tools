@@ -30,7 +30,7 @@
                                 <template #trigger>
                                     <div class=" inline-flex">
                                         <svg-icon class="ml-[2px] pb-[5px] text-[12px] cursor-pointer"
-                                            name="common-copy" @click="handleCopy(text.result)" />
+                                            name="common-copy" @click="copy(text.result)" />
                                     </div>
                                 </template>
                                 {{ `点击复制` }}
@@ -44,15 +44,14 @@
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import { methods } from './utils';
 
 const initialText = '123456'
-const message = useMessage()
 const model = reactive({
     key: "123",
     text: initialText
 })
+const copy = useCopy()
 const textRes = computed(() => {
     const text = model.text || "";
     const key = model.key || ""
@@ -63,13 +62,4 @@ const textRes = computed(() => {
         }
     })
 })
-const handleCopy = (val: string) => {
-    const res = copy(val);
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>

@@ -23,7 +23,7 @@
                                                 <svg-icon name="common-refresh"></svg-icon>
                                             </template>
                                         </n-button>
-                                        <n-button strong secondary circle size="tiny" @click="copySeed">
+                                        <n-button strong secondary circle size="tiny" @click="copy(model.seed)">
                                             <template #icon>
                                                 <svg-icon name="common-copy"></svg-icon>
                                             </template>
@@ -48,7 +48,7 @@
                                                 <svg-icon name="common-refresh"></svg-icon>
                                             </template>
                                         </n-button>
-                                        <n-button strong secondary circle size="tiny" @click="copyMnemonic">
+                                        <n-button strong secondary circle size="tiny" @click="copy(model.mnemonic)">
                                             <template #icon>
                                                 <svg-icon name="common-copy"></svg-icon>
                                             </template>
@@ -69,7 +69,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(res)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
@@ -78,7 +78,6 @@
 <script setup lang="ts">
 import * as bip39 from "bip39"
 import { customAlphabet } from 'nanoid';
-import copy from 'copy-to-clipboard';
 enum Language {
     "chinese_simplified" = "chinese_simplified",
     "chinese_traditional" = "chinese_traditional",
@@ -110,7 +109,6 @@ const model = reactive<Model>({
     seed: '',
     mnemonic: ""
 })
-const message = useMessage();
 const getRandom = customAlphabet('1234567890abcdef');
 const generateSeed = () => {
     return getRandom(32)
@@ -122,23 +120,7 @@ const refreshSeed = () => {
 const refreshMnemonic = () => {
     model.mnemonic = bip39.generateMnemonic();
 }
-const copySeed = () => {
-    const res = copy(model.seed || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
-const copyMnemonic = () => {
-    const res = copy(model.mnemonic || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
+const copy = useCopy()
 
 const typeOptions = defineSelectOptionList<Record<GenType, unknown>>({
     [GenType.mnemonic]: { label: "种子转助记符" },
@@ -175,16 +157,6 @@ const res = computed(() => {
     }
     return text
 })
-
-const handleCopy = () => {
-    const cpyRes = copy(res.value || "");
-    if (cpyRes) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 
 const languageOptions = defineSelectOptionList<Record<Language, unknown>>({
     [Language["chinese_simplified"]]: { label: "简体中文" },

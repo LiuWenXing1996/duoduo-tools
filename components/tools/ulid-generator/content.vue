@@ -34,7 +34,7 @@
                                 <template #trigger>
                                     <div class=" inline-flex">
                                         <svg-icon class="ml-[2px] pb-[5px] text-[12px] cursor-pointer"
-                                            name="common-copy" @click="handleCopy(text)" />
+                                            name="common-copy" @click="copy(text)" />
                                     </div>
                                 </template>
                                 {{ `点击复制` }}
@@ -47,7 +47,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopyAll">复制所有</n-button>
+                <n-button size="small" @click="copy(res.join('\n'))">复制所有</n-button>
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
@@ -55,14 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import { ulid } from "ulid"
 
 export type Model = {
     count: number,
 }
 
-const message = useMessage()
+const copy = useCopy()
 const model = reactive<Model>({
     count: 5,
 })
@@ -84,22 +83,4 @@ const res = computed(() => {
     }
     return ids
 })
-const handleCopy = (val: string) => {
-    const res = copy(val);
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
-const handleCopyAll = () => {
-    const val = res.value.join("\n");
-    const copyRes = copy(val);
-    if (copyRes) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

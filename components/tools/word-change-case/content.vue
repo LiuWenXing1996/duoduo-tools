@@ -42,7 +42,7 @@
                                 <template #trigger>
                                     <div class=" inline-flex">
                                         <svg-icon class="ml-[2px] pb-[5px] text-[12px] cursor-pointer"
-                                            name="common-copy" @click="handleCopy(text.result)" />
+                                            name="common-copy" @click="copy(text.result)" />
                                     </div>
                                 </template>
                                 {{ `点击复制` }}
@@ -56,11 +56,10 @@
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';
-import copy from 'copy-to-clipboard';
 import { methods } from './utils';
 
 const initialText = 'change-case'
-const message = useMessage()
+const copy = useCopy()
 const model = reactive({
     text: initialText
 })
@@ -96,13 +95,4 @@ const rules: FormRules = {
         }
     ]
 }
-const handleCopy = (val: string) => {
-    const res = copy(val);
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>

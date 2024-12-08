@@ -43,13 +43,12 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import cnchar from 'cnchar';
 import 'cnchar-trad';
 export type Model = {
@@ -64,7 +63,7 @@ const model = reactive<Model>({
     toType: "mars",
     chineseType: "simplified",
 })
-const message = useMessage()
+const copy = useCopy()
 const toTypeOptions = defineSelectOptionList<Record<Model['toType'], unknown>>({
     mars: { label: "火星文" },
     chinese: { label: "中文" },
@@ -96,13 +95,4 @@ const textRes = computedAsync(() => {
     }
     return result
 })
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>

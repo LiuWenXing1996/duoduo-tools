@@ -49,14 +49,13 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
 import { pinyin } from 'pinyin-pro';
-import copy from 'copy-to-clipboard';
 export type Model = {
     text: string,
     toneType: "none" | "symbol" | "num"
@@ -68,7 +67,7 @@ export type Model = {
     toneSandhi: boolean
     segmentit: "1" | "2" | "3"
 }
-const message = useMessage()
+const copy = useCopy()
 const initialText = `我是一名粉刷匠`
 const model = reactive<Model>({
     text: initialText,
@@ -130,12 +129,4 @@ const textRes = computed(() => {
     })
     return res
 })
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

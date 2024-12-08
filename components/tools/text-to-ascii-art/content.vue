@@ -34,7 +34,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" :disabled="textResLoading" @click="handleCopy">复制</n-button>
+                <n-button size="small" :disabled="textResLoading" @click="copy(textRes)">复制</n-button>
                 <n-button size="small" :disabled="textResLoading" @click="scaleAdd">放大</n-button>
                 <n-button size="small" :disabled="textResLoading" @click="scaleSub">缩小</n-button>
             </n-space>
@@ -44,11 +44,9 @@
 <script setup lang="ts">
 import type { Fonts } from 'figlet';
 import type { SelectOption } from 'naive-ui';
-import copy from 'copy-to-clipboard';
 
-const message = useMessage()
+const copy = useCopy()
 const isShowScale = useAutoBoolean()
-
 const scale = ref(1)
 
 const scaleAdd = () => {
@@ -90,12 +88,4 @@ const textResLoading = ref(false)
 const textRes = computedAsync(async () => {
     return await figlet.text(model.text, { font: model.font, width: model.width })
 }, undefined, textResLoading)
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

@@ -28,7 +28,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
@@ -36,7 +36,6 @@
 </template>
 <script setup lang="ts">
 import { shuffle } from 'radash';
-import copy from 'copy-to-clipboard';
 const model = reactive<{
     length: number,
     withUppercase: boolean,
@@ -55,7 +54,7 @@ const refreshTag = ref(false);
 const handleRefresh = () => {
     refreshTag.value = !refreshTag.value
 }
-
+const copy = useCopy()
 const textRes = computed(() => {
     const refreshEmptyStr = refreshTag.value ? "" : ""
     const allAlphabet = [
@@ -68,13 +67,4 @@ const textRes = computed(() => {
     const result = shuffle(allAlphabet.repeat(length).split("")).join("").substring(0, length)
     return result + refreshEmptyStr
 })
-const message = useMessage()
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
 </script>

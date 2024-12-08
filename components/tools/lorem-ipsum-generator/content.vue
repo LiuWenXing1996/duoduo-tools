@@ -40,13 +40,12 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="handleCopy">复制</n-button>
+                <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
     </define-tool-wrapper>
 </template>
 <script setup lang="ts">
-import copy from 'copy-to-clipboard';
 import { loremIpsum } from "lorem-ipsum";
 import { iterate } from 'radash';
 export type Model = {
@@ -86,8 +85,7 @@ const formatOptions = defineSelectOptionList<Record<Model['format'], unknown>>({
     html: { label: "网页(html)" },
 })
 
-const message = useMessage()
-
+const copy = useCopy()
 const textRes = computedAsync(() => {
     const words = model.words.isCustom
         ? [...model.words.content.filter(e => e.disabled).map(e => e.word)]
@@ -113,14 +111,4 @@ const textRes = computedAsync(() => {
     })
     return result;
 })
-
-const handleCopy = () => {
-    const res = copy(textRes.value || "");
-    if (res) {
-        message.success("复制成功")
-    } else {
-        message.error("复制失败")
-    }
-}
-
 </script>
