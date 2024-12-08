@@ -1,7 +1,7 @@
 import { assign } from "radash";
 import { jsonParseSafely } from "~/utils";
 import prisma from "../utils/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import type { User } from "@prisma/client";
 import { useUserSession } from "../utils/user";
 import { isBefore } from "date-fns";
