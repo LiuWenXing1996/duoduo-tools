@@ -9,7 +9,7 @@ ${Object.entries(EncryptType)
   })
   .join(";\n")};
 `,
-  category: ToolCategory.text,
+  category: ToolCategory.encryption,
   related: [
     ToolName["text-encrypt"],
     {

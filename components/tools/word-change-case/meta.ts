@@ -9,5 +9,5 @@ ${methods
   })
   .join(";\n")};
 使用时，随意输入任意格式即可，程序会自动识别，也可以混用格式，例如 t-w-T_S`,
-  category: ToolCategory.text,
+  category: ToolCategory.dev,
 });

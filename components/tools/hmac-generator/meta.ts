@@ -9,7 +9,7 @@ ${methods
   })
   .join(";\n")};
 `,
-  category: ToolCategory.text,
+  category: ToolCategory.encryption,
   related: [
     {
       title: "IT-TOOLS - Hmac 生成器",

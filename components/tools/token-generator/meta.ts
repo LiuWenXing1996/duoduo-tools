@@ -6,7 +6,7 @@ export default defineToolMeta({
 数字;
 符号:  .,;:!?./-"\'#{([-|\\@)]=}*+
 `,
-  category: ToolCategory.dev,
+  category: ToolCategory.encryption,
   related: [
     {
       title: "IT-TOOLS - Token 生成器",
