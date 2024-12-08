@@ -1,6 +1,6 @@
 <template>
     <template v-if="!disabled">
-        <fieldset class="rounded-[8px] border p-[10px] mt-[10px] first:mt-[0px] shadow-md">
+        <fieldset class="rounded-[8px]  border-dashed border-2 p-[10px] mt-[10px] first:mt-[0px]">
             <legend class="-ml-[4px] px-[10px] text-[14px] font-medium" v-if="slots.label || label">
                 <div class="flex justify-center items-center">
                     <div>
