@@ -26,6 +26,7 @@
     "@vueuse/core": "^11.2.0",
     "@vueuse/nuxt": "^11.2.0",
     "bcrypt": "^5.1.1",
+    "bip39": "^3.1.0",
     "camelcase": "^8.0.0",
     "change-case": "^5.4.4",
     "cnchar": "^3.2.6",
@@ -38,6 +39,7 @@
     "lorem-ipsum": "^2.0.8",
     "monaco-editor": "^0.52.0",
     "naive-ui": "2.38.2",
+    "nanoid": "^5.0.9",
     "nitropack": "^2.9.7",
     "nodemailer": "^6.9.16",
     "nuxt": "^3.13.0",
@@ -74,7 +76,8 @@
     "prisma-zod-generator": "^0.8.13",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-node-polyfills": "^0.22.0"
   },
   "pnpm": {
     "overrides": {

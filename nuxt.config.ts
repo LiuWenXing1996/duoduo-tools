@@ -4,6 +4,7 @@ import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 import { cpSync } from "node:fs";
 import path from "node:path";
 import viteCompression from "vite-plugin-compression";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -33,6 +34,7 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
+      nodePolyfills(),
       viteCompression(),
       AutoImport({
         dts: true,
