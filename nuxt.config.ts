@@ -22,12 +22,7 @@ export default defineNuxtConfig({
   // devServer: {
   //   host: "0",
   // },
-  modules: [
-    "nuxt-icons",
-    "@nuxtjs/tailwindcss",
-    "@vueuse/nuxt",
-    "@nuxtjs/color-mode",
-  ],
+  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@nuxtjs/color-mode"],
   ssr: false,
   routeRules: {
     "/tools/**": { ssr: false },

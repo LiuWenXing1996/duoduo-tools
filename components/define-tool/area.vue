@@ -14,17 +14,13 @@
                     <div v-if="!foldDisabled"
                         class="h-full flex justify-center items-center ml-[2px] p-[2px] rounded-[2px] cursor-pointer hover:bg-secondary"
                         @click="isExpand = !isExpand">
-                        <n-icon v-if="isExpand">
-                            <define-tool-area-fold-icon />
-                        </n-icon>
-                        <n-icon v-else>
-                            <define-tool-area-expand-icon />
-                        </n-icon>
+                        <svg-icon name="common/fold" v-if="isExpand" />
+                        <svg-icon name="common/unfold" v-else />
                     </div>
                     <template v-if="slots.actions">
                         <div class="ml-[2px] p-[2px]">
                             <slot name="actions"></slot>
-                        </div>
+                        </div>ƒ
                     </template>
                 </div>
             </legend>

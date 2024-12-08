@@ -6,18 +6,14 @@
           <n-radio-button key="name" value="name">
             <div class="flex h-[32px] justify-center">
               <span class="flex items-center">
-                <n-icon>
-                  <user-login-mode-name-icon />
-                </n-icon>
+                <svg-icon name="common-user" />
               </span>
             </div>
           </n-radio-button>
           <n-radio-button key="email" value="email">
             <div class="flex h-[32px] justify-center">
               <span class="flex items-center">
-                <n-icon>
-                  <user-login-mode-email-icon />
-                </n-icon>
+                <svg-icon name="common-email" />
               </span>
             </div>
           </n-radio-button>

@@ -101,9 +101,6 @@ importers:
       nuxt:
         specifier: ^3.13.0
         version: 3.14.1592(@parcel/watcher@2.5.0)(@types/node@22.10.1)(ioredis@5.4.1)(less@4.2.1)(magicast@0.3.5)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(vite@5.4.11(@types/node@22.10.1)(less@4.2.1)(terser@5.36.0))
-      nuxt-icons:
-        specifier: ^3.2.1
-        version: 3.2.1(magicast@0.3.5)(rollup@4.28.0)
       nuxtjs-naive-ui:
         specifier: 1.0.1
         version: 1.0.1(magicast@0.3.5)(rollup@4.28.0)(vue@3.5.13(typescript@5.7.2))
@@ -3440,9 +3437,6 @@ packages:
     resolution: {integrity: sha512-t9m4zTq44R0/icuzQXJHEyPRM3YbgTPMpytyb6YW2LOL/3mwZ3Bmte1FIlCoigzDvxBJRbcchZGc689+Syyu8w==}
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
-
-  nuxt-icons@3.2.1:
-    resolution: {integrity: sha512-trvAFq9oWYwWEQ0qZDHVxvLK+TwOdFnoXYOXQvN1CRUlp1DBJdxC8vXO3mED2Kb+Suag+bpWLC6eXGrRwhfffQ==}
 
   nuxt@3.14.1592:
     resolution: {integrity: sha512-roWAQH4Mb6WY72cNos+YVw0DgTCNAhNygiAMCedM7hbX6ESTR2n3VH7tU0yIWDPe/hfFdii4M4wWTTNHOtS44g==}
@@ -8801,14 +8795,6 @@ snapshots:
       boolbase: 1.0.0
 
   nuxi@3.16.0: {}
-
-  nuxt-icons@3.2.1(magicast@0.3.5)(rollup@4.28.0):
-    dependencies:
-      '@nuxt/kit': 3.14.1592(magicast@0.3.5)(rollup@4.28.0)
-    transitivePeerDependencies:
-      - magicast
-      - rollup
-      - supports-color
 
   nuxt@3.14.1592(@parcel/watcher@2.5.0)(@types/node@22.10.1)(ioredis@5.4.1)(less@4.2.1)(magicast@0.3.5)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(vite@5.4.11(@types/node@22.10.1)(less@4.2.1)(terser@5.36.0)):
     dependencies:
