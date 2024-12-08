@@ -85,6 +85,7 @@ const propsLocal = computed(() => {
         output: {
             area: {
                 label: "结果",
+                foldDisabled: true
             },
             scroll: {
                 outBar: true

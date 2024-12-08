@@ -11,7 +11,8 @@
                             {{ label }}
                         </template>
                     </div>
-                    <div class="h-full flex justify-center items-center ml-[2px] p-[2px] rounded-[2px] cursor-pointer hover:bg-secondary"
+                    <div v-if="!foldDisabled"
+                        class="h-full flex justify-center items-center ml-[2px] p-[2px] rounded-[2px] cursor-pointer hover:bg-secondary"
                         @click="isExpand = !isExpand">
                         <n-icon v-if="isExpand">
                             <define-tool-area-fold-icon />
@@ -20,7 +21,11 @@
                             <define-tool-area-expand-icon />
                         </n-icon>
                     </div>
-
+                    <template v-if="slots.actions">
+                        <div class="ml-[2px] p-[2px]">
+                            <slot name="actions"></slot>
+                        </div>
+                    </template>
                 </div>
             </legend>
             <div class="size-full" v-show="isExpand">
@@ -35,11 +40,13 @@
 <script setup lang="ts">
 export type Props = {
     disabled?: boolean,
-    label?: string
+    label?: string,
+    foldDisabled?: boolean
 }
 defineProps<Props>()
 const slots = defineSlots<{
     label?: () => any
+    actions?: () => any
     default(): any
 }>()
 const isExpand = ref(true);

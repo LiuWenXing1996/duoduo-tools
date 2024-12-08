@@ -6,7 +6,7 @@
                     <n-form-item path="text" first label="输入">
                         <n-input clearable placeholder="输入文本" v-model:value="model.text" />
                     </n-form-item>
-                    <n-form-item path="hash" first label="输入">
+                    <n-form-item path="hash" first label="加密后的文本">
                         <n-input clearable placeholder="输入加密后的文本" v-model:value="model.hash" />
                     </n-form-item>
                 </define-tool-area>
