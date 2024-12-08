@@ -2,12 +2,19 @@ import loader, { type Monaco } from "@monaco-editor/loader";
 
 export const useMonacoLoader = () => {
   const router = useRouter();
-  const home = router.resolve("/static/node_modules/monaco-editor/min/vs");
+  const halfUrlRouter = router.resolve(
+    "/static/node_modules/monaco-editor/min/vs"
+  );
+  const absoluteFullUrl = new URL(
+    halfUrlRouter.href,
+    window.location.origin
+  ).toString();
   loader.config({
     "vs/nls": { availableLanguages: { "*": "zh-cn" } },
-    // paths: {
-    //   vs: home.href,
-    // },
+    paths: {
+      vs: absoluteFullUrl,
+      // vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/dev/vs",
+    },
   });
   const store = shallowRef<{
     lib: Monaco | undefined;

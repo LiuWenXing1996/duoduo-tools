@@ -44,6 +44,7 @@ import type { DeepPartial } from 'ts-essentials';
 import { SystemConfigSchema, type SystemConfig } from '~/schema/system';
 import { zodToJsonSchema } from "zod-to-json-schema";
 import { ToolsSystemConfigEmailTest } from '#components';
+import { v4 as uuidV4 } from "uuid"
 
 const monacoLoader = useMonacoLoader();
 monacoLoader.get()
@@ -72,7 +73,6 @@ const keepSomeActions = (editor: monacoType.editor.IStandaloneCodeEditor) => {
 }
 
 
-
 const SystemConfigJsonSchema = zodToJsonSchema(SystemConfigSchema)
 
 
@@ -84,10 +84,12 @@ watch([
         return
     }
     if (monaco && editorContainer) {
+        const fileRandomName = uuidV4();
+        const schemaRandomName = uuidV4();
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
             schemas: [{
-                fileMatch: ['foo.json'],
-                uri: "ssss",
+                fileMatch: [`${fileRandomName}.json`],
+                uri: schemaRandomName,
                 schema: SystemConfigJsonSchema
             }]
         });
@@ -95,7 +97,7 @@ watch([
 
         const jsonCode = detailRequest.data.value ? JSON.stringify(detailRequest.data.value, null, 2) : "";
 
-        const model = monaco.editor.createModel(jsonCode, 'json', monaco.Uri.parse("internal://server/foo.json"));
+        const model = monaco.editor.createModel(jsonCode, 'json', monaco.Uri.parse(`internal://server/${fileRandomName}.json`));
 
         editor.value = monaco.editor.create(editorContainer, {
             model: model,
@@ -134,8 +136,6 @@ const updateRequest = useCustomRequest(async () => {
     message.success("保存成功")
     return res
 })
-
-
 
 const message = useMessage();
 const dialog = useDialog();
