@@ -82,7 +82,7 @@ const convertBase = (params: { value: string; fromBase: number; toBase: number }
 const model = reactive<Model>({
     val: "42",
     inputBase: 10,
-    outCustomBase: 64,
+    outCustomBase: 33,
 })
 const form = useTemplateRef("formRef")
 const normalBaseList = [2, 8, 10, 16, 32, 64]
