@@ -37,6 +37,7 @@
     "dayjs": "^1.11.13",
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
+    "js-base64": "^3.7.7",
     "knitwork": "^1.1.0",
     "lorem-ipsum": "^2.0.8",
     "monaco-editor": "^0.52.0",
