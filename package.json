@@ -34,6 +34,7 @@
     "cnchar-trad": "^3.2.6",
     "copy-to-clipboard": "^3.3.3",
     "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
     "knitwork": "^1.1.0",
