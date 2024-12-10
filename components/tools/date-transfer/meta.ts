@@ -16,4 +16,5 @@ export default defineToolMeta({
 ${getAllMethods()};
 `,
   category: ToolCategory.dev,
+  related: [ToolName["timestamp-transfer"]],
 });
