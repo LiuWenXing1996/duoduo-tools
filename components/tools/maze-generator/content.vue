@@ -111,7 +111,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="gen">生成</n-button>
+                <n-button size="small" @click="gen">重新生成</n-button>
                 <n-dropdown trigger="click" :options="downloadFileTypeOptions" @select="handleDownload">
                     <n-button size="small">
                         下载迷宫图片
@@ -185,6 +185,10 @@ const gen = () => {
     }
     currentMaze.value = m
 }
+
+onMounted(() => {
+    gen()
+})
 
 const isShowScale = useAutoBoolean()
 const scale = ref(1)
