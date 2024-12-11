@@ -81,25 +81,7 @@ export const methods: Record<
       return val.toHslString();
     },
   },
-  [ColorType.ColorName]: {
-    label: "ColorName",
-    form: (val) => {
-      return colord(val);
-    },
-    validate: (val: string) => {
-      if (!val) {
-        return false;
-      }
-      try {
-        return getFormat(val) === "name";
-      } catch (error) {
-        return false;
-      }
-    },
-    to: (val) => {
-      return val.toName({ closest: true }) || "未知颜色";
-    },
-  },
+
   [ColorType.HWB]: {
     label: "HWB",
     form: (val) => {
@@ -155,6 +137,25 @@ export const methods: Record<
     },
     to: (val) => {
       return val.toLchString();
+    },
+  },
+  [ColorType.ColorName]: {
+    label: "ColorName",
+    form: (val) => {
+      return colord(val);
+    },
+    validate: (val: string) => {
+      if (!val) {
+        return false;
+      }
+      try {
+        return getFormat(val) === "name";
+      } catch (error) {
+        return false;
+      }
+    },
+    to: (val) => {
+      return val.toName({ closest: true }) || "未知颜色";
     },
   },
 };
