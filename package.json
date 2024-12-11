@@ -32,6 +32,7 @@
     "change-case": "^5.4.4",
     "cnchar": "^3.2.6",
     "cnchar-trad": "^3.2.6",
+    "colord": "^2.9.3",
     "copy-to-clipboard": "^3.3.3",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",

@@ -1,16 +1,9 @@
 import dayjs, { Dayjs } from "dayjs";
 import {
-  formatISO,
   formatISO9075,
   formatRFC3339,
   formatRFC7231,
-  fromUnixTime,
-  getTime,
-  getUnixTime,
-  isDate,
-  isValid,
   parseISO,
-  parseJSON,
 } from "date-fns";
 
 export enum DateType {
@@ -34,8 +27,6 @@ const RFC3339_REGEX =
 
 const RFC7231_REGEX =
   /^[A-Za-z]{3},\s[0-9]{2}\s[A-Za-z]{3}\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\sGMT$/;
-
-const EXCEL_FORMAT_REGEX = /^-?\d+(\.\d+)?$/;
 
 export const methods: Record<
   DateType,

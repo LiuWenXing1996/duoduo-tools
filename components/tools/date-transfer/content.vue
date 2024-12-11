@@ -80,7 +80,7 @@ watch(() => model.dateType, () => {
 
 const rules: FormRules = {
     text: [
-        { required: true, message: '请输入日期', trigger: ["change", 'blur'] },
+        { required: true, message: '请输入日期', trigger: ['input', 'change', 'blur', 'focus'] },
         {
             validator: (rule, value) => {
                 let res = false;
