@@ -38,6 +38,7 @@
     "dayjs": "^1.11.13",
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
+    "iarna-toml-esm": "^3.0.5",
     "js-base64": "^3.7.7",
     "json5": "^2.2.3",
     "knitwork": "^1.1.0",
