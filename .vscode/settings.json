@@ -1,4 +1,10 @@
 {
+    "cSpell.ignorePaths": [
+        ".nuxt",
+        ".output",
+        ".vscode",
+        "dist"
+    ],
     "cSpell.words": [
         "abcdefghijklmopqrstuvwxyz",
         "autoincrement",
