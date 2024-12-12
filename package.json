@@ -39,6 +39,7 @@
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
     "js-base64": "^3.7.7",
+    "json5": "^2.2.3",
     "knitwork": "^1.1.0",
     "lorem-ipsum": "^2.0.8",
     "monaco-editor": "^0.52.0",
@@ -62,6 +63,7 @@
     "vue-request": "^2.0.4",
     "vue-router": "latest",
     "vueuc": "^0.4.64",
+    "yaml": "^2.6.1",
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.5"
   },
