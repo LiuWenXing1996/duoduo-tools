@@ -2,7 +2,7 @@
     <define-tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="基础">
+                <define-tool-area label="输入">
                     <n-form-item path="transferType" first label="转换类型">
                         <n-select :options="transferTypeOptions" v-model:value="model.transferType"></n-select>
                     </n-form-item>

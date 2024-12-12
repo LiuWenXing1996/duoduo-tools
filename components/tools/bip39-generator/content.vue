@@ -2,7 +2,7 @@
     <define-tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="基础">
+                <define-tool-area label="配置">
                     <n-form-item path="language" first label="语言">
                         <n-select :options="languageOptions" v-model:value="model.language" />
                     </n-form-item>
