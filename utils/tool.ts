@@ -11,10 +11,4 @@ export interface ToolMeta {
   )[];
 }
 
-export enum ToolMetaAuth {
-  "user" = "user",
-  "admin" = "admin",
-  "super" = "super",
-}
-
 export const defineToolMeta = (meta: ToolMeta) => meta;

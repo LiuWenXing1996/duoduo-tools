@@ -3,7 +3,6 @@ export enum ToolCategory {
   text = "text",
   picture = "picture",
   encryption = "encryption",
-  admin = "admin",
 }
 
 export interface ToolCategoryMeta {
@@ -27,9 +26,5 @@ export const ToolCategoryMap: Record<ToolCategory, ToolCategoryMeta> = {
   [ToolCategory.encryption]: {
     icon: "tool-category-encryption",
     title: "加密工具",
-  },
-  [ToolCategory.admin]: {
-    icon: "tool-category-admin",
-    title: "后台工具",
   },
 };
