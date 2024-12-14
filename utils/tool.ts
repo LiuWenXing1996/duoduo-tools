@@ -2,7 +2,6 @@ export interface ToolMeta {
   title: string;
   description: string;
   category: string;
-  auth?: ToolMetaAuth;
   related?: (
     | {
         title: string;
