@@ -67,7 +67,7 @@
                                         </div>
                                     </XScroll>
                                 </div>
-                                <div class="h-full w-[60px] flex justify-center items-center">
+                                <div class="h-full w-[60px] flex justify-center items-center border-l">
                                     <div :class="[
                                         'relative flex justify-center items-center h-[24px] w-[24px] cursor-pointer rounded-[6px] hover:bg-hoverColor',
                                         collectToolRequest.loading.value ? ' cursor-not-allowed pointer-events-none' : ''
