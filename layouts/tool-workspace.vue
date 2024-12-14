@@ -43,7 +43,7 @@
                     <div class="size-full">
                         <template v-if="hasOpenedTabs">
                             <div class="flex h-[40px] w-full border-b">
-                                <div class="h-full w-[calc(100%-40px)]">
+                                <div class="h-full w-[calc(100%-60px)]">
                                     <!-- TODO：滚动时产生一个阴影？ -->
                                     <XScroll>
                                         <div class="flex h-[38px] w-max justify-center p-[6px]">
@@ -67,7 +67,17 @@
                                         </div>
                                     </XScroll>
                                 </div>
-                                <div class="h-full w-[40px] flex justify-center items-center">
+                                <div class="h-full w-[60px] flex justify-center items-center">
+                                    <div :class="[
+                                        'relative flex justify-center items-center h-[24px] w-[24px] cursor-pointer rounded-[6px] hover:bg-hoverColor',
+                                        collectToolRequest.loading.value ? ' cursor-not-allowed pointer-events-none' : ''
+                                    ]" @click="collectToolRequest.runAsync">
+                                        <svg-icon size="16" class="absolute" name="common-loading"
+                                            v-if="collectToolRequest.loading.value"></svg-icon>
+                                        <svg-icon size="16" :class="[
+                                            sideBarTools.includes(toolName || '') ? 'text-primary' : '',
+                                        ]" name="tool-tabs-user-collect" v-else></svg-icon>
+                                    </div>
                                     <tool-tabs-actions />
                                 </div>
                             </div>
@@ -117,11 +127,17 @@ useHead({
     title: title
 })
 const currentUser = useCurrentUser();
-
 const allTools = getAllTools();
+const sideBarTools = computed(() => {
+    return filterNullable(Object.entries(currentUser.setting.value?.sideBar?.tools || {}).map(([key, value]) => {
+        if (value) {
+            return key
+        }
+    }))
+})
 const sideBarOptions = computed(() => {
     const user = currentUser.current.value;
-    return sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name)
+    const defaultList = sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name)
         .filter(([name, meta]) => {
             if (!meta.auth) {
                 return true
@@ -157,6 +173,23 @@ const sideBarOptions = computed(() => {
                 list
             }
         })
+
+    const useCollectList: ToolCategoryMeta & { name: string, list: SelectOption[] } = {
+        name: "tool-user-collect",
+        icon: "tool-category-user-collect",
+        title: "收藏工具",
+        list: sortByPinyin(
+            allTools.filter(tool => sideBarTools.value.includes(tool.name)),
+            (val) => val.meta?.title || val.name
+        ).map(tool => {
+            return {
+                label: tool.meta?.title || tool.name,
+                value: tool.name
+            }
+        })
+    }
+
+    return [useCollectList, ...defaultList]
 })
 const toolTabs = computed(() => {
     return editTabs.openedTabNames.value.map(toolName => {
@@ -165,6 +198,18 @@ const toolTabs = computed(() => {
             tool: findTool(toolName),
         }
     })
+})
+const collectToolRequest = useCustomRequest(async () => {
+    const toolNameValue = toolName.value;
+    if (!toolNameValue) {
+        return
+    }
+    if (sideBarTools.value.includes(toolNameValue)) {
+        await currentUser.collectToolRequest.runAsync({ toolName: toolNameValue, unCollect: true })
+    } else {
+        await currentUser.collectToolRequest.runAsync({ toolName: toolNameValue, unCollect: false })
+    }
+
 })
 
 const hasOpenedTabs = computed(() => {

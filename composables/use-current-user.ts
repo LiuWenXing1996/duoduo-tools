@@ -35,6 +35,7 @@ const settingDetailRequest = useCustomRequest(async () => {
 });
 
 export const useCurrentUser = () => {
+  const message = useMessage();
   const current = computed(() => store.value.current);
   const setting = computed(() => store.value.setting);
 
@@ -42,6 +43,41 @@ export const useCurrentUser = () => {
     await userRequest.refreshAsync();
     await settingDetailRequest.refreshAsync();
   };
+
+  const collectToolRequest = useCustomRequest(
+    async (params: { toolName: string; unCollect?: boolean }) => {
+      const { toolName, unCollect } = params;
+      if (!toolName) {
+        return;
+      }
+      const userName = current.value?.name;
+      if (!userName) {
+        return;
+      }
+      const data: UserSettingUpdatePostApiParams = {
+        name: userName,
+        config: {
+          sideBar: {
+            tools: {
+              [toolName]: !unCollect,
+            },
+          },
+        },
+      };
+      const res = await $fetch("/api/user/setting/update", {
+        method: "POST",
+        body: data,
+      });
+
+      await settingDetailRequest.refreshAsync();
+      if (unCollect) {
+        message.success("取消收藏成功");
+      } else {
+        message.success("收藏成功");
+      }
+      return res;
+    }
+  );
 
   onMounted(() => {
     refresh();
@@ -52,5 +88,6 @@ export const useCurrentUser = () => {
     refresh,
     userRequest,
     settingDetailRequest,
+    collectToolRequest,
   };
 };

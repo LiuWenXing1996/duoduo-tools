@@ -13,7 +13,7 @@ export const paramsSchema = z.object({
         tools: z.record(z.boolean()),
       }),
     })
-    .optional(),
+    .deepPartial(),
 });
 export type Params = z.infer<typeof paramsSchema>;
 export default defineEventHandler(async (event) => {
