@@ -52,6 +52,12 @@ const model = reactive<Model>({
     needDecodeStr: "",
 })
 
+onMounted(() => {
+    const initialText = "123";
+    model.needEncodeStr = initialText;
+    model.needDecodeStr = Base64.encode(initialText)
+})
+
 const copy = useCopy()
 
 const transferTypeOptions = defineSelectOptionList<Record<TransferType, unknown>>({
