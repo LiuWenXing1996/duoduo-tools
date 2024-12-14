@@ -98,6 +98,12 @@ export default defineNuxtConfig({
         prefix: "",
         suffix: "ComponentModel",
       },
+      {
+        path: "~/server/api",
+        import: "Params",
+        prefix: "",
+        suffix: "ApiParams",
+      },
     ],
   },
 });

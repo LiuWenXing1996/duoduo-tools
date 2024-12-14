@@ -116,11 +116,33 @@ const title = computed(() => {
 useHead({
     title: title
 })
+const currentUser = useCurrentUser();
 
 const allTools = getAllTools();
 const sideBarOptions = computed(() => {
+    const user = currentUser.current.value;
     return sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name)
-        .map(([name, meta]) => {
+        .filter(([name, meta]) => {
+            if (!meta.auth) {
+                return true
+            }
+            if (meta.auth === ToolMetaAuth.user) {
+                if (user) {
+                    return true
+                }
+            }
+            if (meta.auth === ToolMetaAuth.admin) {
+                if (user && (user.isAdmin || user?.isSuper)) {
+                    return true
+                }
+            }
+            if (meta.auth === ToolMetaAuth.super) {
+                if (user && user?.isSuper) {
+                    return true
+                }
+            }
+            return false
+        }).map(([name, meta]) => {
             const toolList = allTools.filter(tool => tool.meta?.category === name);
             const toolListSorted = sortByPinyin(toolList, (val) => val.meta?.title || val.name);
             const list: SelectOption[] = toolListSorted.map(tool => {
