@@ -7,10 +7,4 @@ export default defineToolMeta({
 符号:  .,;:!?./-"\'#{([-|\\@)]=}*+
 `,
   category: ToolCategory.encryption,
-  related: [
-    {
-      title: "IT-TOOLS - Token 生成器",
-      url: "https://www.aiotools.top/token-generator",
-    },
-  ],
 });

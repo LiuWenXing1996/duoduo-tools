@@ -10,11 +10,5 @@ ${Object.entries(EncryptType)
   .join(";\n")};
 `,
   category: ToolCategory.encryption,
-  related: [
-    ToolName["text-encrypt"],
-    {
-      title: "IT-TOOLS - 加密/解密文本",
-      url: "https://www.aiotools.top/encryption",
-    },
-  ],
+  related: [ToolName["text-encrypt"]],
 });

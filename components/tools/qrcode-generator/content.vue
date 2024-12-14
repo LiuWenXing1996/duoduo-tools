@@ -79,23 +79,6 @@ import type { Model as ColorFormModel } from "./color-form.vue"
 import type { Model as BackgroundOptionsFormModel } from "./background-options-form.vue"
 import type { Model as LogoOptionsFormModel } from "./logo-options-form.vue"
 
-defineOptions({
-    toolMeta: defineToolMeta({
-        title: '二维码生成',
-        description: "将文字转成二维码，支持添加图标，自定义颜色，码点形状等",
-        category: ToolCategory.picture,
-        related: [
-            {
-                title: "QR Code Styling",
-                url: "https://qr-code-styling.com/"
-            },
-            {
-                title: "帮小忙 - 二维码美化",
-                url: "https://tool.browser.qq.com/prettify_qrcode.html"
-            },
-        ]
-    })
-})
 const isShowScale = useAutoBoolean()
 const scale = ref(1)
 const scaleAdd = () => {

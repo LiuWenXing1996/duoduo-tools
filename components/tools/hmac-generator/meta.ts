@@ -10,10 +10,4 @@ ${methods
   .join(";\n")};
 `,
   category: ToolCategory.encryption,
-  related: [
-    {
-      title: "IT-TOOLS - Hmac 生成器",
-      url: "https://www.aiotools.top/hmac-generator",
-    },
-  ],
 });

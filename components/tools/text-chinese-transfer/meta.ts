@@ -5,11 +5,5 @@ export default defineToolMeta({
 - 支持自定义字典，方便覆盖一些自动转换程序没有收录到的词
 `,
   category: ToolCategory.text,
-  related: [
-    ToolName["chinese-to-mars"],
-    {
-      title: "帮小忙 - 简体繁体转换",
-      url: "https://tool.browser.qq.com/chinese.html",
-    },
-  ],
+  related: [ToolName["chinese-to-mars"]],
 });

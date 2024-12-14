@@ -3,11 +3,5 @@ export default defineToolMeta({
   description:
     "Lorem ipsum 是一种占位符文本，通常用于演示文档或字体的视觉形式，而不依赖于有意义的内容",
   category: ToolCategory.text,
-  related: [
-    ToolName["chinese-lorem-ipsum"],
-    {
-      title: "IT-TOOLS - Lorem ipsum生成器",
-      url: "https://www.aiotools.top/lorem-ipsum-generator",
-    },
-  ],
+  related: [ToolName["chinese-lorem-ipsum"]],
 });

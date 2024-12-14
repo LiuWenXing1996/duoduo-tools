@@ -10,10 +10,4 @@ ${methods
   .join(";\n")};
 `,
   category: ToolCategory.encryption,
-  related: [
-    {
-      title: "IT-TOOLS - Hash 文本",
-      url: "https://www.aiotools.top/hash-text",
-    },
-  ],
 });
