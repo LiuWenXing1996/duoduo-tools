@@ -13,39 +13,8 @@
         }
     }">
         <template #output>
-            <n-list hoverable clickable>
-                <n-list-item v-for="group in groups">
-                    <n-thing :title="group.label" content-style="margin-top: 10px;">
-                        <n-descriptions label-placement="left" :column="1" label-class="w-[120px] inline-flex"
-                            content-class="w-[calc(100%-120px)]">
-                            <n-descriptions-item v-for="item in group.items">
-                                <template #label>
-                                    <div class="inline-flex">
-                                        <span class="font-medium break-all">
-                                            {{ item.label }}
-                                        </span>
-                                    </div>
-                                </template>
-                                <div class="inline-flex">
-                                    <span class=" break-all">
-                                        {{ item.value }}
-                                        <n-tooltip trigger="hover" v-if="item.value !== ''">
-                                            <template #trigger>
-                                                <div class=" inline-flex">
-                                                    <svg-icon class="ml-[2px] pb-[5px] text-[12px] cursor-pointer"
-                                                        name="common-copy" @click="copy(item.value)" />
-                                                </div>
-                                            </template>
-                                            {{ `点击复制` }}
-                                        </n-tooltip>
-                                    </span>
+            <group-list :data="result"></group-list>
 
-                                </div>
-                            </n-descriptions-item>
-                        </n-descriptions>
-                    </n-thing>
-                </n-list-item>
-            </n-list>
         </template>
         <template #actions>
             <n-space>
@@ -56,16 +25,7 @@
 </template>
 <script setup lang="ts">
 import { UAParser } from 'ua-parser-js';
-export type Item = {
-    label: string,
-    value: string
-}
 
-export type ItemGroup = {
-    label: string,
-    items: Item[]
-}
-const copy = useCopy()
 const { width, height } = useWindowSize();
 const battery = useBattery();
 const { language } = useNavigatorLanguage();
@@ -94,12 +54,12 @@ const refreshTag = ref(false);
 const handleRefresh = () => {
     refreshTag.value = !refreshTag.value
 }
-const groups: ComputedRef<ItemGroup[]> = computed(() => {
+const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
     const refreshEmptyStr = refreshTag.value ? "" : ""
     const ua = navigator.userAgent + refreshEmptyStr;
     const { browser, cpu, os } = UAParser(ua);
     const orientationType = getOrientationType()
-    return [
+    const groups: GroupListComponentProps['data'] = [
         {
             label: "屏幕",
             items: [
@@ -200,6 +160,8 @@ const groups: ComputedRef<ItemGroup[]> = computed(() => {
             ]
         }
     ]
+
+    return groups
 })
 
 </script>

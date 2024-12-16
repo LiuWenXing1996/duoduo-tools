@@ -5,8 +5,6 @@ import {
   formatRFC7231,
   parseISO,
 } from "date-fns";
-import { toString } from "lodash-es";
-import { isPureNumberString } from "./common";
 
 export enum DateType {
   "Unix-Timestamp" = "Unix-Timestamp",
