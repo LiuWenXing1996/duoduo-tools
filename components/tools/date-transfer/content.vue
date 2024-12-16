@@ -45,7 +45,7 @@
 </template>
 <script setup lang="ts">
 import type { FormRules, SelectOption } from 'naive-ui';
-import { methods, DateType } from './utils';
+import { DateType, dateTransferMap } from '~/utils/date';
 
 export type Model = {
     dateType: DateType,
@@ -60,10 +60,10 @@ const model = reactive<Model>({
 const form = useTemplateRef("formRef")
 onMounted(() => {
     const now = new Date()
-    model.text = methods[model.dateType].to(now)
+    model.text = dateTransferMap[model.dateType].to(now)
 })
 
-const dataTypeOptions: SelectOption[] = Object.entries(methods).map(([key, value]) => {
+const dataTypeOptions: SelectOption[] = Object.entries(dateTransferMap).map(([key, value]) => {
     return {
         key,
         label: value.label,
@@ -85,7 +85,7 @@ const rules: FormRules = {
             validator: (rule, value) => {
                 let res = false;
                 try {
-                    res = methods[model.dateType].validate(value)
+                    res = dateTransferMap[model.dateType].validate(value)
                 } catch (error) {
                     res = false
                 }
@@ -100,7 +100,7 @@ const textRes = computed(() => {
     const dateType = model.dateType;
     let dateInstance: undefined | Date = undefined;
     try {
-        const m = methods[dateType]
+        const m = dateTransferMap[dateType]
         const isValid = m.validate(text);
         if (isValid) {
             dateInstance = m.form(text)
@@ -108,7 +108,7 @@ const textRes = computed(() => {
     } catch (error) {
     }
 
-    return Object.values(methods).map(m => {
+    return Object.values(dateTransferMap).map(m => {
         let res = "";
         try {
             if (dateInstance) {

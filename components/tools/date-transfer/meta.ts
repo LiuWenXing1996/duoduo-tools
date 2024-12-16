@@ -1,8 +1,8 @@
-import { methods } from "./utils";
+import { dateTransferMap } from "~/utils/date";
 
 const getAllMethods = () => {
   const now = new Date();
-  return Object.values(methods)
+  return Object.values(dateTransferMap)
     .map((e) => {
       const example = e.to(now);
       return `    ${e.label} : ${example}`;
