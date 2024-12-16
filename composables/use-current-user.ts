@@ -52,6 +52,7 @@ export const useCurrentUser = () => {
       }
       const userName = current.value?.name;
       if (!userName) {
+        // TODO:未登录，直接弹出登录窗口
         return;
       }
       const data: UserSettingUpdatePostApiParams = {
