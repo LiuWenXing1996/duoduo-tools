@@ -1,7 +1,4 @@
 import { type JwtHeader, type JwtPayload, jwtDecode } from "jwt-decode";
-import sign from "jwt-encode";
-import { type Algorithm } from "jsonwebtoken";
-// import * as jsonwebtoken from "jsonwebtoken";
 import {
   SignJWT,
   exportPKCS8,

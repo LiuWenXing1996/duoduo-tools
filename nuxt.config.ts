@@ -52,7 +52,7 @@ export default defineNuxtConfig({
       minify: true,
     },
     optimizeDeps: {
-      exclude: ["jsonwebtoken"],
+      exclude: [],
     },
   },
   pages: true,
