@@ -7,11 +7,14 @@
 </template>
 <script setup lang="ts">
 import { NIcon, type IconProps } from "naive-ui";
-defineProps<{
+
+export type Props = {
   name: string;
   color?: IconProps["color"];
   size?: IconProps["size"];
   depth?: IconProps["depth"];
   unFilled?: boolean;
-}>();
+}
+
+defineProps<Props>();
 </script>

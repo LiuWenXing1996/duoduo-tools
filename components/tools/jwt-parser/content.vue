@@ -25,7 +25,7 @@ const model = reactive({
 
 onMounted(() => {
     // cSpell:disable-next-line
-    model.jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    model.jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzUxOTU2MjEwMDAsInN1YiI6InRlc3QiLCJuYmYiOjE3MzUwMjI4NDcwMDAsImlhdCI6MTczNDg1MDA1MTAwMCwiYXVkIjoiMTIzIiwiaGVsbG8iOiLkvaDlpb0ifQ.oFkocq3rWSrZRUVUnBq-OatGCALZKMfb39tGY7GTOf0"
 })
 
 const formRef = ref<FormInst | null>(null)

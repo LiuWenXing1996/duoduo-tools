@@ -51,6 +51,9 @@ export default defineNuxtConfig({
     build: {
       minify: true,
     },
+    optimizeDeps: {
+      exclude: ["jsonwebtoken"],
+    },
   },
   pages: true,
   colorMode: {
@@ -91,6 +94,12 @@ export default defineNuxtConfig({
         import: "Props",
         prefix: "",
         suffix: "ComponentProps",
+      },
+      {
+        path: "~/components",
+        import: "Slots",
+        prefix: "",
+        suffix: "ComponentSlots",
       },
       {
         path: "~/components",

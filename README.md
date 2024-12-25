@@ -6,6 +6,7 @@
 
 # TODO
 
+- [ ] 讲一些前端资源转成 CDN 的方式，减少请求，用国内的 unpkg zhimg
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
@@ -44,3 +45,4 @@
 - [ ] 抛硬币 https://tools.ranblogs.com/coin/
 - [ ] 数字转金额大写 
 - [ ] 手持弹幕
+- [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/

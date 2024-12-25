@@ -15,7 +15,7 @@ export type InitParams = {
     editorContainer: HTMLDivElement
 }
 
-export type Props<T> = {
+export type Props<T extends monacoType.editor.IEditor> = {
     init: (params: InitParams) => MaybePromise<T>;
     contextMenuActions?: MonacoEditorContextMenuAction[]
 }
