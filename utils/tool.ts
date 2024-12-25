@@ -1,6 +1,8 @@
+import type { RenderFunction } from "vue";
+
 export interface ToolMeta {
   title: string;
-  description: string;
+  description: string | RenderFunction;
   category: string;
   related?: (
     | {

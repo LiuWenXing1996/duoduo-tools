@@ -11,8 +11,13 @@
             <custom-scrollbar out-bar>
                 <div class="relative">
                     <define-tool-area v-if="tool?.meta?.description" label="描述" class=" mb-[10px]">
-                        <div class="break-all whitespace-pre-wrap">
-                            {{ tool.meta.description }}
+                        <div class="break-all whitespace-pre-wrap ">
+                            <template v-if="isString(tool.meta.description)">
+                                {{ tool.meta.description }}
+                            </template>
+                            <template v-else>
+                                <component :is="tool.meta.description"></component>
+                            </template>
                         </div>
                     </define-tool-area>
                     <slot name="input"></slot>
