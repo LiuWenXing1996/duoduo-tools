@@ -51,7 +51,7 @@
                 </div>
                 <div class="mt-[10px]" v-if="slots.actions">
                     <define-tool-area>
-                        <template #label>操作</template>
+                        <template #label>{{ propsLocal.output?.actions?.label }}</template>
                         <slot name="actions"></slot>
                     </define-tool-area>
                 </div>
@@ -74,6 +74,9 @@ export type Props = {
     output?: {
         area?: DefineToolAreaComponentProps
         scroll?: CustomScrollbarComponentProps,
+        actions?: {
+            label?: string
+        }
     }
 }
 const props = defineProps<Props>()
@@ -94,6 +97,9 @@ const propsLocal = computed(() => {
             },
             scroll: {
                 outBar: true
+            },
+            actions: {
+                label: "操作"
             }
         }
     }, { vertical: vertical.value, output: output.value })

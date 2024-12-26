@@ -1,6 +1,6 @@
 <template>
-  <n-config-provider :locale="zhCN" :date-locale="dateZhCN" inline-theme-disabled :theme="theme.current.value"
-    class="size-full">
+  <n-config-provider :locale="zhCN" :theme-overrides="theme.themeOverrides" :date-locale="dateZhCN"
+    inline-theme-disabled :theme="theme.current.value" class="size-full">
     <n-global-style />
     <global-css-vars />
     <n-message-provider>

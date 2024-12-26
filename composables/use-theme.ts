@@ -1,4 +1,4 @@
-import { darkTheme } from "naive-ui";
+import { darkTheme, type GlobalThemeOverrides } from "naive-ui";
 
 export const useTheme = () => {
   const colorMode = useColorMode();
@@ -18,6 +18,8 @@ export const useTheme = () => {
     return colorMode.preference;
   });
 
+  const themeOverrides: GlobalThemeOverrides = {};
+
   const toggle = () => {
     if (isDark.value) {
       colorMode.preference = "light";
@@ -30,6 +32,7 @@ export const useTheme = () => {
     setPreference,
     preference,
     current,
+    themeOverrides,
     isDark,
   };
 };
