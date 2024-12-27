@@ -107,6 +107,12 @@ export default defineNuxtConfig({
         prefix: "",
         suffix: "ComponentModel",
       },
+      {
+        path: "~/components",
+        import: "Exports",
+        prefix: "",
+        suffix: "ComponentExports",
+      },
     ],
   },
 });

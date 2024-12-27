@@ -30,16 +30,20 @@ export const jsonParseSafely = <T>(str?: string | null): T | undefined => {
   return res;
 };
 export * from "./tool-category";
-export const defineSelectOptionList = <T extends object>(obj: {
-  [key in keyof T]: SelectOption;
-}): SelectOption[] => {
-  return Object.entries(obj).map(([key, option]) => {
+export const defineSelectOptionList = <T extends object>(
+  obj: {
+    [key in keyof T]: SelectOption;
+  },
+  append?: SelectOption[]
+): SelectOption[] => {
+  const raw = Object.entries(obj).map(([key, option]) => {
     return {
       key,
       value: key,
       ...(option as any),
     };
   });
+  return [...raw, ...(append || [])];
 };
 export const sortByPinyin = <T>(
   list: T[],

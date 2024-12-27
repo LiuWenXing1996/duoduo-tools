@@ -1,5 +1,5 @@
 export const useAutoBoolean = (options?: { time?: number; init?: boolean }) => {
-  const time = options?.time || 1000;
+  const time = options?.time ?? 1000;
   const init = options?.init == undefined ? false : options?.init;
   const store = ref(init);
   let timer: ReturnType<typeof setTimeout> | undefined = undefined;
@@ -20,4 +20,3 @@ export const useAutoBoolean = (options?: { time?: number; init?: boolean }) => {
     toggle,
   };
 };
-

@@ -43,9 +43,11 @@
                 <div class="grow">
                     <define-tool-area class="size-full" v-bind="propsLocal.output?.area">
                         <div class="size-full relative">
-                            <custom-scrollbar v-bind="propsLocal.output?.scroll">
-                                <slot name="output"></slot>
-                            </custom-scrollbar>
+                            <common-loading-wrapper v-bind="props.output?.loadingWrapper">
+                                <custom-scrollbar v-bind="propsLocal.output?.scroll">
+                                    <slot name="output"></slot>
+                                </custom-scrollbar>
+                            </common-loading-wrapper>
                         </div>
                     </define-tool-area>
                 </div>
@@ -74,6 +76,7 @@ export type Props = {
     output?: {
         area?: DefineToolAreaComponentProps
         scroll?: CustomScrollbarComponentProps,
+        loadingWrapper?: CommonLoadingWrapperComponentProps,
         actions?: {
             label?: string
         }
