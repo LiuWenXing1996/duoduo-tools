@@ -9,8 +9,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] custom icon 中的 iconsImport 换种实现方式，直接修改 iconsImport 的路径
-- [ ] HTTP 状态码
 - [ ] WiFi 二维码生成器
 - [ ] SVG 占位符生成器
 - [ ] Crontab 表达式生成

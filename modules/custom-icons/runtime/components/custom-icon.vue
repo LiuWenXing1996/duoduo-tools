@@ -5,13 +5,20 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from '#imports'
-import { split } from "change-case";
+import { kebabCase } from "change-case";
 
 const props = withDefaults(defineProps<{
   name: string;
   filled?: boolean
 }>(), { filled: false })
 
+const toNormalIconName = (findIconPath: string) => {
+  const start = `/assets/icons/`
+  const end = `.svg`
+  const findPathName = findIconPath.slice(start.length, -end.length);
+  const normalIconName = kebabCase(findPathName);
+  return normalIconName
+}
 
 const icon = ref<string | Record<string, any>>('')
 let hasStroke = false
@@ -19,41 +26,18 @@ let hasStroke = false
 async function getIcon() {
   try {
     // @ts-ignore
-    const iconsImport = import.meta.glob('assets/icons/**/**.svg', {
+    const iconsImport = import.meta.glob(`assets/icons/**/**.svg`, {
       eager: false,
       query: '?raw',
       import: 'default'
     })
-    const allPathPoints = split(props.name);
-    let allPaths: string[] = [];
-    const getPoints = (i: number, input: string[]): string[][] => {
-      if (i === 1) {
-        return ["/", "-"].map(e => {
-          return [...input, e]
-        })
-      } else {
-        const children = ["/", "-"].map(e => {
-          return [...input, e]
-        }).map(e => getPoints(i - 1, e)).flat()
-        return children
-      }
-    }
-    if (allPathPoints.length === 1) {
-      allPaths = [allPathPoints[0]]
-    } else {
-      const allPoints = getPoints(allPathPoints.length - 1, []);
-      allPaths = allPoints.map((points) => {
-        const str: string = allPathPoints.map((pathPoint, pathPointIndex) => {
-          const point = points[pathPointIndex] || ""
-          return [pathPoint, point]
-        }).flat().join('');
-        return str
-      })
-    }
-    const pathName = allPaths.find(pathVal => {
-      return iconsImport[`/assets/icons/${pathVal}.svg`]
-    });
-    const rawIcon = await iconsImport[`/assets/icons/${pathName}.svg`]()
+    const allFindIconPathList = Object.keys(iconsImport);
+    const allNormalIcons: Record<string, any> = {};
+    allFindIconPathList.map(findIconPath => {
+      const normalIconName = toNormalIconName(findIconPath);
+      allNormalIcons[normalIconName] = iconsImport[findIconPath]
+    })
+    const rawIcon = await allNormalIcons[props.name]()
     if (rawIcon.includes('stroke')) { hasStroke = true }
     icon.value = rawIcon
   } catch {
