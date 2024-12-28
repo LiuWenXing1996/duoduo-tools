@@ -12,6 +12,9 @@
                     <n-form-item :="formItemPropsMap.fontSize">
                         <n-input-number v-model:value="model.fontSize" />
                     </n-form-item>
+                    <n-form-item :="formItemPropsMap.customText">
+                        <n-input v-model:value="model.customText" />
+                    </n-form-item>
                     <n-form-item :="formItemPropsMap.bgColor">
                         <n-color-picker :render-label="() => ''" v-model:value="model.bgColor" />
                     </n-form-item>
@@ -80,6 +83,11 @@ const formItemPropsMap = defineFromItemPropsMap(
         "fontSize": {
             config: {
                 label: "字体大小",
+            }
+        },
+        "customText": {
+            config: {
+                label: "自定义文本",
             }
         },
         "bgColor": {
