@@ -1,0 +1,5 @@
+{
+  "$schema": "https://unpkg.com/create-code-easy@0.1.3/schemas/meta.json",
+  "name": "tool-base",
+  "description": "工具基础模板"
+}

@@ -82,6 +82,7 @@
     "@types/crypto-js": "^4.2.2",
     "@types/nodemailer": "^6.4.16",
     "@vue-macros/common": "^1.15.0",
+    "create-code-easy": "^0.1.5",
     "husky": "^9.1.6",
     "less": "^4.2.0",
     "perfect-debounce": "^1.0.0",
