@@ -225,7 +225,7 @@ const handleDownload = async (val: FileExtension) => {
     const mimeType = typeMap[val]
     const url = resCanvas.value?.toDataURL(mimeType);
     if (url) {
-        downloadURI(url, `maze.${val}`);
+        downloadURL(url, `maze.${val}`);
     }
 }
 
