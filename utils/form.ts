@@ -60,3 +60,5 @@ export const defineFromItemPropsMap = <T extends Record<string, unknown>>(
   });
   return res as Record<keyof T, FormItemProps>;
 };
+
+export const allFormItemTrigger = ["input", "change", "blur", "focus"];

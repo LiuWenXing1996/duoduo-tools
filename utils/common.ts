@@ -68,3 +68,26 @@ export type Primitive =
   | undefined;
 
 export type PlainObject = Record<string, Primitive>;
+
+export type UnionCommonKeys<T extends object> = keyof T;
+export type UnionAllKeys<T> = T extends unknown ? keyof T : never;
+export type SubtractKeys<A, C> = A extends C ? never : A;
+export type UnionNonCommonKeys<T extends object> = SubtractKeys<
+  UnionAllKeys<T>,
+  UnionCommonKeys<T>
+>;
+export type UnionMerge<T extends object> = {
+  [k in UnionCommonKeys<T>]: UnionPickTypeOf<T, k>;
+} & {
+  [k in UnionNonCommonKeys<T>]?: UnionPickTypeOf<T, k>;
+};
+export type UnionPickType<T, K extends UnionAllKeys<T>> = T extends {
+  [k in K]?: any;
+}
+  ? T[K]
+  : undefined;
+
+export type UnionPickTypeOf<
+  T,
+  K extends string | number | symbol
+> = K extends UnionAllKeys<T> ? UnionPickType<T, K> : never;
