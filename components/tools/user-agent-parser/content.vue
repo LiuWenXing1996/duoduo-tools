@@ -8,7 +8,7 @@
                     </n-form-item>
                     <common-empty-form-item label="当前浏览器 UA" :actions="[
                         {
-                            type: IconButtonType['form-label-action'],
+                            type: 'common',
                             shortcut: {
                                 'icon.name': 'common-copy',
                                 'button.onClick': () => {
@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { UAParser } from 'ua-parser-js';
-import { IconButtonType } from "@/components/common/icon-button/utils"
 
 export type Model = {
     content: string,

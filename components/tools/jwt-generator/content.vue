@@ -12,7 +12,7 @@
                     <common-empty-form-item label="自定义数据" :show-feedback="(model.data.custom?.header || []).length > 0"
                         :actions="[
                             {
-                                type: IconButtonType['form-label-action'],
+                                type: 'common',
                                 shortcut: {
                                     'icon.name': 'common-add',
                                     'button.onClick': () => {
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="ml-[10px] h-[34px] flex items-center">
-                                <common-icon-button :type="IconButtonType['form-label-action']" :shortcut="{
+                                <common-icon-button type="common" :shortcut="{
                                     'icon.name': 'common-delete',
                                     'button.onClick': () => { customHeaderHandler.del(index) },
                                     'tooltipWrapper.content': '移除',
@@ -66,7 +66,7 @@
                         :show-feedback="(!model.append.payloadAud.isSingle) && (model.append.payloadAud.list || []).length > 0"
                         :actions="[
                             {
-                                type: IconButtonType['form-label-action'],
+                                type: 'common',
                                 shortcut: {
                                     'icon.name': 'common-list',
                                     'button.onClick': () => {
@@ -83,7 +83,7 @@
                                 }
                             },
                             (!model.append.payloadAud.isSingle) ? {
-                                type: IconButtonType['form-label-action'],
+                                type: 'common',
                                 shortcut: {
                                     'icon.name': 'common-add',
                                     'button.onClick': () => {
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-[10px] h-[34px] flex items-center">
-                                    <common-icon-button :type="IconButtonType['form-label-action']" :shortcut="{
+                                    <common-icon-button type="common" :shortcut="{
                                         'icon.name': 'common-delete',
                                         'button.onClick': () => { payloadAudListHandler.del(index) },
                                         'tooltipWrapper.content': '移除',
@@ -133,7 +133,7 @@
                     <common-empty-form-item label="自定义数据" :show-feedback="(model.data.custom?.payload || []).length > 0"
                         :actions="[
                             {
-                                type: IconButtonType['form-label-action'],
+                                type: 'common',
                                 shortcut: {
                                     'icon.name': 'common-add',
                                     'button.onClick': () => {
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                             <div class="ml-[10px] h-[34px] flex items-center">
-                                <common-icon-button :type="IconButtonType['form-label-action']" :shortcut="{
+                                <common-icon-button type="common" :shortcut="{
                                     'icon.name': 'common-delete',
                                     'button.onClick': () => { customPayloadHandler.del(index) },
                                     'tooltipWrapper.content': '移除',
@@ -199,7 +199,6 @@
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';
-import { IconButtonType } from "@/components/common/icon-button/utils"
 
 export type Model = {
     data: Omit<JwtEncodeOptions, "payload"> & {

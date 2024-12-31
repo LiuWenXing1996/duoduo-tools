@@ -41,8 +41,6 @@
 </template>
 
 <script setup lang="tsx">
-import { IconButtonType } from "~/components/common/icon-button/utils";
-
 export type Model = {
     width: number,
     height: number,
@@ -151,7 +149,7 @@ const resKeyValueList = computed<CommonKeyValueComponentProps['data'] | undefine
             value: data.svgString,
             valueActions: [
                 {
-                    type: IconButtonType["form-label-action"],
+                    type: 'common',
                     shortcut: {
                         'icon.name': "common-copy",
                         "button.onClick": () => {
@@ -166,7 +164,7 @@ const resKeyValueList = computed<CommonKeyValueComponentProps['data'] | undefine
             value: data.base64,
             valueActions: [
                 {
-                    type: IconButtonType["form-label-action"],
+                    type: 'common',
                     shortcut: {
                         'icon.name': "common-copy",
                         "button.onClick": () => {
