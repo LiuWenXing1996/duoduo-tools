@@ -5,7 +5,6 @@ export type CronOptions = {
   day: CronDayOptions;
   month: CronMonthOptions;
   week: CronWeekOptions;
-  year?: CronYearOptions;
 };
 export type CronSecondOptions =
   | {
@@ -208,41 +207,13 @@ export const cronWeekGen = (options: CronWeekOptions): string => {
   }
 };
 
-export type CronYearOptions =
-  | {
-      type: "per";
-    }
-  | {
-      type: "none";
-    }
-  | {
-      type: "interval";
-      interval: {
-        start: number;
-        end: number;
-      };
-    };
-
-export const cronYearGen = (options: CronYearOptions): string => {
-  switch (options.type) {
-    case "per":
-      return "*";
-    case "none":
-      return "?";
-    case "interval":
-      return `${options.interval.start}-${options.interval.end}`;
-    default:
-      throw new Error("Invalid CronYearOptions type");
-  }
-};
-
 export const cronGenerator = (
   options: CronOptions,
   config: {
     length: number;
   }
 ) => {
-  const { second, minute, hour, day, month, week, year } = options;
+  const { second, minute, hour, day, month, week } = options;
   const { length } = config || {};
   return filterNullable([
     length >= 6 ? (second ? cronSecondGen(second) : "") : "",
@@ -251,6 +222,5 @@ export const cronGenerator = (
     cronDayGen(day),
     cronMonthGen(month),
     cronWeekGen(week),
-    length >= 7 ? (year ? cronYearGen(year) : "") : "",
   ]).join(" ");
 };

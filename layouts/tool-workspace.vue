@@ -18,7 +18,6 @@
                         <normal-icon name="github"
                             class="cursor-pointer  rounded-[6px] hover:bg-hoverColor"></normal-icon>
                     </a>
-                    <user-avatar />
                 </div>
             </div>
             <div class="h-[calc(100%-50px)] flex">

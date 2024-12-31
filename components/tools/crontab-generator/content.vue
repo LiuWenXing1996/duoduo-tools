@@ -18,7 +18,6 @@
                         radioList: [
                             { label: '5 位，分、时、日期、月、周', value: 5 },
                             { label: '6 位，秒、分、时、日期、月、周', value: 6 },
-                            { label: '7 位，秒、分、时、日期、月、周、年', value: 7 }
                         ]
                     }" />
                 </define-tool-area>
@@ -42,18 +41,14 @@
                 <define-tool-area label="周">
                     <tools-crontab-generator-week ref="weekForm" />
                 </define-tool-area>
-                <template v-if="useYears">
-                    <define-tool-area label="年">
-                        <tools-crontab-generator-year ref="yearForm" />
-                    </define-tool-area>
-                </template>
             </n-form>
         </template>
         <template #output>
             <common-key-value :item-label-width="100" :data="[
                 { label: 'Cron 表达式', value: resRequest.data.value?.content || '' },
                 { label: '是否有效', value: resRequest.data.value?.valid || '' },
-                { label: '解释', value: resRequest.data.value?.expression || '' }
+                { label: '解释', value: resRequest.data.value?.expression || '' },
+                { label: '下次执行时间', value: resRequest.data.value?.nextRuns?.map((item) => item.toLocaleString()).join('\n') || '' },
             ]" />
         </template>
     </define-tool-wrapper>
@@ -63,6 +58,7 @@ import { cronGenerator, type CronOptions } from './utils'
 import cronValidate from "cron-validate"
 import cronstrue from "cronstrue"
 import 'cronstrue/locales/zh_CN';
+import {Cron} from 'croner'
 
 export type Model = {
     config: {
@@ -72,7 +68,6 @@ export type Model = {
         day?: ToolsCrontabGeneratorDayComponentModel,
         month?: ToolsCrontabGeneratorMonthComponentModel,
         week?: ToolsCrontabGeneratorWeekComponentModel,
-        year?: ToolsCrontabGeneratorYearComponentModel,
     },
     length: number,
 }
@@ -80,7 +75,8 @@ export type Model = {
 export type Result = {
     content: string,
     valid: string,
-    expression: string
+    expression: string,
+    nextRuns?: Date[]
 }
 const model = reactive<Model>({
     config: {},
@@ -119,11 +115,6 @@ watch(() => weekFormRef.value?.model, (val) => {
     model.config.week = val
 })
 
-const yearFormRef = useTemplateRef('yearForm');
-watch(() => yearFormRef.value?.model, (val) => {
-    model.config.year = val
-})
-
 const useSeconds = computed(() => model.length >= 6)
 const useYears = computed(() => model.length >= 7)
 
@@ -140,9 +131,6 @@ const resRequest = useCustomRequest<Result | undefined>(
             await dayFormRef.value?.formRef?.validate();
             await monthFormRef.value?.formRef?.validate();
             await weekFormRef.value?.formRef?.validate();
-            if (useYears.value) {
-                await yearFormRef.value?.formRef?.validate();
-            }
             const options: CronOptions = {
                 second: model.config.second?.config,
                 minute: model.config.minute!.config,
@@ -150,7 +138,6 @@ const resRequest = useCustomRequest<Result | undefined>(
                 day: model.config.day!.config,
                 month: model.config.month!.config,
                 week: model.config.week!.config,
-                year: model.config.year?.config,
             }
             const content = cronGenerator(options, {
                 length: model.length
@@ -171,11 +158,12 @@ const resRequest = useCustomRequest<Result | undefined>(
                 locale: 'zh_CN',
                 use24HourTimeFormat: true
             });
-            console.log(cronResult)
+            const cron = new Cron(content);
             res = {
                 content,
                 valid: cronResult.isValid() ? '有效' : '无效',
                 expression,
+                nextRuns: cron.nextRuns(10)||[]
             }
         } catch (error) {
             resRequest.mutate(undefined)
