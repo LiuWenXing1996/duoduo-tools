@@ -64,6 +64,7 @@
     "pinyin-pro": "^3.26.0",
     "qr-code-styling": "^1.8.4",
     "radash": "^12.1.0",
+    "sql-formatter": "^15.4.8",
     "tailwindcss": "^3.4.14",
     "ts-essentials": "^10.0.3",
     "type-fest": "^4.31.0",
