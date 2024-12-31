@@ -13,7 +13,7 @@
                         },
                         input: {
                             type: 'textarea',
-                            rows: 10,
+                            rows: 4,
                             value: model.content,
                             onUpdateValue: (val) => { model.content = val }
                         }
