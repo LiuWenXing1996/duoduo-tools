@@ -6,7 +6,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <define-tool-area label="输入">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '原始 Json',

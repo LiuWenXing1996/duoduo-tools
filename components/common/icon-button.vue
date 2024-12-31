@@ -36,9 +36,7 @@ const defaultTypes: Record<Type, Config> = {
     },
     simple: {
         button: {
-            strong: true,
-            secondary: true,
-            circle: true,
+            quaternary: true,
             size: "tiny",
         },
         tooltipWrapper: {

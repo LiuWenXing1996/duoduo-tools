@@ -22,6 +22,15 @@
                             <slot name="actions"></slot>
                         </div>
                     </template>
+                    <div class="ml-[2px]" v-if="labelActions && labelActions.length > 0">
+                        <n-space :size="10">
+                            <template v-for="item in labelActions">
+                                <template v-if="item">
+                                    <common-icon-button v-bind="item" />
+                                </template>
+                            </template>
+                        </n-space>
+                    </div>
                 </div>
             </legend>
             <div class="size-full" v-show="isExpand">
@@ -37,6 +46,7 @@
 export type Props = {
     disabled?: boolean,
     label?: string,
+    labelActions?: (CommonIconButtonComponentProps | undefined)[],
     foldDisabled?: boolean
 }
 defineProps<Props>()
