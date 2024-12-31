@@ -47,6 +47,12 @@ export type Result = {
 const model = reactive<Model>({
     content: ""
 })
+onMounted(() => {
+    model.content = `{
+    "foo": "bars",
+    "hello": "world"
+}`
+})
 const copy = useCopy()
 const transformer = (value: string) => {
     const val = (value ?? "").trim();

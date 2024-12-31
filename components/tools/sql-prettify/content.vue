@@ -2,6 +2,17 @@
     <define-tool-wrapper :output="{
         scroll: {
             disabled: true
+        },
+        area: {
+            labelActions: [
+                {
+                    type: 'simple',
+                    shortcut: {
+                        'icon.name': 'common-copy',
+                        'button.onClick': () => { copy(resRequest.data.value?.content || '') }
+                    }
+                }
+            ]
         }
     }">
         <template #input>
@@ -215,7 +226,7 @@ const model = reactive<Model>({
         newlineBeforeSemicolon: false
     }
 })
-
+const copy = useCopy()
 onMounted(() => {
     model.content = `select supplier_name,city from
 (select * from suppliers join addresses on suppliers.address_id=addresses.id)

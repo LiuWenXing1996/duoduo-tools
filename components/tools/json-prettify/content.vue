@@ -2,6 +2,17 @@
     <define-tool-wrapper :output="{
         scroll: {
             disabled: true
+        },
+        area: {
+            labelActions: [
+                {
+                    type: 'simple',
+                    shortcut: {
+                        'icon.name': 'common-copy',
+                        'button.onClick': () => { copy(resRequest.data.value?.content || '') }
+                    }
+                }
+            ]
         }
     }">
         <template #input>
@@ -66,7 +77,7 @@ const model = reactive<Model>({
     isSort: true,
     intent: 4
 })
-
+const copy = useCopy()
 const formRef = useTemplateRef("form")
 const outputEditor = shallowRef<monacoType.editor.IStandaloneCodeEditor>();
 const initOutputEditor: MonacoEditorComponentProps<monacoType.editor.IStandaloneCodeEditor>['init'] = (params) => {
