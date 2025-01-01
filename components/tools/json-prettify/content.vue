@@ -140,6 +140,7 @@ const resRequest = useCustomRequest<Result | undefined>(async () => {
         }
     } catch (error) {
         resRequest.mutate(undefined)
+        outputEditor.value?.setValue("")
         throw error
     }
     outputEditor.value?.setValue(res.content || "")
