@@ -23,7 +23,7 @@
                         </div>
                     </template>
                     <div class="ml-[2px]" v-if="labelActions && labelActions.length > 0">
-                        <n-space :size="10">
+                        <n-space :size="10" class="!gap-0">
                             <template v-for="item in labelActions">
                                 <template v-if="item">
                                     <common-icon-button v-bind="item" />

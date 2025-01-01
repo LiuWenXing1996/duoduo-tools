@@ -33,6 +33,7 @@
     "cnchar": "^3.2.6",
     "cnchar-trad": "^3.2.6",
     "colord": "^2.9.3",
+    "composerize-ts": "^0.6.2",
     "copy-to-clipboard": "^3.3.3",
     "cron-parser": "^4.9.0",
     "cron-validate": "^1.4.5",
