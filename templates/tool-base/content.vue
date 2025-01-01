@@ -3,9 +3,15 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <define-tool-area label="配置">
-                    <n-form-item :="formItemPropsMap.content">
-                        <n-input v-model:value="model.content" :min="0" />
-                    </n-form-item>
+                    <common-form-item-input type="common" :custom="{
+                        formItem: {
+                            label: '内容',
+                        },
+                        input: {
+                            value: model.content,
+                            onUpdateValue: (val) => { model.content = val }
+                        }
+                    }" />
                 </define-tool-area>
             </n-form>
         </template>
@@ -29,18 +35,6 @@ const model = reactive<Model>({
 })
 
 const formRef = useTemplateRef("form")
-const formItemPropsMap = defineFromItemPropsMap(
-    {
-        "content": {
-            config: {
-                label: "内容",
-            }
-        },
-    },
-    {
-        first: true
-    }
-)
 const resRequest = useCustomRequest<Result | undefined>(async () => {
     let res: Result | undefined = undefined;
     try {

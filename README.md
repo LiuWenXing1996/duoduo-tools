@@ -9,7 +9,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] Chmod 计算器
 - [ ] Docker Run 到 docker-compose 转换器
 - [ ] XML 格式化
 - [ ] YAML美化和格式化
