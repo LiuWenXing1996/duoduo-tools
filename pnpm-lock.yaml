@@ -200,6 +200,9 @@ importers:
       vueuc:
         specifier: ^0.4.64
         version: 0.4.64(vue@3.5.13(typescript@5.7.2))
+      xml-formatter:
+        specifier: ^3.6.3
+        version: 3.6.3
       yaml:
         specifier: ^2.6.1
         version: 2.6.1
@@ -4852,6 +4855,14 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  xml-formatter@3.6.3:
+    resolution: {integrity: sha512-++x1TlRO1FRlQ82AZ4WnoCSufaI/PT/sycn4K8nRl4gnrNC1uYY2VV/67aALZ2m0Q4Q/BLj/L69K360Itw9NNg==}
+    engines: {node: '>= 16'}
+
+  xml-parser-xo@4.1.3:
+    resolution: {integrity: sha512-U6eN5Pyrlek9ottHVpT9e8YUax75oVYXbnYxU+utzDC7i+OyWj9ynsNMiZNQZvpuazbG0O7iLAs9FkcFmzlgSA==}
+    engines: {node: '>= 16'}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -10092,6 +10103,12 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.18.0: {}
+
+  xml-formatter@3.6.3:
+    dependencies:
+      xml-parser-xo: 4.1.3
+
+  xml-parser-xo@4.1.3: {}
 
   xtend@4.0.2: {}
 

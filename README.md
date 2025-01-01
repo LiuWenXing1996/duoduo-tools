@@ -9,8 +9,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] Docker Run 到 docker-compose 转换器
-- [ ] XML 格式化
 - [ ] YAML美化和格式化
 - [ ] IPv4子网计算器
 - [ ] Ipv4地址转换器
