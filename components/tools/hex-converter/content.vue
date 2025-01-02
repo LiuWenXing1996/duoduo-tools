@@ -48,7 +48,6 @@
 </template>
 <script setup lang="ts">
 import type { FormRules } from 'naive-ui';
-import { BaseRange, isValidBase, isValidNumberForBase } from './utils';
 
 export type Model = {
     val: string,
@@ -57,27 +56,6 @@ export type Model = {
 }
 
 const copy = useCopy()
-const convertBase = (params: { value: string; fromBase: number; toBase: number }) => {
-    const { value, fromBase, toBase } = params
-    const range = BaseRange;
-    const fromRange = range.slice(0, fromBase);
-    const toRange = range.slice(0, toBase);
-    let decValue = value
-        .split('')
-        .reverse()
-        .reduce((carry: bigint, digit: string, index: number) => {
-            if (!fromRange.includes(digit)) {
-                throw new Error(`无效数字，${fromBase} 不包含此数字 ${digit}`);
-            }
-            return (carry += BigInt(fromRange.indexOf(digit)) * BigInt(fromBase) ** BigInt(index));
-        }, 0n);
-    let newValue = '';
-    while (decValue > 0) {
-        newValue = toRange[Number(decValue % BigInt(toBase))] + newValue;
-        decValue = (decValue - (decValue % BigInt(toBase))) / BigInt(toBase);
-    }
-    return newValue || '0';
-}
 
 const model = reactive<Model>({
     val: "42",
@@ -97,7 +75,7 @@ const rules: FormRules = {
     inputBase: [
         {
             validator: (rule, value: number) => {
-                return isValidBase(value)
+                return isValidIntegerBase(value)
             },
             message: '无效的进制,进制必须在 2-64 之间', trigger: ['input', 'change', 'blur', 'focus']
         }
@@ -105,7 +83,7 @@ const rules: FormRules = {
     outCustomBase: [
         {
             validator: (rule, value: number) => {
-                return isValidBase(value)
+                return isValidIntegerBase(value)
             },
             message: '无效的进制,进制必须在 2-64 之间', trigger: ['input', 'change', 'blur', 'focus']
         }
@@ -114,7 +92,7 @@ const rules: FormRules = {
         { required: true, message: '请输入数值', trigger: ['input', 'change', 'blur', 'focus'] },
         {
             validator: (rule, value: string) => {
-                return isValidNumberForBase(value, model.inputBase)
+                return isValidNumberForIntegerBase(value, model.inputBase)
             },
             message: '无效的数值', trigger: ['input', 'change', 'blur', 'focus']
         }
@@ -136,7 +114,7 @@ const textRes = computed(() => {
     }).map(item => {
         let target = "";
         try {
-            target = convertBase({
+            target = convertIntegerBase({
                 value: val,
                 fromBase: inputBase,
                 toBase: item.base

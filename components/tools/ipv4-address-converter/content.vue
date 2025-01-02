@@ -5,7 +5,7 @@
                 <define-tool-area label="配置">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
-                            label: '内容',
+                            label: 'IPv4 地址',
                             labelActions: [
                                 {
                                     type: 'simple',
@@ -18,10 +18,22 @@
                                         'tooltipWrapper.enabled': true
                                     }
                                 }
+                            ],
+                            path: 'content',
+                            rule: [
+                                { required: true, message: '请输入 IPv4 地址', trigger: allFormItemTrigger },
+                                {
+                                    validator: (_, val) => {
+                                        if (isValidIpv4({ ip: val })) {
+                                            return true
+                                        } else {
+                                            return false
+                                        }
+                                    }, message: '请输入正确的 IPv4 地址', trigger: allFormItemTrigger
+                                }
                             ]
                         },
                         input: {
-                            clearable: true,
                             value: model.content,
                             onUpdateValue: (val) => { model.content = val }
                         }
@@ -32,113 +44,81 @@
         <template #output>
             <common-key-value :data="[
                 () => {
-                    const value = resRequest.data.value?.content?.toString() || ''
+                    const value = resRequest.data.value?.ipv4 || ''
                     return {
-                        label: '子网掩码',
-                        value: value,
-                        valueActions: [commonCopyAction(value)]
-                    }
-                },
-                () => {
-                    const value = resRequest.data.value?.content?.base || ''
-                    return {
-                        label: '网络地址',
+                        label: 'IPv4 地址',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
                 () => {
-                    const value = resRequest.data.value?.content?.mask || ''
+                    const value = resRequest.data.value?.decimal || ''
                     return {
-                        label: '网络掩码',
+                        label: '十进制',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
                 () => {
-                    const value = bitmaskToDisplay(resRequest.data.value?.content?.bitmask)
+                    const value = resRequest.data.value?.binary || ''
                     return {
-                        label: '网络掩码（二进制）',
+                        label: '二进制',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
                 () => {
-                    const value = resRequest.data.value?.content?.bitmask ? `/${resRequest.data.value.content.bitmask}` : ''
+                    const value = resRequest.data.value?.hex || ''
                     return {
-                        label: 'CIDR 标记',
+                        label: '十六进制',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
                 () => {
-                    const value = resRequest.data.value?.content?.hostmask || ''
+                    const value = resRequest.data.value?.ipv6 || ''
                     return {
-                        label: '通配符掩码',
+                        label: 'IPv6 地址',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
                 () => {
-                    const value = resRequest.data.value?.content?.size?.toString() || ''
+                    const value = resRequest.data.value?.ipv6Short || ''
                     return {
-                        label: '网络大小',
+                        label: 'IPv6 地址(简写)',
                         value,
                         valueActions: [commonCopyAction(value)]
                     }
                 },
-                () => {
-                    const value = resRequest.data.value?.content?.first || ''
-                    return {
-                        label: '起始地址',
-                        value,
-                        valueActions: [commonCopyAction(value)]
-                    }
-                },
-                () => {
-                    const value = resRequest.data.value?.content?.last || ''
-                    return {
-                        label: '结束地址',
-                        value,
-                        valueActions: [commonCopyAction(value)]
-                    }
-                },
-                () => {
-                    const value = resRequest.data.value?.content?.broadcast || ''
-                    return {
-                        label: '广播地址',
-                        value,
-                        valueActions: [commonCopyAction(value)]
-                    }
-                },
-                () => {
-                    const value = getIPClass(resRequest.data.value?.content?.base)
-                    return {
-                        label: 'IP 类别',
-                        value,
-                        valueActions: [commonCopyAction(value)]
-                    }
-                }
             ]" />
         </template>
     </define-tool-wrapper>
 </template>
 
 <script setup lang="tsx">
-import { Netmask } from 'netmask';
+import * as _ from 'lodash-es'
 export type Model = {
     content: string,
 }
 
 export type Result = {
-    content: Netmask,
+    ipv4: string,
+    decimal: string,
+    binary: string,
+    hex: string,
+    ipv6: string,
+    ipv6Short: string,
 }
 const model = reactive<Model>({
     content: ""
 })
 const addExample = () => {
-    model.content = "192.168.0.1/24"
+    model.content = "192.168.1.1"
 }
+onMounted(() => {
+    addExample()
+})
 const copy = useCopy()
 onMounted(() => {
     addExample()
@@ -162,9 +142,15 @@ const resRequest = useCustomRequest<Result | undefined>(async () => {
     let res: Result | undefined = undefined;
     try {
         await formRef.value?.validate();
-        const block = new Netmask(model.content)
+        const ipv4 = model.content;
+        const decimal = ipv4ToInt({ ip: ipv4 }).toString();
         res = {
-            content: block
+            ipv4,
+            decimal: decimal,
+            binary: convertIntegerBase({ value: decimal, fromBase: 10, toBase: 2 }),
+            hex: convertIntegerBase({ value: decimal, fromBase: 10, toBase: 16 }),
+            ipv6: ipv4ToIpv6({ ip: ipv4 }),
+            ipv6Short: ipv4ToIpv6({ ip: ipv4, prefix: '::ffff:' }),
         }
     } catch (error) {
         resRequest.mutate(undefined)
@@ -174,39 +160,43 @@ const resRequest = useCustomRequest<Result | undefined>(async () => {
 }, {
     loadingKeep: 0,
     debounceOptions: {
-        leading: false
+        leading: true
     }
 })
-const bitmaskToDisplay = (bitmask: number | undefined) => {
-    if (!bitmask) {
-        return ''
-    }
-    const res = ('1'.repeat(bitmask) + '0'.repeat(32 - bitmask)).match(/.{8}/g)?.join('.');
-    return res ?? ''
-}
-const getIPClass = (ip: string | undefined) => {
+const isValidIpv4 = ({ ip }: { ip: string }) => {
     if (!ip) {
-        return ""
+        return false;
     }
-    const [firstOctet] = ip.split('.').map(Number);
+    const cleanIp = ip.trim();
 
-    if (firstOctet < 128) {
-        return 'A';
-    }
-    if (firstOctet > 127 && firstOctet < 192) {
-        return 'B';
-    }
-    if (firstOctet > 191 && firstOctet < 224) {
-        return 'C';
-    }
-    if (firstOctet > 223 && firstOctet < 240) {
-        return 'D';
-    }
-    if (firstOctet > 239 && firstOctet < 256) {
-        return 'E';
+    return /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/.test(cleanIp);
+}
+const ipv4ToInt = ({ ip }: { ip: string }) => {
+    if (!isValidIpv4({ ip })) {
+        return 0;
     }
 
-    return "";
+    return ip
+        .trim()
+        .split('.')
+        .reduce((acc, part, index) => acc + Number(part) * 256 ** (3 - index), 0);
+}
+const ipv4ToIpv6 = ({ ip, prefix = '0000:0000:0000:0000:0000:ffff:' }: { ip: string; prefix?: string }) => {
+    if (!isValidIpv4({ ip })) {
+        return '';
+    }
+
+    return (
+        prefix
+        + _.chain(ip)
+            .trim()
+            .split('.')
+            .map(part => Number.parseInt(part).toString(16).padStart(2, '0'))
+            .chunk(2)
+            .map(blocks => blocks.join(''))
+            .join(':')
+            .value()
+    );
 }
 watch(() => model, () => {
     resRequest.run()
