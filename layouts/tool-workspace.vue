@@ -42,7 +42,7 @@
                     <div class="size-full">
                         <template v-if="hasOpenedTabs">
                             <div class="flex h-[40px] w-full border-b">
-                                <div class="h-full w-[calc(100%-60px)]">
+                                <div class="h-full w-[calc(100%-40px)]">
                                     <XScroll>
                                         <div class="flex h-[38px] w-max justify-center p-[6px]">
                                             <div v-for="item in toolTabs" :class="[
@@ -65,7 +65,7 @@
                                         </div>
                                     </XScroll>
                                 </div>
-                                <div class="h-full w-[60px] flex justify-center items-center border-l">
+                                <div class="h-full w-[40px] flex justify-center items-center border-l">
                                     <tool-tabs-actions />
                                 </div>
                             </div>
