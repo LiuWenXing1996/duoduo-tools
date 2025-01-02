@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="tsx">
-import * as _ from 'lodash-es'
+import _ from 'lodash'
 export type Model = {
     content: string,
 }
