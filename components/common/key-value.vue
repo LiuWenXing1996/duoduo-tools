@@ -7,7 +7,7 @@
         }">
             <n-descriptions-item v-for="item in items">
                 <template #label>
-                    <div class="block">
+                    <div class="inline-flex">
                         <common-rich-text :content="item.label" />
                         <span class="ml-[10px] inline-flex" v-if="(item.labelActions || []).length > 0">
                             <n-space :size="10" inline>
@@ -20,7 +20,7 @@
                         </span>
                     </div>
                 </template>
-                <div class="block">
+                <div class="inline-flex">
                     <common-rich-text :content="item.value" />
                     <span class="ml-[10px] inline-flex" v-if="(item.valueActions || []).length > 0">
                         <n-space :size="10">

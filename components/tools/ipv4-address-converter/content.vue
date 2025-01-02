@@ -34,6 +34,7 @@
                             ]
                         },
                         input: {
+                            clearable: true,
                             value: model.content,
                             onUpdateValue: (val) => { model.content = val }
                         }
@@ -160,7 +161,7 @@ const resRequest = useCustomRequest<Result | undefined>(async () => {
 }, {
     loadingKeep: 0,
     debounceOptions: {
-        leading: true
+        leading: false
     }
 })
 const isValidIpv4 = ({ ip }: { ip: string }) => {
