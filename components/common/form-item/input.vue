@@ -1,16 +1,16 @@
 <template>
-    <n-form-item :="config.formItem">
+    <common-form-item-base :="config.formItem">
         <n-input :="config.input" />
-    </n-form-item>
+    </common-form-item-base>
 </template>
 <script setup lang="tsx">
-import type { FormItemProps, InputProps } from 'naive-ui'
+import type { InputProps } from 'naive-ui'
 import { assign, construct } from 'radash'
 import type { DeepPartial } from 'ts-essentials'
 
 export type Type = "common"
 export type Config = {
-    formItem?: FormItemProps,
+    formItem?: CommonFormItemBaseComponentProps,
     input?: InputProps,
 }
 export type Props = {

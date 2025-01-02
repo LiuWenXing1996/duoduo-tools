@@ -5,7 +5,7 @@
         }" label-class="inline-flex justify-between" :content-style="{
             width: `calc(100% - ${itemLabelWidth}px)`
         }">
-            <n-descriptions-item v-for="item in data">
+            <n-descriptions-item v-for="item in items">
                 <template #label>
                     <div class="block">
                         <common-rich-text :content="item.label" />
@@ -43,12 +43,19 @@ import type { RenderFunction } from 'vue'
 export type Item = {
     label: string | RenderFunction,
     value: string | RenderFunction,
+    labelActions?: (CommonIconButtonComponentProps | undefined | (() => CommonIconButtonComponentProps | undefined))[],
+    valueActions?: (CommonIconButtonComponentProps | undefined | (() => CommonIconButtonComponentProps | undefined))[]
+}
+
+export type ItemPure = {
+    label: string | RenderFunction,
+    value: string | RenderFunction,
     labelActions?: (CommonIconButtonComponentProps | undefined)[],
-    valueActions?: (CommonIconButtonComponentProps | undefined)[]
+    valueActions?: (CommonIconButtonComponentProps | undefined)[],
 }
 
 export type Props = {
-    data: Item[],
+    data: (Item | undefined | (() => Item | undefined))[],
     itemLabelWidth?: number | ((container: DOMRectReadOnly | undefined) => number | undefined);
 }
 const props = defineProps<Props>()
@@ -64,6 +71,31 @@ const itemLabelWidth = computed(() => {
     }
     const val = props.itemLabelWidth(containerRect.value);
     return val || defaultItemLabelWidth
+})
+const items = computed<ItemPure[]>(() => {
+    const items: (ItemPure | undefined)[] = (props.data || []).map(item => {
+        if (!item) {
+            return undefined
+        }
+        let itemWithFunction: Item | undefined = undefined;
+        if (isFunction(item)) {
+            itemWithFunction = item();
+        } else {
+            itemWithFunction = item
+        }
+        if (!itemWithFunction) {
+            return itemWithFunction
+        }
+        const itemPure: ItemPure = {
+            label: itemWithFunction.label,
+            value: itemWithFunction.value,
+            labelActions: isFunction(itemWithFunction.labelActions) ? itemWithFunction.labelActions() : itemWithFunction.labelActions,
+            valueActions: isFunction(itemWithFunction.valueActions) ? itemWithFunction.valueActions() : itemWithFunction.valueActions
+        }
+        return itemPure
+    });
+    const itemsNullable = filterNullable(items)
+    return itemsNullable
 })
 useResizeObserver(containerRef, async (entries) => {
     const entry = entries[0]
