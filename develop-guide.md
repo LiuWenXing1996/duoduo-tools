@@ -102,4 +102,4 @@ export default defineToolMeta({
     - 如果本次更改仅涉及到单个工具，请在`scope`中填写工具的名称，工具的名称为`tool-[工具目录的名称]`,如`tool-date-transfer`
   - 最后运行 `git push`
 - 发布
-  - 本仓库绑定了`Vercel`，每次提交代码后，会自动发布到`Vercel`，可以在`Vercel`中查看发布状态
+  - 本仓库绑定了`Vercel`，每次提交代码后，会自动发布到`Vercel`，可以在`Vercel`中查看发布状态，如果想要自定义部署，可以参考`Nuxt3`的文档    
