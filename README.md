@@ -1,8 +1,9 @@
+[开发中]
+
 # DuoDuo Tools
 
 多多益善工具箱，一个希望实现很多工具的工具箱
 
-[开发中]
 
 # TODO
 
@@ -23,3 +24,13 @@
 - [ ] 数字转金额大写 
 - [ ] 手持弹幕
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
+
+# 感谢
+
+在实现工具的过程中参考了以下网站
+
+- [IT-TOOLS](https://www.aiotools.top/)
+- [Tools-Web](https://tools.ranblogs.com/)
+- [帮小忙](https://tool.browser.qq.com/)
+- [即时工具](https://www.67tool.com/)
+- [UU在线工具](https://uutool.cn/)
