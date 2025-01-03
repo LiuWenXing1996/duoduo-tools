@@ -87,8 +87,19 @@ export default defineToolMeta({
 ```
 
 ## 开发流程
-[TODO]
+- 创建分支
 - 创建工具目录
+
+    运行以下命令，按照提示创建工具目录
+    ```bash
+    pnpm create-code
+    ```
+    请注意，选择的工具生成路径需要在`./components/tools`下
 - 实现工具
 - 提交代码
+  - 运行 `git add`
+  - 然后运行 `pnpm commit`，按照提示填写提交信息
+    - 如果本次更改仅涉及到单个工具，请在`scope`中填写工具的名称，工具的名称为`tool-[工具目录的名称]`,如`tool-date-transfer`
+  - 最后运行 `git push`
 - 发布
+  - 本仓库绑定了`Vercel`，每次提交代码后，会自动发布到`Vercel`，可以在`Vercel`中查看发布状态
