@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@angelofana/emoji-json':
+        specifier: ^15.1.1
+        version: 15.1.1
       '@css-render/vue3-ssr':
         specifier: ^0.15.14
         version: 0.15.14(vue@3.5.13(typescript@5.7.2))
@@ -283,6 +286,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@angelofana/emoji-json@15.1.1':
+    resolution: {integrity: sha512-M2DvkgsmY9//zupkJwirCQL6XLcXZM7bM4KaRTN/x4CkDmJZfriZhPjycqwLOVj+aOtM6myQAOlpY1C3GD27QA==}
 
   '@antfu/utils@0.7.10':
     resolution: {integrity: sha512-+562v9k4aI80m1+VuMHehNJWLOFjBnXn3tdOitzD0il5b7smkSBal4+a3oKiQTbrwMmN/TBUMDvbdoWDehgOww==}
@@ -4963,6 +4969,8 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@angelofana/emoji-json@15.1.1': {}
 
   '@antfu/utils@0.7.10': {}
 
