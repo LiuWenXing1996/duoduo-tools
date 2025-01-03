@@ -15,6 +15,6 @@ export default defineToolMeta({
   description: `支持各种日期格式之间互转，支持的日期格式：
 ${getAllMethods()};
 `,
-  category: ToolCategory.dev,
+  category: ToolCategory.unit,
   related: [ToolName["timestamp-transfer"]],
 });

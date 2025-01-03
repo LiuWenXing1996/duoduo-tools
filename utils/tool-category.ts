@@ -4,6 +4,7 @@ export enum ToolCategory {
   picture = "picture",
   encryption = "encryption",
   network = "network",
+  unit = "unit",
 }
 
 export interface ToolCategoryMeta {
@@ -31,5 +32,9 @@ export const ToolCategoryMap: Record<ToolCategory, ToolCategoryMeta> = {
   [ToolCategory.network]: {
     icon: "tool-category-network",
     title: "网络工具",
+  },
+  [ToolCategory.unit]: {
+    icon: "tool-category-unit",
+    title: "单位转换",
   },
 };
