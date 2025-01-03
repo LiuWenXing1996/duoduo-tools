@@ -40,7 +40,7 @@
                                         <div v-for="i in item.items" class="emoji-item p-[5px] ">
                                             <div class="size-full bg-secondary rounded flex items-center p-[2px] cursor-pointer hover:bg-primaryActiveBg hover:text-primary"
                                                 @click="copy(i.char)">
-                                                <div class="w-[30px] flex items-center justify-center">
+                                                <div class="w-[30px] flex items-center justify-center text-[25px] ">
                                                     {{ i.char }}
                                                 </div>
                                                 <div class="w-[calc(100%-30px)] ml-[2px] text-[12px]">
