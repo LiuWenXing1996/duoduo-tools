@@ -41,7 +41,7 @@ export const temperatureTransferMap: Record<
     display: (val) => `${val.toFixed(2)} °F`,
   },
   Rankine: {
-    label: "兰氏 (Rankine)",
+    label: "兰氏度 (Rankine)",
     toKelvin: (val) => (val * 5) / 9,
     formKelvin: (val) => (val * 9) / 5,
     display: (val) => `${val.toFixed(2)} °R`,

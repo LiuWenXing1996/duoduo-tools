@@ -7,7 +7,7 @@
                         <n-select :options="dataTypeOptions" v-model:value="model.type" />
                     </n-form-item>
                     <n-form-item path="text" label="温度" first>
-                        <n-input-number clearable placeholder="输入温度" v-model:value="model.text" />
+                        <n-input-number placeholder="输入温度" v-model:value="model.text" />
                     </n-form-item>
                 </define-tool-area>
             </n-form>
