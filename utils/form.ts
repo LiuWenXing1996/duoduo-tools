@@ -62,3 +62,9 @@ export const defineFromItemPropsMap = <T extends Record<string, unknown>>(
 };
 
 export const allFormItemTrigger = ["input", "change", "blur", "focus"];
+export const commonFormItemProps: FormItemProps = {
+  first: true,
+  labelProps: {
+    for: "none",
+  },
+};
