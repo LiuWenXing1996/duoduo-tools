@@ -1,21 +1,23 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper :output="{
+        area: {
+            labelActions: [
+                {
+                    name: 'common-copy',
+                    onClick: () => copy(result?.content || ''),
+                }
+            ]
+        }
+    }">
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="文本">
-                    <n-form-item path="text" first>
-                        <template #label>
-                            <div class="inline-flex">
-                                <span>
-                                    输入
-                                </span>
-                            </div>
-                        </template>
+                <tool-area label="文本">
+                    <n-form-item :="commonFormItemProps" path="text" label="输入">
                         <n-input clearable placeholder="输入文本" v-model:value="model.text" type="textarea" :rows="3" />
                     </n-form-item>
-                </define-tool-area>
-                <define-tool-area label="配置">
-                    <n-form-item path="type" first label="转换类型">
+                </tool-area>
+                <tool-area label="配置">
+                    <n-form-item :="commonFormItemProps" path="type" label="转换类型">
                         <n-radio-group v-model:value="model.toType">
                             <n-space>
                                 <n-radio v-for="option in toTypeOptions" :value="option.value">
@@ -24,7 +26,7 @@
                             </n-space>
                         </n-radio-group>
                     </n-form-item>
-                    <n-form-item path="type" first label="中文类型">
+                    <n-form-item :="commonFormItemProps" path="type" label="中文类型">
                         <n-radio-group v-model:value="model.chineseType">
                             <n-space>
                                 <n-radio v-for="option in chineseTypeOptions" :value="option.value">
@@ -33,20 +35,13 @@
                             </n-space>
                         </n-radio-group>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
-            <div class=" whitespace-pre-wrap">
-                {{ textRes }}
-            </div>
+            <common-rich-text :content="result?.content" />
         </template>
-        <template #actions>
-            <n-space>
-                <n-button size="small" @click="copy(textRes)">复制</n-button>
-            </n-space>
-        </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import cnchar from 'cnchar';
@@ -56,6 +51,11 @@ export type Model = {
     toType: "mars" | "chinese",
     chineseType: "simplified" | "traditional",
 }
+
+export type Result = {
+    content: string
+}
+
 const initialText = `把球还我，我要回家`
 
 const model = reactive<Model>({
@@ -64,6 +64,8 @@ const model = reactive<Model>({
     chineseType: "simplified",
 })
 const copy = useCopy()
+const message = useAnyMessage();
+
 const toTypeOptions = defineSelectOptionList<Record<Model['toType'], unknown>>({
     mars: { label: "火星文" },
     chinese: { label: "中文" },
@@ -73,26 +75,34 @@ const chineseTypeOptions = defineSelectOptionList<Record<Model['chineseType'], u
     traditional: { label: "中文繁体" },
     simplified: { label: "中文简体" },
 })
-const textRes = computedAsync(() => {
-
-    const text = model.text || "";
-    let result = "";
-    if (model.toType === "chinese") {
-        if (model.chineseType === "simplified") {
-            result = cnchar.convert.sparkToSimple(text);
+const result = computedAsync(() => {
+    let res: undefined | Result = undefined;
+    try {
+        const text = model.text || "";
+        let content = "";
+        if (model.toType === "chinese") {
+            if (model.chineseType === "simplified") {
+                content = cnchar.convert.sparkToSimple(text);
+            }
+            if (model.chineseType === "traditional") {
+                content = cnchar.convert.sparkToTrad(text);
+            }
         }
-        if (model.chineseType === "traditional") {
-            result = cnchar.convert.sparkToTrad(text);
+        if (model.toType === "mars") {
+            if (model.chineseType === "simplified") {
+                content = cnchar.convert.simpleToSpark(text);
+            }
+            if (model.chineseType === "traditional") {
+                content = cnchar.convert.tradToSpark(text);
+            }
         }
+        res = {
+            content: content
+        }
+    } catch (error) {
+        message.anyError(error);
+        res = undefined
     }
-    if (model.toType === "mars") {
-        if (model.chineseType === "simplified") {
-            result = cnchar.convert.simpleToSpark(text);
-        }
-        if (model.chineseType === "traditional") {
-            result = cnchar.convert.tradToSpark(text);
-        }
-    }
-    return result
+    return res
 })
 </script>
