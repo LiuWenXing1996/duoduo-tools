@@ -11,7 +11,7 @@
     }">
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item :="commonFormItemProps" path="text">
                         <template #label>
                             <tool-label label="输入" :actions="[
@@ -27,7 +27,7 @@
                     <n-form-item :="commonFormItemProps" path="saltRounds" first label="轮询次数">
                         <n-input-number v-model:value="model.saltRounds" :min="1" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

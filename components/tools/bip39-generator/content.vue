@@ -11,7 +11,7 @@
     }">
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item :="commonFormItemProps" path="language" label="语言">
                         <n-select :options="languageOptions" v-model:value="model.language" />
                     </n-form-item>
@@ -48,7 +48,7 @@
                         </template>
                         <n-input type="textarea" clearable v-model:value="model.mnemonic" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
@@ -135,10 +135,10 @@ const result = computed(() => {
         const mnemonic = model.mnemonic;
         let text = ""
         bip39.setDefaultWordlist(language);
-        if (type === "mnemonic") {
+        if (type === "mnemonic" && seed) {
             text = bip39.entropyToMnemonic(seed);
         }
-        if (type === "seed") {
+        if (type === "seed" && mnemonic) {
             text = bip39.mnemonicToEntropy(mnemonic);
         }
         res = {
