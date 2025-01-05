@@ -40,7 +40,7 @@ const model = reactive<Model>({
 })
 
 const addExample = () => {
-    const initialText = `123`;
+    const initialText = `我是一个示例文本 123`;
     const hash = bcrypt.hashSync(initialText, 4);
     model.text = initialText;
     model.hash = hash;
