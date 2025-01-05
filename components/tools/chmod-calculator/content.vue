@@ -1,78 +1,63 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
-            <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
-                    <common-form-item-checkbox type="common" :custom="{
-                        formItem: {
-                            label: '读取权限(read)',
-                        },
-                        checkboxGroup: {
-                            value: model.read,
-                            onUpdateValue: (val) => { model.read = val.map(v => v as Group) }
-                        },
-                        checkboxList: [
-                            ...groupTypeList
-                        ]
-                    }" />
-                    <common-form-item-checkbox type="common" :custom="{
-                        formItem: {
-                            label: '写入权限(write)',
-                        },
-                        checkboxGroup: {
-                            value: model.write,
-                            onUpdateValue: (val) => { model.write = val.map(v => v as Group) }
-                        },
-                        checkboxList: [
-                            ...groupTypeList
-                        ]
-                    }" />
-                    <common-form-item-checkbox type="common" :custom="{
-                        formItem: {
-                            label: '执行权限(execute)',
-                        },
-                        checkboxGroup: {
-                            value: model.execute,
-                            onUpdateValue: (val) => { model.execute = val.map(v => v as Group) }
-                        },
-                        checkboxList: [
-                            ...groupTypeList
-                        ]
-                    }" />
-                </define-tool-area>
+            <n-form :model="model">
+                <tool-area label="配置">
+                    <n-form-item :="commonFormItemProps" label="读取权限(read)" path="read">
+                        <n-checkbox-group v-model:value="model.read">
+                            <n-space>
+                                <template v-for="item in groupTypeList">
+                                    <n-checkbox :="item" />
+                                </template>
+                            </n-space>
+                        </n-checkbox-group>
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" label="写入权限(write)" path="write">
+                        <n-checkbox-group v-model:value="model.write">
+                            <n-space>
+                                <template v-for="item in groupTypeList">
+                                    <n-checkbox :="item" />
+                                </template>
+                            </n-space>
+                        </n-checkbox-group>
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" label="执行权限(execute)" path="execute">
+                        <n-checkbox-group v-model:value="model.execute">
+                            <n-space>
+                                <template v-for="item in groupTypeList">
+                                    <n-checkbox :="item" />
+                                </template>
+                            </n-space>
+                        </n-checkbox-group>
+                    </n-form-item>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
-            <common-key-value :data="[
+            <key-value :data="[
                 {
                     label: '八进制(octal)',
-                    value: resRequest.data.value?.octal || '',
+                    value: result?.octal || '',
                     valueActions: [
                         {
-                            type: 'simple',
-                            shortcut: {
-                                'icon.name': 'common-copy',
-                                'button.onClick': () => { copy(resRequest.data.value?.octal || '') }
-                            }
+                            name: 'common-copy',
+                            onClick: () => { copy(result?.octal || '') }
                         }
                     ]
                 },
                 {
                     label: '符号(symbolic)',
-                    value: resRequest.data.value?.symbolic || '',
+                    value: result?.symbolic || '',
                     valueActions: [
                         {
-                            type: 'simple',
-                            shortcut: {
-                                'icon.name': 'common-copy',
-                                'button.onClick': () => { copy(resRequest.data.value?.symbolic || '') }
-                            }
+                            name: 'common-copy',
+                            onClick: () => { copy(result?.symbolic || '') }
                         }
                     ]
                 },
             ]" />
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">
@@ -109,7 +94,7 @@ const groupTypeList = [
     { label: '公共(Public)', value: 'public' },
 ]
 const copy = useCopy()
-const formRef = useTemplateRef("form")
+const message = useAnyMessage()
 const computeChmodOctalRepresentation = ({ permissions }: { permissions: Permissions }): string => {
     const permissionValue = { read: 4, write: 2, execute: 1 };
 
@@ -136,11 +121,9 @@ const computeChmodSymbolicRepresentation = ({ permissions }: { permissions: Perm
     ].join('');
 }
 
-
-const resRequest = useCustomRequest<Result | undefined>(async () => {
+const result = computedAsync(async () => {
     let res: Result | undefined = undefined;
     try {
-        await formRef.value?.validate();
         const permissions: Permissions = {
             owner: {
                 read: model.read.includes("owner"),
@@ -165,21 +148,9 @@ const resRequest = useCustomRequest<Result | undefined>(async () => {
             symbolic
         }
     } catch (error) {
-        resRequest.mutate(undefined)
-        throw error
+        message.anyError(error);
+        res = undefined
     }
     return res;
-}, {
-    loadingKeep: 0,
-    debounceOptions: {
-        leading: true
-    }
 })
-watch(() => model, () => {
-    resRequest.run()
-}, {
-    immediate: true,
-    deep: true
-})
-
 </script>
