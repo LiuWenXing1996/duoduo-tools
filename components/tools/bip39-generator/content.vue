@@ -1,99 +1,88 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper :output="{
+        area: {
+            labelActions: [
+                {
+                    name: 'common-copy',
+                    onClick: () => copy(result?.content || ''),
+                }
+            ]
+        }
+    }">
         <template #input>
             <n-form :model="model">
                 <define-tool-area label="配置">
-                    <n-form-item path="language" first label="语言">
+                    <n-form-item :="commonFormItemProps" path="language" label="语言">
                         <n-select :options="languageOptions" v-model:value="model.language" />
                     </n-form-item>
-                    <n-form-item path="type" first label="类型">
+                    <n-form-item :="commonFormItemProps" path="type" label="类型">
                         <n-select :options="typeOptions" v-model:value="model.type"></n-select>
                     </n-form-item>
-                    <n-form-item path="seed" first :label-props="{ for: 'none' }"
-                        v-if="model.type === GenType.mnemonic">
+                    <n-form-item :="commonFormItemProps" path="seed" v-if="model.type === 'mnemonic'">
                         <template #label>
-                            <div class="flex items-center relative">
-                                <span>
-                                    种子（seed）
-                                </span>
-                                <div class="absolute -right-[60px]">
-                                    <n-space>
-                                        <n-button strong secondary circle size="tiny" @click="refreshSeed">
-                                            <template #icon>
-                                                <svg-icon name="common-refresh"></svg-icon>
-                                            </template>
-                                        </n-button>
-                                        <n-button strong secondary circle size="tiny" @click="copy(model.seed)">
-                                            <template #icon>
-                                                <svg-icon name="common-copy"></svg-icon>
-                                            </template>
-                                        </n-button>
-                                    </n-space>
-                                </div>
-                            </div>
+                            <tool-label label="种子（seed）" :actions="[
+                                {
+                                    name: 'common-refresh',
+                                    onClick: () => refreshSeed(),
+                                },
+                                {
+                                    name: 'common-copy',
+                                    onClick: () => copy(model.seed),
+                                },
+                            ]" />
                         </template>
-                        <n-input v-model:value="model.seed" />
+                        <n-input type="textarea" clearable v-model:value="model.seed" />
                     </n-form-item>
-                    <n-form-item path="mnemonic" first :label-props="{ for: 'none' }"
-                        v-if="model.type === GenType.seed">
+                    <n-form-item :="commonFormItemProps" path="mnemonic" v-if="model.type === 'seed'">
                         <template #label>
-                            <div class="flex items-center relative">
-                                <span>
-                                    助记符（mnemonic）
-                                </span>
-                                <div class="absolute -right-[60px]">
-                                    <n-space>
-                                        <n-button strong secondary circle size="tiny" @click="refreshMnemonic">
-                                            <template #icon>
-                                                <svg-icon name="common-refresh"></svg-icon>
-                                            </template>
-                                        </n-button>
-                                        <n-button strong secondary circle size="tiny" @click="copy(model.mnemonic)">
-                                            <template #icon>
-                                                <svg-icon name="common-copy"></svg-icon>
-                                            </template>
-                                        </n-button>
-                                    </n-space>
-                                </div>
-                            </div>
+                            <tool-label label="助记符（mnemonic）" :actions="[
+                                {
+                                    name: 'common-refresh',
+                                    onClick: () => refreshMnemonic(),
+                                },
+                                {
+                                    name: 'common-copy',
+                                    onClick: () => copy(model.mnemonic),
+                                },
+                            ]" />
                         </template>
-                        <n-input v-model:value="model.mnemonic" />
+                        <n-input type="textarea" clearable v-model:value="model.mnemonic" />
                     </n-form-item>
                 </define-tool-area>
             </n-form>
         </template>
         <template #output>
-            <div class=" break-all">
-                {{ res }}
-            </div>
+            <common-rich-text :content="result?.content" />
         </template>
-        <template #actions>
-            <n-space>
-                <n-button size="small" @click="copy(res)">复制</n-button>
-            </n-space>
-        </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="ts">
 import * as bip39 from "bip39"
 import { customAlphabet } from 'nanoid';
-enum Language {
-    "chinese_simplified" = "chinese_simplified",
-    "chinese_traditional" = "chinese_traditional",
-    "english" = "english",
-    "japanese" = "japanese",
-    "spanish" = "spanish",
-    "italian" = "italian",
-    "french" = "french",
-    "korean" = "korean",
-    "czech" = "czech",
-    "portuguese" = "portuguese",
-}
+const LanguageList = [
+    "chinese_simplified",
+    "chinese_traditional",
+    "english",
+    "japanese",
+    "spanish",
+    "italian",
+    "french",
+    "korean",
+    "czech",
+    "portuguese",
+] as const
+export type Language = typeof LanguageList[number]
 
-enum GenType {
-    mnemonic = "mnemonic",
-    seed = "seed"
+const genType = [
+    "mnemonic",
+    "seed"
+] as const
+
+export type GenType = typeof genType[number]
+
+export type Result = {
+    content: string
 }
 
 export type Model = {
@@ -104,8 +93,8 @@ export type Model = {
 }
 
 const model = reactive<Model>({
-    language: Language.chinese_simplified,
-    type: GenType.mnemonic,
+    language: 'chinese_simplified',
+    type: 'mnemonic',
     seed: '',
     mnemonic: ""
 })
@@ -122,9 +111,9 @@ const refreshMnemonic = () => {
 }
 const copy = useCopy()
 
-const typeOptions = defineSelectOptionList<Record<GenType, unknown>>({
-    [GenType.mnemonic]: { label: "种子转助记符" },
-    [GenType.seed]: { label: "助记符转种子" },
+const typeOptions = defineSelectOptionList<Record<string, unknown>>({
+    mnemonic: { label: "种子转助记符" },
+    seed: { label: "助记符转种子" },
 })
 
 watch(() => model.language, (language) => {
@@ -136,40 +125,42 @@ onMounted(() => {
     refreshSeed();
     refreshMnemonic();
 })
-
-const res = computed(() => {
-    const language = model.language;
-    const seed = model.seed;
-    const type = model.type
-    const mnemonic = model.mnemonic;
-    let text = ""
-    bip39.setDefaultWordlist(language);
+const message = useAnyMessage()
+const result = computed(() => {
+    let res: undefined | Result = undefined;
     try {
-        if (type === GenType.mnemonic) {
+        const language = model.language;
+        const seed = model.seed;
+        const type = model.type
+        const mnemonic = model.mnemonic;
+        let text = ""
+        bip39.setDefaultWordlist(language);
+        if (type === "mnemonic") {
             text = bip39.entropyToMnemonic(seed);
         }
-        if (type === GenType.seed) {
+        if (type === "seed") {
             text = bip39.mnemonicToEntropy(mnemonic);
         }
+        res = {
+            content: text
+        }
     } catch (error) {
-        console.log(error)
-        text = ""
+        message.anyError(error)
+        res = undefined
     }
-    return text
+    return res
 })
 
 const languageOptions = defineSelectOptionList<Record<Language, unknown>>({
-    [Language["chinese_simplified"]]: { label: "简体中文" },
-    [Language["chinese_traditional"]]: { label: "繁体中文" },
-    [Language["english"]]: { label: "英语" },
-    [Language["japanese"]]: { label: "日语" },
-    [Language["spanish"]]: { label: "西班牙语" },
-    [Language["italian"]]: { label: "意大利语" },
-    [Language["french"]]: { label: "法语" },
-    [Language["korean"]]: { label: "韩语" },
-    [Language["czech"]]: { label: "捷克语" },
-    [Language["portuguese"]]: { label: "葡萄牙语" },
+    chinese_simplified: { label: "简体中文" },
+    chinese_traditional: { label: "繁体中文" },
+    english: { label: "英语" },
+    japanese: { label: "日语" },
+    spanish: { label: "西班牙语" },
+    italian: { label: "意大利语" },
+    french: { label: "法语" },
+    korean: { label: "韩语" },
+    czech: { label: "捷克语" },
+    portuguese: { label: "葡萄牙语" },
 })
-
-
 </script>
