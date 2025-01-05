@@ -1,44 +1,66 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper :output="{
+        area: {
+            labelActions: [
+                {
+                    name: 'common-copy',
+                    onClick: () => copy(result?.content || ''),
+                }
+            ]
+        }
+    }">
         <template #input>
-            <n-form :model="model" :rules="rules">
-                <define-tool-area label="输入">
-                    <n-form-item path="transferType" first label="转换类型">
+            <n-form :model="model" ref="form">
+                <tool-area label="输入">
+                    <n-form-item :="commonFormItemProps" path="transferType" label="转换类型">
                         <n-select :options="transferTypeOptions" v-model:value="model.transferType"></n-select>
                     </n-form-item>
-                    <n-form-item path="needDecodeStr" first label="需要解码的字符串"
-                        v-if="model.transferType === TransferType.decode">
+                    <n-form-item :="commonFormItemProps" path="needDecodeStr" :rule="[
+                        { required: true, message: '请输入需要解码的字符串', trigger: allFormItemTrigger }
+                    ]" v-if="model.transferType === 'decode'">
+                        <template #label>
+                            <tool-label label="需要解码的字符串" :actions="[
+                                {
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        model.needDecodeStr = Base64.encode(exampleText)
+                                    },
+                                }
+                            ]" />
+                        </template>
                         <n-input type="textarea" v-model:value="model.needDecodeStr" :rows="3"></n-input>
                     </n-form-item>
-                    <n-form-item path="needEncodeStr" first label="需要编码的字符串"
-                        v-if="model.transferType === TransferType.encode">
-                        <n-input type="textarea" v-model:value="model.needEncodeStr" :rows="3"></n-input>
+                    <n-form-item :="commonFormItemProps" path="needEncodeStr" :rule="[
+                        { required: true, message: '请输入需要编码的字符串', trigger: allFormItemTrigger }
+                    ]" v-if="model.transferType === 'encode'">
+                        <template #label>
+                            <tool-label label="需要编码的字符串" :actions="[
+                                {
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        model.needEncodeStr = exampleText;
+                                    },
+                                }
+                            ]" />
+                        </template>
+                        <n-input type="textarea" v-model:value="model.needEncodeStr" :rows="3" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
-            <div class=" break-all">
-                {{ res }}
-            </div>
+            <common-rich-text :content="result?.content" />
         </template>
-        <template #actions>
-            <n-space>
-                <n-button size="small" @click="copy(res)">复制</n-button>
-            </n-space>
-        </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="ts">
-import type { FormRules } from "naive-ui";
 import { Base64 } from 'js-base64';
 
-enum TransferType {
-    encode = "encode",
-    decode = "decode"
-}
-
+const transferTypes = ["encode", "decode"] as const;
+type TransferType = typeof transferTypes[number];
 
 export type Model = {
     transferType: TransferType,
@@ -46,41 +68,49 @@ export type Model = {
     needDecodeStr: string
 }
 
+export type Result = {
+    content: string
+}
+
 const model = reactive<Model>({
-    transferType: TransferType.encode,
+    transferType: "encode",
     needEncodeStr: "",
     needDecodeStr: "",
 })
+const formRef = useTemplateRef("form")
+const exampleText = "我是一个示例文本 123"
 
 onMounted(() => {
-    const initialText = "123";
-    model.needEncodeStr = initialText;
-    model.needDecodeStr = Base64.encode(initialText)
+    model.needEncodeStr = exampleText;
+    model.needDecodeStr = Base64.encode(exampleText)
 })
 
 const copy = useCopy()
 
 const transferTypeOptions = defineSelectOptionList<Record<TransferType, unknown>>({
-    [TransferType.encode]: { label: "编码" },
-    [TransferType.decode]: { label: "解码" },
+    encode: { label: "编码" },
+    decode: { label: "解码" },
 })
 
-const rules: FormRules = {
-}
-
-
-const res = computed(() => {
+const result = computedAsync(async () => {
+    let res: undefined | Result = undefined
     const transferType = model.transferType;
     const needEncodeStr = model.needEncodeStr;
     const needDecodeStr = model.needDecodeStr;
-    let text = "";
-    if (transferType === TransferType.encode) {
-        text = Base64.encode(needEncodeStr)
+    try {
+        await formRef.value?.validate()
+        if (transferType === 'encode') {
+            res = { content: Base64.encode(needEncodeStr) }
+        }
+        if (transferType === 'decode') {
+            res = {
+                content: Base64.decode(needDecodeStr)
+            }
+        }
+    } catch (error) {
+        res = undefined
     }
-    if (transferType === TransferType.decode) {
-        text = Base64.decode(needDecodeStr)
-    }
-    return text
-})
 
+    return res
+})
 </script>
