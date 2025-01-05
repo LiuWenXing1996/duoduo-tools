@@ -30,6 +30,8 @@ const defaultConfig: Config = {
     button: {
         quaternary: true,
         size: "tiny",
+        // @ts-ignore
+        class: "px-[4px] py-[0px]",
     },
     tooltipWrapper: {
         tooltip: {

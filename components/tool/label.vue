@@ -4,7 +4,7 @@
             <common-rich-text :content="label" />
         </span>
         <div class="ml-[2px]" v-if="actions.length > 0">
-            <n-space :size="10">
+            <n-space :size="2">
                 <template v-for="item in actions">
                     <template v-if="item">
                         <icon-button v-bind="item" />

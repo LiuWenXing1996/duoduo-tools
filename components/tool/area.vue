@@ -28,12 +28,23 @@ const slots = defineSlots<{
 const isExpand = ref(true);
 const labelProps = computed<ToolLabelComponentProps>(() => {
     const labelActions: ToolLabelComponentProps['actions'] = [
-        props.foldDisabled ? undefined : {
-            name: "common-fold",
-            onClick: () => {
-                isExpand.value = !isExpand.value
-            }
-        },
+        props.foldDisabled
+            ? undefined
+            : isExpand.value
+                ? {
+                    name: 'common-fold',
+                    tooltip: "折叠面板",
+                    onClick: () => {
+                        isExpand.value = false;
+                    },
+                }
+                : {
+                    name: 'common-unfold',
+                    tooltip: "展开面板",
+                    onClick: () => {
+                        isExpand.value = true;
+                    },
+                },
         ...props.labelActions || []
     ]
     return {

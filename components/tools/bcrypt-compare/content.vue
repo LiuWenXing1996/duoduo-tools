@@ -1,23 +1,27 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="配置">
-                    <n-form-item path="text" first label="输入">
-                        <n-input clearable placeholder="输入文本" v-model:value="model.text" />
+                <tool-area label="配置" :label-actions="[
+                    {
+                        name: 'common-demo',
+                        tooltip: '使用示例',
+                        onClick: addExample,
+                    }
+                ]">
+                    <n-form-item :="commonFormItemProps" path="text" label="输入">
+                        <n-input type="textarea" clearable placeholder="输入文本" v-model:value="model.text" />
                     </n-form-item>
-                    <n-form-item path="hash" first label="加密后的文本">
-                        <n-input clearable placeholder="输入加密后的文本" v-model:value="model.hash" />
+                    <n-form-item :="commonFormItemProps" path="hash" label="加密后的文本">
+                        <n-input type="textarea" clearable placeholder="输入加密后的文本" v-model:value="model.hash" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
-            <div class=" whitespace-pre-wrap">
-                {{ textRes }}
-            </div>
+            <common-rich-text :content="result.content" />
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import bcrypt from "bcryptjs";
@@ -25,21 +29,40 @@ export type Model = {
     text: string,
     hash: string,
 }
-const initialText = `123`
+
+export type Result = {
+    content: string
+}
 
 const model = reactive<Model>({
-    text: initialText,
-    hash: "$2a$04$aXJxHZ2mL.g.Os.76CfXOOpgF7Vp3ZYrZuJCKahaQTXaBRgtEAUGu",
+    text: "",
+    hash: "",
 })
-const textRes = computed(() => {
+
+const addExample = () => {
+    const initialText = `123`;
+    const hash = bcrypt.hashSync(initialText, 4);
+    model.text = initialText;
+    model.hash = hash;
+}
+onMounted(() => {
+    addExample()
+})
+const result = computed(() => {
+    let res: undefined | Result = undefined;
     const text = model.text || "";
     const hash = model.hash || "";
-    const result = bcrypt.compareSync(text, hash);
-    if (result) {
-        return "相同"
+    const compareRes = bcrypt.compareSync(text, hash);
+    if (compareRes) {
+        res = {
+            content: "相同"
+        }
     } else {
-        return "不同"
+        res = {
+            content: "不同"
+        }
     }
+    return res
 })
 
 </script>
