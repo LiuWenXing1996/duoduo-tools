@@ -5,7 +5,10 @@
                 <div class="flex h-full items-center">
                     <a :href="home.href" target="_blank"
                         :class="`w-[50px] h-full items-center justify-center flex border-r hover:text-primary`">
-                        <normal-icon name="logo" class="cursor-pointer border rounded-[6px]"></normal-icon>
+                        <div
+                            class="h-[36px] w-[36px] flex justify-center items-center cursor-pointer border rounded-[6px]">
+                            <svg-icon :size="16" name="logo" />
+                        </div>
                     </a>
                     <div class="ml-[10px]">
                         <tool-search />
@@ -15,8 +18,10 @@
                     <theme-button />
                     <a href="https://github.com/LiuWenXing1996/duoduo-tools" target="_blank"
                         :class="`h-full items-center justify-center flex pl-[2px]`">
-                        <normal-icon name="github"
-                            class="cursor-pointer  rounded-[6px] hover:bg-hoverColor"></normal-icon>
+                        <div
+                            class="h-[36px] w-[36px] flex justify-center items-center cursor-pointer  rounded-[6px] hover:bg-hoverColor">
+                            <svg-icon :size="16" name="github" />
+                        </div>
                     </a>
                 </div>
             </div>
@@ -31,10 +36,12 @@
                             <template #header>
                                 {{ opt.title }}{{ `（${opt.list.length}）` }}
                             </template>
-                            <normal-icon :name="opt.icon || ''" :class="[
-                                'cursor-pointer rounded-[6px]',
+                            <div :class="[
+                                'cursor-pointer rounded-[6px] h-[36px] w-[36px] flex justify-center items-center',
                                 opt.list.find(e => e.value === editTabs.currentTabName.value) ? 'bg-primaryActiveBg text-primary' : 'hover:bg-hoverColor'
-                            ]"></normal-icon>
+                            ]">
+                                <svg-icon :size="16" :name="opt.icon || ''" />
+                            </div>
                         </n-popselect>
                     </div>
                 </div>

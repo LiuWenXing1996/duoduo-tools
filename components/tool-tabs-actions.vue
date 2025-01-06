@@ -2,13 +2,14 @@
     <n-dropdown trigger="click" :options="options" @select="handleSelect" placement="bottom-end">
         <div
             class="flex justify-center items-center h-[24px] w-[24px] cursor-pointer  rounded-[6px] hover:bg-hoverColor">
-            <svg-icon class="origin-center -rotate-90" size="16"
-                name="tool-tabs-actions-arrow"></svg-icon>
+            <svg-icon class="origin-center -rotate-90" size="16" name="tool-tabs-actions-arrow"></svg-icon>
         </div>
     </n-dropdown>
     <DefinePreferenceTemplate v-slot="{ iconName, label }">
         <div class="flex items-center -ml-[10px]">
-            <normal-icon :name="iconName" />
+            <div class="h-[36px] w-[36px] flex justify-center items-center">
+                <svg-icon :size="16" :name="iconName" />
+            </div>
             <span>{{ label }}</span>
         </div>
     </DefinePreferenceTemplate>

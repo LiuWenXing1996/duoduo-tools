@@ -1,13 +1,16 @@
 <template>
     <n-dropdown trigger="click" :options="options" @select="handleSelect" v-model:value="theme.preference.value">
-        <normal-icon v-if="theme.isDark.value" name="theme-dark-mode"
-            class="cursor-pointer rounded-[6px] hover:bg-hoverColor"></normal-icon>
-        <normal-icon v-else name="theme-light-mode"
-            class="cursor-pointer rounded-[6px] hover:bg-hoverColor"></normal-icon>
+        <div
+            class="h-[36px] w-[36px] flex justify-center items-center cursor-pointer rounded-[6px] hover:bg-hoverColor">
+            <svg-icon v-if="theme.isDark.value" :size="16" name="theme-dark-mode" />
+            <svg-icon v-else :size="16" name="theme-light-mode" />
+        </div>
     </n-dropdown>
     <DefinePreferenceTemplate v-slot="{ iconName, label }">
         <div class="flex items-center -ml-[10px]">
-            <normal-icon :name="iconName" />
+            <div class="h-[36px] w-[36px] flex justify-center items-center">
+                <svg-icon :size="16" :name="iconName" />
+            </div>
             <span>{{ label }}</span>
         </div>
     </DefinePreferenceTemplate>
