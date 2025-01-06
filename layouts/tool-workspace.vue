@@ -75,7 +75,7 @@
                                     <!-- 此处直接渲染内容，具体原因参照[pages/tools/toolName] -->
                                     <template v-for="item in editTabs.openedTabNames.value" :key="item">
                                         <div class="size-full" v-show="item === editTabs.currentTabName.value">
-                                            <define-tool-render :name="item" />
+                                            <tool-render :name="item" />
                                         </div>
                                     </template>
                                 </div>
