@@ -19,12 +19,25 @@
         }
     }">
         <template #output>
-            <group-list :data="result" />
+            <n-list hoverable clickable>
+                <n-list-item v-for="groupItem in result.group">
+                    <n-thing :title="groupItem.label" content-style="margin-top: 10px;">
+                        <key-value :data="groupItem.items" />
+                    </n-thing>
+                </n-list-item>
+            </n-list>
         </template>
     </tool-content>
 </template>
 <script setup lang="ts">
 import { UAParser } from 'ua-parser-js';
+
+export type Result = {
+    group: {
+        label: string,
+        items: KeyValueComponentProps['data']
+    }[],
+}
 
 const { width, height } = useWindowSize();
 const battery = useBattery();
@@ -54,38 +67,44 @@ const refreshTag = ref(false);
 const handleRefresh = () => {
     refreshTag.value = !refreshTag.value
 }
-const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
+const result: ComputedRef<Result> = computed(() => {
     const refreshEmptyStr = refreshTag.value ? "" : ""
     const ua = navigator.userAgent + refreshEmptyStr;
     const { browser, cpu, os } = UAParser(ua);
     const orientationType = getOrientationType()
-    const groups: GroupListComponentProps['data'] = [
+    const group: Result['group'] = [
         {
             label: "屏幕",
             items: [
                 {
                     label: "大小",
-                    value: `${window.screen.availWidth} x ${window.screen.availHeight}`
+                    value: `${window.screen.availWidth} x ${window.screen.availHeight}`,
+                    valueCopy: true
                 },
                 {
                     label: "方向",
-                    value: `${orientationType.label}(${orientationType.value})`
+                    value: `${orientationType.label}(${orientationType.value})`,
+                    valueCopy: true
                 },
                 {
                     label: "旋转角度",
-                    value: `${window.screen.orientation.angle}°`
+                    value: `${window.screen.orientation.angle}°`,
+                    valueCopy: true
                 },
                 {
                     label: "色彩深度",
-                    value: `${window.screen.colorDepth} 位`
+                    value: `${window.screen.colorDepth} 位`,
+                    valueCopy: true
                 },
                 {
                     label: `设备像素比(dpr)`,
-                    value: `${window.devicePixelRatio} dppx`
+                    value: `${window.devicePixelRatio} dppx`,
+                    valueCopy: true
                 },
                 {
                     label: `窗口大小`,
-                    value: `${width.value} x ${height.value}`
+                    value: `${width.value} x ${height.value}`,
+                    valueCopy: true
                 },
 
             ]
@@ -95,23 +114,28 @@ const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
             items: [
                 {
                     label: "名称",
-                    value: browser.name || "-"
+                    value: browser.name || "-",
+                    valueCopy: true
                 },
                 {
                     label: "版本号",
-                    value: browser.version || "-"
+                    value: browser.version || "-",
+                    valueCopy: true
                 },
                 {
                     label: "主版本",
-                    value: browser.major || "-"
+                    value: browser.major || "-",
+                    valueCopy: true
                 },
                 {
                     label: "浏览器供应商",
-                    value: navigator.vendor
+                    value: navigator.vendor,
+                    valueCopy: true
                 },
                 {
                     label: "用户代理(User-Agent)",
-                    value: ua
+                    value: ua,
+                    valueCopy: true
                 },
             ]
         },
@@ -120,18 +144,29 @@ const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
             items: [
                 {
                     label: "首选语言",
-                    value: language.value || "-"
+                    value: language.value || "-",
+                    valueCopy: true
                 },
                 {
                     label: "操作系统",
-                    value: os.name || navigator.platform
+                    value: os.name || navigator.platform,
+                    valueCopy: true
                 },
                 {
                     label: "操作系统版本",
-                    value: os.version || "-"
+                    value: os.version || "-",
+                    valueCopy: true
                 },
-                { label: "CPU 架构", value: cpu.architecture || "-" },
-                { label: "CPU 核心数", value: `${navigator.hardwareConcurrency}` },
+                {
+                    label: "CPU 架构",
+                    value: cpu.architecture || "-",
+                    valueCopy: true
+                },
+                {
+                    label: "CPU 核心数",
+                    value: `${navigator.hardwareConcurrency}`,
+                    valueCopy: true
+                },
             ]
         },
         {
@@ -139,29 +174,36 @@ const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
             items: [
                 {
                     label: "检测到电池",
-                    value: battery.isSupported.value ? "是" : "否"
+                    value: battery.isSupported.value ? "是" : "否",
+                    valueCopy: true
                 },
                 {
                     label: "充电中",
-                    value: battery.charging.value ? "是" : "否"
+                    value: battery.charging.value ? "是" : "否",
+                    valueCopy: true
                 },
                 {
                     label: "电量",
-                    value: `${battery.level.value * 100}%`
+                    value: `${battery.level.value * 100}%`,
+                    valueCopy: true
                 },
                 {
                     label: "充电时间",
-                    value: `${battery.chargingTime.value}秒`
+                    value: `${battery.chargingTime.value}秒`,
+                    valueCopy: true
                 },
                 {
                     label: "续航时间",
-                    value: `${battery.dischargingTime.value}秒`
+                    value: `${battery.dischargingTime.value}秒`,
+                    valueCopy: true
                 }
             ]
         }
     ]
 
-    return groups
+    return {
+        group
+    }
 })
 
 </script>

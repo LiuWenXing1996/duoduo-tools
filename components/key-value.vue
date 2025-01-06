@@ -8,23 +8,51 @@
             <n-descriptions-item v-for="item in items">
                 <template #label>
                     <div class="inline-flex">
-                        <tool-label :label="item.label" :actions="item.labelActions" />
+                        <tool-label :label="item.label" :actions="[
+                            item.labelCopy ? {
+                                name: 'common-copy',
+                                tooltip: '复制',
+                                onClick: () => {
+                                    if (isString(item.label)) {
+                                        copy(item.label)
+                                    } else {
+                                        message.error('无法复制')
+                                    }
+                                }
+                            } : undefined,
+                            ...(item.labelActions || [])
+                        ]" />
                     </div>
                 </template>
                 <div class="inline-flex">
-                    <tool-label :label="item.value" :actions="item.valueActions" />
+                    <tool-label :label="item.value" :actions="[
+                        item.valueCopy ? {
+                            name: 'common-copy',
+                            tooltip: '复制',
+                            onClick: () => {
+                                if (isString(item.value)) {
+                                    copy(item.value)
+                                } else {
+                                    message.error('无法复制')
+                                }
+                            }
+                        } : undefined,
+                        ...(item.valueActions || [])
+                    ]" />
                 </div>
             </n-descriptions-item>
         </n-descriptions>
     </div>
 </template>
 <script setup lang="ts">
-import { isFunction } from 'radash'
+import { isFunction, isString } from 'radash'
 export type Item = {
     label: ToolLabelComponentProps['label'],
     labelActions?: ToolLabelComponentProps['actions'],
+    labelCopy?: boolean,
     value: ToolLabelComponentProps['label'],
-    valueActions?: ToolLabelComponentProps['actions']
+    valueActions?: ToolLabelComponentProps['actions'],
+    valueCopy?: boolean,
 }
 
 export type Props = {
@@ -35,6 +63,8 @@ const props = defineProps<Props>()
 const defaultItemLabelWidth = 120;
 const containerRef = useTemplateRef("container");
 const containerRect = shallowRef<DOMRectReadOnly | undefined>()
+const copy = useCopy()
+const message = useAnyMessage()
 const itemLabelWidth = computed(() => {
     if (!props.itemLabelWidth) {
         return defaultItemLabelWidth

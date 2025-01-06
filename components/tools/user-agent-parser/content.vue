@@ -23,7 +23,13 @@
             </n-form>
         </template>
         <template #output>
-            <group-list :data="result"></group-list>
+            <n-list hoverable clickable>
+                <n-list-item v-for="groupItem in result">
+                    <n-thing :title="groupItem.label" content-style="margin-top: 10px;">
+                        <key-value :item-label-width="70" :data="groupItem.items" />
+                    </n-thing>
+                </n-list-item>
+            </n-list>
         </template>
     </tool-content>
 </template>
@@ -34,6 +40,10 @@ import { UAParser } from 'ua-parser-js';
 export type Model = {
     content: string,
 }
+export type Result = {
+    label: string,
+    items: KeyValueComponentProps['data']
+}[]
 const copy = useCopy()
 const model = reactive<Model>({
     content: ""
@@ -48,81 +58,100 @@ onMounted(() => {
 const showVal = (val: string | undefined) => {
     return val || "未知"
 }
-const result: ComputedRef<GroupListComponentProps['data']> = computed(() => {
-    const ua = model.content;
-    const { browser, cpu, os, engine, device } = UAParser(ua);
-    const groups: GroupListComponentProps['data'] = [
-        {
-            label: "浏览器",
-            items: [
-                {
-                    label: "名称",
-                    value: showVal(browser.name)
-                },
-                {
-                    label: "版本号",
-                    value: showVal(browser.version)
-                },
-                {
-                    label: "主版本",
-                    value: showVal(browser.major)
-                },
-            ]
-        },
-        {
-            label: "渲染引擎",
-            items: [
-                {
-                    label: "名称",
-                    value: showVal(engine.name)
-                },
-                {
-                    label: "版本号",
-                    value: showVal(engine.version)
-                },
-            ]
-        },
-        {
-            label: "操作系统",
-            items: [
-                {
-                    label: "名称",
-                    value: showVal(os.name)
-                },
-                {
-                    label: "版本",
-                    value: showVal(os.version)
-                },
-            ]
-        },
-        {
-            label: "CPU",
-            items: [
-                {
-                    label: "架构",
-                    value: showVal(cpu.architecture)
-                },
-            ]
-        },
-        {
-            label: "设备",
-            items: [
-                {
-                    label: "型号",
-                    value: showVal(device.model)
-                },
-                {
-                    label: "类型",
-                    value: showVal(device.type)
-                },
-                {
-                    label: "供应商",
-                    value: showVal(device.vendor)
-                },
-            ]
-        },
-    ]
+const message = useAnyMessage()
+const result = computed(() => {
+    let res: Result | undefined = undefined
+    try {
+        const ua = model.content;
+        const { browser, cpu, os, engine, device } = UAParser(ua);
+        const groups: Result = [
+            {
+                label: "浏览器",
+                items: [
+                    {
+                        label: "名称",
+                        value: showVal(browser.name),
+                        valueCopy: true
+                    },
+                    {
+                        label: "版本号",
+                        value: showVal(browser.version),
+                        valueCopy: true
+                    },
+                    {
+                        label: "主版本",
+                        value: showVal(browser.major),
+                        valueCopy: true
+                    },
+                ]
+            },
+            {
+                label: "渲染引擎",
+                items: [
+                    {
+                        label: "名称",
+                        value: showVal(engine.name),
+                        valueCopy: true
+                    },
+                    {
+                        label: "版本号",
+                        value: showVal(engine.version),
+                        valueCopy: true
+                    },
+                ]
+            },
+            {
+                label: "操作系统",
+                items: [
+                    {
+                        label: "名称",
+                        value: showVal(os.name),
+                        valueCopy: true
+                    },
+                    {
+                        label: "版本",
+                        value: showVal(os.version),
+                        valueCopy: true
+                    },
+                ]
+            },
+            {
+                label: "CPU",
+                items: [
+                    {
+                        label: "架构",
+                        value: showVal(cpu.architecture),
+                        valueCopy: true
+                    },
+                ]
+            },
+            {
+                label: "设备",
+                items: [
+                    {
+                        label: "型号",
+                        value: showVal(device.model),
+                        valueCopy: true
+                    },
+                    {
+                        label: "类型",
+                        value: showVal(device.type),
+                        valueCopy: true
+                    },
+                    {
+                        label: "供应商",
+                        value: showVal(device.vendor),
+                        valueCopy: true
+                    },
+                ]
+            },
+        ]
+        res = groups
+    } catch (error) {
+        message.anyError(error)
+        res = undefined
+    }
 
-    return groups
+    return res
 })
 </script>
