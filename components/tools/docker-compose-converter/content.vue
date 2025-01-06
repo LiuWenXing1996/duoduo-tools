@@ -1,42 +1,37 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         scroll: {
             disabled: true
         },
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-copy',
-                        'button.onClick': () => { copy(resRequest.data.value?.yaml || '') }
-                    }
+                    name: 'common-copy',
+                    onClick: () => { copy(result?.data?.yaml || '') }
                 },
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-download',
-                        'button.onClick': handleDownload
-                    }
+                    name: 'common-download',
+                    onClick: handleDownload
                 }
             ]
         }
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '命令',
-                        },
-                        input: {
-                            type: 'textarea',
-                            rows: 10,
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
-                </define-tool-area>
+                <tool-area label="配置">
+                    <n-form-item label="命令">
+                        <template #label>
+                            <tool-label label="命令" :actions="[
+                                {
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: addExample
+                                },
+                            ]" />
+                        </template>
+                        <n-input type="textarea" :rows="10" v-model:value="model.content" />
+                    </n-form-item>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
@@ -77,7 +72,7 @@
                 </div>
             </div>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">
@@ -87,13 +82,19 @@ export type Model = {
     content: string,
 }
 
-export type Result = ComposerizeResult | undefined
+export type Result = {
+    data: ComposerizeResult | undefined
+}
 const model = reactive<Model>({
     content: ""
 })
+const example = `docker run -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --restart always --log-opt max-size=1g nginx`
 onMounted(() => {
-    model.content = `docker run -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --restart always --log-opt max-size=1g nginx`
+    model.content = example
 })
+const addExample = () => {
+    model.content = example
+}
 const copy = useCopy()
 const formRef = useTemplateRef("form")
 const outputEditor = shallowRef<monacoType.editor.IStandaloneCodeEditor>();
@@ -108,50 +109,44 @@ const initOutputEditor: MonacoEditorComponentProps<monacoType.editor.IStandalone
         },
     });
     outputEditor.value = editor
-    const initText = resRequest.data.value?.yaml || "";
+    const initText = result.value?.data?.yaml || ""
     editor.setValue(initText)
     return editor
 }
-const resRequest = useCustomRequest<Result | undefined>(async () => {
+const messages = useAnyMessage();
+const result = computedAsync(async () => {
     let res: Result | undefined = undefined;
     try {
+        const composerizeResult = composerize(model.content)
         await formRef.value?.validate();
-        const result = composerize(model.content)
-        res = result
+        res = {
+            data: composerizeResult
+        }
     } catch (error) {
-        resRequest.mutate(undefined)
-        throw error
+        messages.anyError(error)
+        res = undefined
     }
-    outputEditor.value?.setValue(res.yaml || "")
+    outputEditor.value?.setValue(res?.data?.yaml || "")
     return res;
-}, {
-    loadingKeep: 0,
-    debounceOptions: {
-        leading: true
-    }
 })
+
 const notImplemented = computed(() => {
-    return resRequest.data.value?.messages.filter(msg => msg.type === MessageType.notImplemented).map(msg => msg.value) || []
+    return result.value?.data?.messages.filter(msg => msg.type === MessageType.notImplemented).map(msg => msg.value) || []
 });
 const notComposable = computed(() => {
-    return resRequest.data.value?.messages.filter(msg => msg.type === MessageType.notTranslatable).map(msg => msg.value) || []
+    return result.value?.data?.messages.filter(msg => msg.type === MessageType.notTranslatable).map(msg => msg.value) || []
 });
 const errors = computed(() => {
-    return resRequest.data.value?.messages
+    return result.value?.data?.messages
         .filter(msg => msg.type === MessageType.errorDuringConversion)
         .map(msg => msg.value) || []
 });
-watch(() => model, () => {
-    resRequest.run()
-}, {
-    immediate: true,
-    deep: true
-})
+
 const handleDownload = async () => {
-    if (!resRequest.data.value) {
+    if (!result.value?.data) {
         return
     };
-    const data = resRequest.data.value.yaml || '';
+    const data = result.value?.data.yaml || '';
     const base64 = textToBase64(data);
     const dataUrl = base64ToDataURLByFileExtension(base64, "yaml")
     downloadURL(dataUrl, `docker-compose.yml`);
