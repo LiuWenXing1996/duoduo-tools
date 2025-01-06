@@ -1,13 +1,10 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-copy',
-                        'button.onClick': () => { copy(resRequest.data.value?.content || '') }
-                    }
+                    name: 'common-copy',
+                    onClick: () => { copy(resRequest.data.value?.content || '') }
                 }
             ]
         }
@@ -32,7 +29,7 @@
         <template #output>
             {{ resRequest.data.value?.content }}
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

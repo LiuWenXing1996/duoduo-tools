@@ -19,7 +19,7 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <n-form-item label="命令">
+                    <n-form-item :="commonFormItemProps">
                         <template #label>
                             <tool-label label="命令" :actions="[
                                 {

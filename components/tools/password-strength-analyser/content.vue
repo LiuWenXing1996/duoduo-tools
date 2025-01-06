@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
                 <define-tool-area label="密码">
@@ -69,7 +69,7 @@
                 </n-descriptions-item>
             </n-descriptions>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 export type Model = {

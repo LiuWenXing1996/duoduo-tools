@@ -1,7 +1,5 @@
 <template>
-    <define-tool-wrapper :output="{
-
-    }">
+    <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" require-mark-placement="left">
                 <define-tool-area label="WIFI">
@@ -85,7 +83,7 @@
                 <n-button size="small" @click="scaleSub">缩小</n-button>
             </n-space>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import { wifiConnectGenerator } from './utils';

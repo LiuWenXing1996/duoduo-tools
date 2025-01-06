@@ -27,6 +27,7 @@
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
 - [ ] cron 表达式生成器添加年字段
 - [ ] key-value 组件支持 labelCopy action 和 valueCopy action
+- [ ] 文本与 ASCII 二进制互转 缺少示例
 
 
 # 开发指南

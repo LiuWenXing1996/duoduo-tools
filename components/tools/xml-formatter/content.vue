@@ -1,16 +1,13 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         scroll: {
             disabled: true
         },
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-copy',
-                        'button.onClick': () => { copy(resRequest.data.value?.content || '') }
-                    }
+                    name: 'common-copy',
+                    onClick: () => { copy(resRequest.data.value?.content || '') }
                 }
             ]
         }
@@ -20,7 +17,7 @@
                 <define-tool-area label="输入">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
-                            label: '原始 Json',
+                            label: '原始 XML',
                         },
                         input: {
                             type: 'textarea',
@@ -57,7 +54,7 @@
                 MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
             ]" />
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

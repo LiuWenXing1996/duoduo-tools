@@ -1,15 +1,14 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         scroll: {
             disabled: true
         },
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-copy',
-                        'button.onClick': () => { copy(resRequest.data.value?.content || '') }
+                    name: 'common-copy',
+                    onClick: () => {
+                        copy(resRequest.data.value?.content || '')
                     }
                 }
             ]
@@ -194,7 +193,7 @@
                 MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
             ]" />
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

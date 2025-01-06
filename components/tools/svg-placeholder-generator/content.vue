@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form ref="form" :model="model">
                 <define-tool-area label="配置">
@@ -37,7 +37,7 @@
                 <n-button size="small" @click="handleDownload('svg')">下载图片</n-button>
             </n-space>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

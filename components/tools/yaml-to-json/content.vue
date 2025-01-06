@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :vertical="{
+    <tool-wrapper :vertical="{
         enabled: true,
         top: {
             class: '!h-[20%]'
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import type * as monacoType from 'monaco-editor';

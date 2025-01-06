@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :vertical="{
+    <tool-wrapper :vertical="{
         enabled: true,
         top: {
             class: '!h-[15%]'
@@ -11,7 +11,8 @@
         area: {
             label: '列表'
         },
-        actions: {
+    }" :actions="{
+        area: {
             label: '搜索'
         }
     }">
@@ -29,7 +30,7 @@
         <template #actions>
             <n-input placeholder="搜索状态码" v-model:value="searchKey"></n-input>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="tsx">
 import { group } from "radash";

@@ -45,7 +45,7 @@
                     </tool-area>
                 </div>
                 <div class="mt-[10px]" v-if="slots.actions">
-                    <tool-area :="props.actions?.area">
+                    <tool-area :="propsLocal.actions?.area">
                         <slot name="actions"></slot>
                     </tool-area>
                 </div>
@@ -79,7 +79,8 @@ const props = defineProps<Props>()
 const propsLocal = computed(() => {
     const {
         vertical,
-        output
+        output,
+        actions
     } = toRefs(props);
     const newVal = assign<Props>({
         vertical: {
@@ -100,7 +101,7 @@ const propsLocal = computed(() => {
                 foldDisabled: true
             },
         }
-    }, { vertical: vertical.value, output: output.value })
+    }, { vertical: vertical.value, output: output.value, actions: actions.value })
     return newVal
 })
 

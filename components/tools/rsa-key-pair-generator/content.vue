@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         area: {
             disabled: true
         },
@@ -51,7 +51,7 @@
                 <n-button size="small" :loading="genRequest.loading.value" @click="genRequest.runAsync">生成</n-button>
             </n-space>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import type { FormRules } from 'naive-ui';

@@ -1,14 +1,11 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-copy',
-                        'button.onClick': () => {
-                            copy(result?.content)
-                        },
+                    name: 'common-copy',
+                    onClick: () => {
+                        copy(result?.content)
                     }
                 }
             ]
@@ -52,7 +49,7 @@
         <template #output>
             <common-rich-text :content="result?.content" />
         </template>s
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

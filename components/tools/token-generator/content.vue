@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
                 <define-tool-area label="配置">
@@ -32,7 +32,7 @@
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import { shuffle } from 'radash';

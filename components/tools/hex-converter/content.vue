@@ -1,8 +1,8 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <n-form-item path="val" label="值" first>
                         <n-input v-model:value="model.val" />
                     </n-form-item>
@@ -12,7 +12,7 @@
                     <n-form-item path="outCustomBase" label="自定义输出进制" first>
                         <n-input-number v-model:value="model.outCustomBase" :min="2" :max="64" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
@@ -44,7 +44,7 @@
                 </n-descriptions-item>
             </n-descriptions>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import type { FormRules } from 'naive-ui';

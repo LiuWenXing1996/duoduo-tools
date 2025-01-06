@@ -1,13 +1,10 @@
 <template>
-    <define-tool-wrapper :output="{
+    <tool-wrapper :output="{
         area: {
             labelActions: [
                 {
-                    type: 'simple',
-                    shortcut: {
-                        'icon.name': 'common-refresh',
-                        'button.onClick': () => { handleRefresh() }
-                    }
+                    name: 'common-refresh',
+                    onClick: handleRefresh,
                 }
             ]
         }
@@ -87,7 +84,7 @@
                 }) ?? []
             ]" />
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

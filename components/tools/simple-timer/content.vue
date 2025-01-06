@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :vertical="{
+    <tool-wrapper :vertical="{
         enabled: true,
         top: {
             class: '!h-[20%]'
@@ -62,7 +62,7 @@
                 <n-button size="small" @click="counter = 0">重置</n-button>
             </n-space>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">
