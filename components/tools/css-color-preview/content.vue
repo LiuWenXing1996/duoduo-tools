@@ -1,63 +1,84 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
-            <n-form ref="formRef" :model="model" :rules="rules">
-                <define-tool-area label="颜色">
-                    <n-form-item label="输入" path="color" first>
+            <n-form ref="form" :model="model">
+                <tool-area label="颜色">
+                    <n-form-item :="commonFormItemProps" path="color" :rule="[
+                        {
+                            required: true,
+                            message: '请输入色值',
+                            trigger: ['input', 'change', 'blur', 'focus']
+                        },
+                        {
+                            validator: (_rule, value: string) => {
+                                return isValidColor(value)
+                            },
+                            message: '请输入合法色值',
+                            trigger: ['input', 'change', 'blur', 'focus']
+                        }
+                    ]">
+                        <template #label>
+                            <tool-label label="输入" :actions="[
+                                {
+                                    name: 'common-demo',
+                                    onClick: () => {
+                                        model.color = initialColor
+                                    }
+                                }
+                            ]" />
+                        </template>
                         <n-input clearable placeholder="输入合法色值" v-model:value="model.color" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
-            <template v-if="finalColor">
+            <template v-if="result?.color">
                 <div class="h-[30px] w-[30px]" :style="{
-                    backgroundColor: finalColor
+                    backgroundColor: result.color
                 }"></div>
             </template>
             <template v-else>
                 <n-empty description="无效色值" />
             </template>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
-import type { FormInst, FormRules } from 'naive-ui';
+
+export type Model = {
+    color: string
+}
+
+export type Result = {
+    color: string
+}
 
 const initialColor = 'red'
-
-const model = reactive({
+const model = reactive<Model>({
     color: initialColor
 })
-const formRef = ref<FormInst | null>(null)
-const finalColor = computedAsync(
+const formRef = useTemplateRef("form");
+const message = useAnyMessage()
+const result = computedAsync(
     async () => {
+        let res: undefined | Result = undefined;
         const color = model.color;
         try {
-            await formRef.value?.validate() || {}
+            await formRef.value?.validate();
+            res = {
+                color
+            }
         } catch (error) {
-            return
+            message.anyError(error)
+            res = undefined;
         }
-        return color
-    },
-    initialColor,
+        return res
+    }
 )
-const rules: FormRules = {
-    color: [
-        {
-            required: true,
-            message: '请输入色值',
-            trigger: ['input', 'change', 'blur', 'focus']
-        },
-        {
-            validator: (_rule, value: string) => {
-                let otpNode = new Option();
-                otpNode.style.color = value
-                return !!otpNode.style.color
-            },
-            message: '请输入合法色值',
-            trigger: ['input', 'change', 'blur', 'focus']
-        }
-    ]
+const isValidColor = (color: string) => {
+    let otpNode = new Option();
+    otpNode.style.color = color
+    return !!otpNode.style.color
 }
 </script>
