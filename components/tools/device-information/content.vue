@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :vertical="{
+    <tool-wrapper :vertical="{
         enabled: true,
         top: {
             class: '!h-[15%]'
@@ -9,19 +9,19 @@
         }
     }" :output="{
         area: {
-            label: '信息'
+            label: '信息',
+            labelActions: [
+                {
+                    name: 'common-refresh',
+                    onClick: handleRefresh
+                }
+            ]
         }
     }">
         <template #output>
-            <group-list :data="result"></group-list>
-
+            <group-list :data="result" />
         </template>
-        <template #actions>
-            <n-space>
-                <n-button size="small" @click="handleRefresh">刷新</n-button>
-            </n-space>
-        </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 <script setup lang="ts">
 import { UAParser } from 'ua-parser-js';
