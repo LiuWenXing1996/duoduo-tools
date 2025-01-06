@@ -5,15 +5,17 @@ import namesPlugin from "colord/plugins/names";
 import lchPlugin from "colord/plugins/lch";
 extend([cmykPlugin, hwbPlugin, namesPlugin, lchPlugin]);
 
-export enum ColorType {
-  Hexadecimal = "Hexadecimal",
-  RGB = "RGB",
-  HSL = "HSL",
-  HWB = "HWB",
-  CMYK = "CMYK",
-  LCH = "LCH",
-  ColorName = "ColorName",
-}
+const ColorTypeList = [
+  "Hexadecimal",
+  "RGB",
+  "HSL",
+  "HWB",
+  "CMYK",
+  "LCH",
+  "ColorName",
+] as const;
+
+export type ColorType = (typeof ColorTypeList)[number];
 
 export const methods: Record<
   ColorType,
@@ -24,7 +26,7 @@ export const methods: Record<
     to: (val: Colord) => string;
   }
 > = {
-  [ColorType.Hexadecimal]: {
+  Hexadecimal: {
     label: "Hexadecimal",
     form: (val) => {
       return colord(val);
@@ -43,7 +45,7 @@ export const methods: Record<
       return val.toHex();
     },
   },
-  [ColorType.RGB]: {
+  RGB: {
     label: "RGB",
     form: (val) => {
       return colord(val);
@@ -62,7 +64,7 @@ export const methods: Record<
       return val.toRgbString();
     },
   },
-  [ColorType.HSL]: {
+  HSL: {
     label: "HSL",
     form: (val) => {
       return colord(val);
@@ -81,8 +83,7 @@ export const methods: Record<
       return val.toHslString();
     },
   },
-
-  [ColorType.HWB]: {
+  HWB: {
     label: "HWB",
     form: (val) => {
       return colord(val);
@@ -101,7 +102,7 @@ export const methods: Record<
       return val.toHwbString();
     },
   },
-  [ColorType.CMYK]: {
+  CMYK: {
     label: "CMYK",
     form: (val) => {
       return colord(val);
@@ -120,7 +121,7 @@ export const methods: Record<
       return val.toCmykString();
     },
   },
-  [ColorType.LCH]: {
+  LCH: {
     label: "LCH",
     form: (val) => {
       return colord(val);
@@ -139,7 +140,7 @@ export const methods: Record<
       return val.toLchString();
     },
   },
-  [ColorType.ColorName]: {
+  ColorName: {
     label: "ColorName",
     form: (val) => {
       return colord(val);
