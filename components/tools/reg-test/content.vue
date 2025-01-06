@@ -9,24 +9,12 @@
                         </template>
                         <n-input type="textarea" :rows="2" clearable v-model:value="model.regStr" />
                     </n-form-item>
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '是否忽略大小写',
-                        },
-                        switch: {
-                            value: model.isCase,
-                            onUpdateValue: (val) => { model.isCase = val }
-                        }
-                    }" />
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '是否匹配全部',
-                        },
-                        switch: {
-                            value: model.isAll,
-                            onUpdateValue: (val) => { model.isAll = val }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="isCase" label="是否忽略大小写">
+                        <n-switch v-model:value="model.isCase" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="isAll" label="是否匹配全部">
+                        <n-switch v-model:value="model.isAll" />
+                    </n-form-item>
                     <n-form-item :="commonFormItemProps" path="content">
                         <template #label>
                             <tool-label label="内容" :actions="[

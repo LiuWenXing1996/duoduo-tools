@@ -12,24 +12,15 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <common-form-item-input-number type="common" :custom="{
-                        formItem: {
-                            label: '数量',
-                            path: 'count',
-                            rule: [
-                                {
-                                    validator: () => {
-                                        return model.count > 0
-                                    }, message: '数量必须大于0', trigger: allFormItemTrigger
-                                },
-                            ],
+                    <n-form-item :="commonFormItemProps" label="数量" path="count" :rule="[
+                        {
+                            validator: () => {
+                                return model.count > 0
+                            }, message: '数量必须大于0', trigger: allFormItemTrigger
                         },
-                        inputNumber: {
-                            min: 1,
-                            value: model.count,
-                            onUpdateValue: (val) => { model.count = val ?? 0 }
-                        }
-                    }" />
+                    ]">
+                        <n-input-number v-model:value="model.count" min="1" />
+                    </n-form-item>
                     <n-form-item :="commonFormItemProps" path="prefix">
                         <template #label>
                             <tool-label label="前缀" :actions="[
@@ -42,26 +33,12 @@
                         </template>
                         <n-input v-model:value="model.prefix" />
                     </n-form-item>
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '分隔符',
-                        },
-                        select: {
-                            options: separatorTypeOptions,
-                            value: model.separators,
-                            onUpdateValue: (val) => { model.separators = val }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '大小写',
-                        },
-                        select: {
-                            options: caseTypeOptions,
-                            value: model.case,
-                            onUpdateValue: (val) => { model.case = val }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="separators" label="分隔符">
+                        <n-select v-model:value="model.separators" :options="separatorTypeOptions" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="case" label="大小写">
+                        <n-select v-model:value="model.case" :options="caseTypeOptions" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>

@@ -22,157 +22,46 @@
                     </n-form-item>
                 </tool-area>
                 <tool-area label="美化配置">
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: 'SQL 方言',
-                        },
-                        select: {
-                            options: languageOptions,
-                            value: model.config.language,
-                            onUpdateValue: (value) => {
-                                model.config.language = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-input-number type="common" :custom="{
-                        formItem: {
-                            label: 'Tab 长度',
-                        },
-                        inputNumber: {
-                            value: model.config.tabWidth,
-                            onUpdateValue: (value) => {
-                                model.config.tabWidth = value ?? 0
-                            }
-                        }
-                    }" />
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '使用制表符'
-                        },
-                        switch: {
-                            value: model.config.useTabs,
-                            onUpdateValue: (value) => {
-                                model.config.useTabs = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '关键字格式'
-                        },
-                        select: {
-                            options: keywordCaseOptions,
-                            value: model.config.keywordCase,
-                            onUpdateValue: (value) => {
-                                model.config.keywordCase = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '数据类型格式'
-                        },
-                        select: {
-                            options: dataTypeCaseOptions,
-                            value: model.config.dataTypeCase,
-                            onUpdateValue: (value) => {
-                                model.config.dataTypeCase = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '函数格式'
-                        },
-                        select: {
-                            options: functionCaseOptions,
-                            value: model.config.functionCase,
-                            onUpdateValue: (value) => {
-                                model.config.functionCase = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '标识符格式'
-                        },
-                        select: {
-                            options: identifierCaseOptions,
-                            value: model.config.identifierCase,
-                            onUpdateValue: (value) => {
-                                model.config.identifierCase = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '缩进样式'
-                        },
-                        select: {
-                            options: indentStyleOptions,
-                            value: model.config.indentStyle,
-                            onUpdateValue: (value) => {
-                                model.config.indentStyle = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-input-number type="common" :custom="{
-                        formItem: {
-                            label: '表达式宽度'
-                        },
-                        inputNumber: {
-                            value: model.config.expressionWidth,
-                            onUpdateValue: (value) => {
-                                model.config.expressionWidth = value ?? 0
-                            }
-                        }
-                    }" />
-                    <common-form-item-input-number type="common" :custom="{
-                        formItem: {
-                            label: '查询之间的行数'
-                        },
-                        inputNumber: {
-                            value: model.config.linesBetweenQueries,
-                            onUpdateValue: (value) => {
-                                model.config.linesBetweenQueries = value ?? 0
-                            }
-                        }
-                    }" />
-                    <common-form-item-select type="common" :custom="{
-                        formItem: {
-                            label: '逻辑运算符换行'
-                        },
-                        select: {
-                            options: logicalOperatorNewlineOptions,
-                            value: model.config.logicalOperatorNewline,
-                            onUpdateValue: (value) => {
-                                model.config.logicalOperatorNewline = value
-                            }
-                        }
-                    }" />
-
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '紧凑运算符'
-                        },
-                        switch: {
-                            value: model.config.denseOperators,
-                            onUpdateValue: (value) => {
-                                model.config.denseOperators = value
-                            }
-                        }
-                    }" />
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '分号前换行'
-                        },
-                        switch: {
-                            value: model.config.newlineBeforeSemicolon,
-                            onUpdateValue: (value) => {
-                                model.config.newlineBeforeSemicolon = value
-                            }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="config.language" label="SQL 方言">
+                        <n-select :options="languageOptions" v-model:value="model.config.language" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.tabWidth" label="Tab 长度">
+                        <n-input-number v-model:value="model.config.tabWidth" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.useTabs" label="使用制表符">
+                        <n-switch v-model:value="model.config.useTabs" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.keywordCase" label="关键字格式">
+                        <n-select :options="keywordCaseOptions" v-model:value="model.config.keywordCase" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.dataTypeCase" label="数据类型格式">
+                        <n-select :options="dataTypeCaseOptions" v-model:value="model.config.dataTypeCase" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.functionCase" label="函数格式">
+                        <n-select :options="functionCaseOptions" v-model:value="model.config.functionCase" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.identifierCase" label="标识符格式">
+                        <n-select :options="identifierCaseOptions" v-model:value="model.config.identifierCase" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.indentStyle" label="缩进样式">
+                        <n-select :options="indentStyleOptions" v-model:value="model.config.indentStyle" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.expressionWidth" label="表达式宽度">
+                        <n-input-number v-model:value="model.config.expressionWidth" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.linesBetweenQueries" label="查询之间的行数">
+                        <n-input-number v-model:value="model.config.linesBetweenQueries" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.logicalOperatorNewline" label="逻辑运算符换行">
+                        <n-select :options="logicalOperatorNewlineOptions"
+                            v-model:value="model.config.logicalOperatorNewline" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.denseOperators" label="紧凑运算符">
+                        <n-switch v-model:value="model.config.denseOperators" />
+                    </n-form-item>
+                    <n-form-item :="commonFormItemProps" path="config.newlineBeforeSemicolon" label="分号前换行">
+                        <n-switch v-model:value="model.config.newlineBeforeSemicolon" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>

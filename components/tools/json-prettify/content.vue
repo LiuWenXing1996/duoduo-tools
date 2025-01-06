@@ -21,24 +21,12 @@
                         </template>
                         <n-input type="textarea" :rows="4" clearable v-model:value="model.content" />
                     </n-form-item>
-                    <common-form-item-switch type="common" :custom="{
-                        formItem: {
-                            label: '是否排序',
-                        },
-                        switch: {
-                            value: model.isSort,
-                            onUpdateValue: (val) => { model.isSort = val }
-                        }
-                    }" />
-                    <common-form-item-input-number type="common" :custom="{
-                        formItem: {
-                            label: '缩进',
-                        },
-                        inputNumber: {
-                            value: model.intent,
-                            onUpdateValue: (val) => { model.intent = val ?? 0 }
-                        }
-                    }" />
+                    <n-form-item label="是否排序">
+                        <n-switch v-model:value="model.isSort" />
+                    </n-form-item>
+                    <n-form-item label="缩进">
+                        <n-input-number v-model:value="model.intent" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>
