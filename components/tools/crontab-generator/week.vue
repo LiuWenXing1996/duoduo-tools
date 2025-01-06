@@ -1,194 +1,163 @@
 <template>
     <n-form ref="form" :model="model">
-        <common-form-item-select :type="'common'" :custom="{
-            formItem: {
-                label: '类型',
-            },
-            select: {
-                options: typeOptions,
-                value: model.config.type,
-                onUpdateValue: (val) => { model.config.type = val }
-            }
-        }" />
+        <n-form-item :="commonFormItemProps" path="config.type" label="类型">
+            <n-select :options="typeOptions" v-model:value="model.config.type" />
+        </n-form-item>
         <template v-if="model.config.type === 'interval'">
-            <common-form-item-radio :type="'common'" :custom="{
-                formItem: {
-                    label: '从星期 n 开始',
-                    path: 'config.interval.start',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '开始星期不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 7) {
-                                    return false
-                                }
-                            },
-                            message: '开始星期不能大于 7',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > model.config.interval.end) {
-                                    return false
-                                }
-                            },
-                            message: '开始星期不能大于结束星期',
-                            trigger: allFormItemTrigger
+            <n-form-item :="commonFormItemProps" path="config.interval.start" label="从星期 n 开始" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
                         }
-                    ],
+                    },
+                    message: '开始星期不能小于 1',
+                    trigger: allFormItemTrigger
                 },
-                radioGroup: {
-                    value: model.config.interval.start,
-                    onUpdateValue: (val) => { model.config.interval.start = val }
-                },
-                radioList: [...range(1, 7)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: weekName[i - 1]
-                    }
-                })
-            }" />
-            <common-form-item-radio :type="'common'" :custom="{
-                formItem: {
-                    label: '到星期 m 结束',
-                    path: 'config.interval.end',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '结束星期不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 7) {
-                                    return false
-                                }
-                            },
-                            message: '结束星期不能大于 7',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val < model.config.interval.start) {
-                                    return false
-                                }
-                            },
-                            message: '结束星期不能小于开始星期',
-                            trigger: allFormItemTrigger
+                {
+                    validator: (_, val) => {
+                        if (val > 7) {
+                            return false
                         }
-                    ],
+                    },
+                    message: '开始星期不能大于 7',
+                    trigger: allFormItemTrigger
                 },
-                radioGroup: {
-                    value: model.config.interval.end,
-                    onUpdateValue: (val) => { model.config.interval.end = val }
+                {
+                    validator: (_, val) => {
+                        if (val > model.config.interval.end) {
+                            return false
+                        }
+                    },
+                    message: '开始星期不能大于结束星期',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-radio-group v-model:value="model.config.interval.start">
+                    <n-space>
+                        <template v-for="i in range(1, 7)">
+                            <n-radio :="{
+                                key: i,
+                                value: i,
+                                label: weekName[i - 1]
+                            }" />
+                        </template>
+                    </n-space>
+                </n-radio-group>
+            </n-form-item>
+            <n-form-item :="commonFormItemProps" path="config.interval.end" label="到星期 m 结束" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
+                        }
+                    },
+                    message: '结束星期不能小于 1',
+                    trigger: allFormItemTrigger
                 },
-                radioList: [...range(1, 7)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: weekName[i - 1]
-                    }
-                })
-            }" />
+                {
+                    validator: (_, val) => {
+                        if (val > 7) {
+                            return false
+                        }
+                    },
+                    message: '结束星期不能大于 7',
+                    trigger: allFormItemTrigger
+                },
+                {
+                    validator: (_, val) => {
+                        if (val < model.config.interval.start) {
+                            return false
+                        }
+                    },
+                    message: '结束星期不能小于开始星期',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-radio-group v-model:value="model.config.interval.end">
+                    <n-space>
+                        <template v-for="i in range(1, 7)">
+                            <n-radio :="{
+                                key: i,
+                                value: i,
+                                label: weekName[i - 1]
+                            }" />
+                        </template>
+                    </n-space>
+                </n-radio-group>
+            </n-form-item>
         </template>
         <template v-else-if="model.config.type === 'week'">
-            <common-form-item-radio :type="'common'" :custom="{
-                formItem: {
-                    label: '第 n 周',
-                },
-                radioGroup: {
-                    value: model.config.week.weekNo,
-                    onUpdateValue: (val) => { model.config.week.weekNo = val }
-                },
-                radioList: [...range(1, 5)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: '第' + i.toString() + '周'
-                    }
-                })
-            }" />
-            <common-form-item-radio :type="'common'" :custom="{
-                formItem: {
-                    label: '星期 m',
-                },
-                radioGroup: {
-                    value: model.config.week.weekVal,
-                    onUpdateValue: (val) => { model.config.week.weekVal = val }
-                },
-                radioList: [...range(1, 7)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: weekName[i - 1]
-                    }
-                })
-            }" />
+            <n-form-item :="commonFormItemProps" path="config.week.weekNo" label="第 n 周">
+                <n-radio-group v-model:value="model.config.week.weekNo">
+                    <n-space>
+                        <template v-for="i in range(1, 5)">
+                            <n-radio :="{
+                                key: i,
+                                value: i,
+                                label: '第' + i.toString() + '周'
+                            }" />
+                        </template>
+                    </n-space>
+                </n-radio-group>
+            </n-form-item>
+            <n-form-item :="commonFormItemProps" path="config.week.weekVal" label="星期 m">
+                <n-radio-group v-model:value="model.config.week.weekVal">
+                    <n-space>
+                        <template v-for="i in range(1, 7)">
+                            <n-radio :="{
+                                key: i,
+                                value: i,
+                                label: weekName[i - 1]
+                            }" />
+                        </template>
+                    </n-space>
+                </n-radio-group>
+            </n-form-item>
         </template>
         <template v-else-if="model.config.type === 'last'">
-            <common-form-item-radio :type="'common'" :custom="{
-                formItem: {
-                    label: '星期 n',
-                },
-                radioGroup: {
-                    value: model.config.last,
-                    onUpdateValue: (val) => { model.config.last = val }
-                },
-                radioList: [...range(1, 7)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: weekName[i - 1]
-                    }
-                })
-            }" />
+            <n-form-item :="commonFormItemProps" path="config.last" label="星期 n">
+                <n-radio-group v-model:value="model.config.last">
+                    <n-space>
+                        <template v-for="i in range(1, 7)">
+                            <n-radio :="{
+                                key: i,
+                                value: i,
+                                label: weekName[i - 1]
+                            }" />
+                        </template>
+                    </n-space>
+                </n-radio-group>
+            </n-form-item>
         </template>
         <template v-else-if="model.config.type === 'list'">
-            <common-form-item-checkbox :type="'common'" :custom="{
-                formItem: {
-                    label: '星期列表',
-                    path: 'config.list',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (!val) {
-                                    return false
-                                }
-                                if (val.length <= 0) {
-                                    return false
-                                }
-                                return true
-                            },
-                            message: '星期列表不能为空',
-                            trigger: allFormItemTrigger
+            <n-form-item :="commonFormItemProps" path="config.list" label="星期列表" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (!val) {
+                            return false
                         }
-                    ]
-                },
-                checkboxGroup: {
-                    value: model.config.list,
-                    onUpdateValue: (val) => { model.config.list = val.map(e => Number(e)) }
-                },
-                checkboxList: [...range(1, 7)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: weekName[i - 1]
-                    }
-                })
-            }" />
+                        if (val.length <= 0) {
+                            return false
+                        }
+                        return true
+                    },
+                    message: '星期列表不能为空',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-checkbox-group v-model:value="model.config.list">
+                    <n-space>
+                        <template v-for="i in range(1, 7)">
+                            <n-checkbox :="{
+                                key: i,
+                                value: i,
+                                label: weekName[i - 1]
+                            }" />
+                        </template>
+                    </n-space>
+                </n-checkbox-group>
+            </n-form-item>
         </template>
     </n-form>
 </template>

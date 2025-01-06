@@ -1,198 +1,146 @@
 <template>
     <n-form ref="form" :model="model">
-        <common-form-item-select :type="'common'" :custom="{
-            formItem: {
-                label: '类型',
-            },
-            select: {
-                options: typeOptions,
-                value: model.config.type,
-                onUpdateValue: (val) => { model.config.type = val }
-            }
-        }" />
+        <n-form-item :="commonFormItemProps" path="config.type" label="类型">
+            <n-select :options="typeOptions" v-model:value="model.config.type" />
+        </n-form-item>
         <template v-if="model.config.type === 'interval'">
-            <common-form-item-input-number :type="'common'" :custom="{
-                formItem: {
-                    label: '从 n 月开始',
-                    path: 'config.interval.start',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '开始月份不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 12) {
-                                    return false
-                                }
-                            },
-                            message: '开始月份不能大于 12',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > model.config.interval.end) {
-                                    return false
-                                }
-                            },
-                            message: '开始月份不能大于结束月份',
-                            trigger: allFormItemTrigger
+            <n-form-item :="commonFormItemProps" path="config.interval.start" label="从 n 月开始" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
                         }
-                    ]
+                    },
+                    message: '开始月份不能小于 1',
+                    trigger: allFormItemTrigger
                 },
-                inputNumber: {
-                    min: 1,
-                    max: 12,
-                    value: model.config.interval.start,
-                    onUpdateValue: (val) => { model.config.interval.start = val ?? 0 }
-                }
-            }" />
-            <common-form-item-input-number :type="'common'" :custom="{
-                formItem: {
-                    label: '从 m 月结束',
-                    path: 'config.interval.end',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '结束月份不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 12) {
-                                    return false
-                                }
-                            },
-                            message: '结束月份不能大于 12',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val < model.config.interval.start) {
-                                    return false
-                                }
-                            },
-                            message: '结束月份不能小于开始月份',
-                            trigger: allFormItemTrigger
+                {
+                    validator: (_, val) => {
+                        if (val > 12) {
+                            return false
                         }
-                    ]
+                    },
+                    message: '开始月份不能大于 12',
+                    trigger: allFormItemTrigger
                 },
-                inputNumber: {
-                    min: 1,
-                    max: 12,
-                    value: model.config.interval.end,
-                    onUpdateValue: (val) => { model.config.interval.end = val ?? 0 }
+                {
+                    validator: (_, val) => {
+                        if (val > model.config.interval.end) {
+                            return false
+                        }
+                    },
+                    message: '开始月份不能大于结束月份',
+                    trigger: allFormItemTrigger
                 }
-            }" />
+            ]">
+                <n-input-number v-model:value="model.config.interval.start" min="1" max="12" />
+            </n-form-item>
+            <n-form-item :="commonFormItemProps" path="config.interval.end" label="到 m 月结束" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
+                        }
+                    },
+                    message: '结束月份不能小于 1',
+                    trigger: allFormItemTrigger
+                },
+                {
+                    validator: (_, val) => {
+                        if (val > 12) {
+                            return false
+                        }
+                    },
+                    message: '结束月份不能大于 12',
+                    trigger: allFormItemTrigger
+                },
+                {
+                    validator: (_, val) => {
+                        if (val < model.config.interval.start) {
+                            return false
+                        }
+                    },
+                    message: '结束月份不能小于开始月份',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-input-number v-model:value="model.config.interval.end" min="1" max="12" />
+            </n-form-item>
         </template>
         <template v-else-if="model.config.type === 'start-per'">
-            <common-form-item-input-number :type="'common'" :custom="{
-                formItem: {
-                    label: '从 n 月开始',
-                    path: 'config.startPer.start',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '开始月份不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 12) {
-                                    return false
-                                }
-                            },
-                            message: '开始月份不能大于 12',
-                            trigger: allFormItemTrigger
+            <n-form-item :="commonFormItemProps" path="config.startPer.start" label="从 n 月开始" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
                         }
-                    ]
+                    },
+                    message: '开始月份不能小于 1',
+                    trigger: allFormItemTrigger
                 },
-                inputNumber: {
-                    min: 1,
-                    max: 12,
-                    value: model.config.startPer.start,
-                    onUpdateValue: (val) => { model.config.startPer.start = val ?? 0 }
-                }
-            }" />
-            <common-form-item-input-number :type="'common'" :custom="{
-                formItem: {
-                    label: '每 m 月执行一次',
-                    path: 'config.startPer.per',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (val < 1) {
-                                    return false
-                                }
-                            },
-                            message: '执行月份间隔不能小于 1',
-                            trigger: allFormItemTrigger
-                        },
-                        {
-                            validator: (_, val) => {
-                                if (val > 12) {
-                                    return false
-                                }
-                            },
-                            message: '执行月份间隔不能大于 12',
-                            trigger: allFormItemTrigger
+                {
+                    validator: (_, val) => {
+                        if (val > 12) {
+                            return false
                         }
-                    ]
-                },
-                inputNumber: {
-                    min: 1,
-                    max: 12,
-                    value: model.config.startPer.per,
-                    onUpdateValue: (val) => { model.config.startPer.per = val ?? 0 }
+                    },
+                    message: '开始月份不能大于 12',
+                    trigger: allFormItemTrigger
                 }
-            }" />
+            ]">
+                <n-input-number v-model:value="model.config.startPer.start" min="1" max="12" />
+            </n-form-item>
+            <n-form-item :="commonFormItemProps" path="config.startPer.per" label="每 m 月执行一次" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (val < 1) {
+                            return false
+                        }
+                    },
+                    message: '执行月份间隔不能小于 1',
+                    trigger: allFormItemTrigger
+                },
+                {
+                    validator: (_, val) => {
+                        if (val > 12) {
+                            return false
+                        }
+                    },
+                    message: '执行月份间隔不能大于 12',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-input-number v-model:value="model.config.startPer.per" min="1" max="12" />
+            </n-form-item>
         </template>
         <template v-else-if="model.config.type === 'list'">
-            <common-form-item-checkbox :type="'common'" :custom="{
-                formItem: {
-                    label: '月份列表',
-                    path: 'config.list',
-                    rule: [
-                        {
-                            validator: (_, val) => {
-                                if (!val) {
-                                    return false
-                                }
-                                if (val.length <= 0) {
-                                    return false
-                                }
-                                return true
-                            },
-                            message: '月份列表不能为空',
-                            trigger: allFormItemTrigger
+            <n-form-item :="commonFormItemProps" path="config.list" label="月份列表" :rule="[
+                {
+                    validator: (_, val) => {
+                        if (!val) {
+                            return false
                         }
-                    ]
-                },
-                checkboxGroup: {
-                    value: model.config.list,
-                    onUpdateValue: (val) => { model.config.list = val.map(e => Number(e)) }
-                },
-                checkboxList: [...range(1, 12)].map(i => {
-                    return {
-                        key: i,
-                        value: i,
-                        label: i.toString() + '月'
-                    }
-                })
-            }" />
+                        if (val.length <= 0) {
+                            return false
+                        }
+                        return true
+                    },
+                    message: '月份列表不能为空',
+                    trigger: allFormItemTrigger
+                }
+            ]">
+                <n-checkbox-group v-model:value="model.config.list">
+                    <n-space>
+                        <template v-for="i in range(1, 12)">
+                            <n-checkbox :="{
+                                key: i,
+                                value: i,
+                                label: i.toString() + '月'
+                            }" />
+                        </template>
+                    </n-space>
+                </n-checkbox-group>
+            </n-form-item>
         </template>
     </n-form>
 </template>
