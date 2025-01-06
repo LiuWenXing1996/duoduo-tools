@@ -63,15 +63,15 @@ pnpm dev
 `content.vue`的示例
 ```vue
 <template>
-    // 根组件必须是 define-tool-wrapper 组件
-    <define-tool-wrapper>
+    // 根组件必须是 tool-content 组件
+    <tool-content>
         <template #input>
             // 可以自定义一些输入表单
         </template>
         <template #output>
             // 可以自定义一些输出结果
         </template>
-    </define-tool-wrapper>
+    </tool-content>
 </template>
 ```
 

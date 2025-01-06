@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :output="{
+    <tool-content :output="{
         area: {
             labelActions: [
                 {
@@ -84,7 +84,7 @@
                 }) ?? []
             ]" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

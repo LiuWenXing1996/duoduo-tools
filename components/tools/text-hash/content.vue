@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model">
                 <tool-area label="文本">
@@ -45,7 +45,7 @@
                 </n-descriptions-item>
             </n-descriptions>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import { methods } from './utils';

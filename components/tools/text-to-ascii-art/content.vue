@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
                 <tool-area label="文本">
@@ -39,7 +39,7 @@
                 <n-button size="small" :disabled="textResLoading" @click="scaleSub">缩小</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import type { Fonts } from 'figlet';

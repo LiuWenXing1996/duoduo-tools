@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="颜色">
@@ -43,7 +43,7 @@
                 <n-empty description="无效色值" />
             </template>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 

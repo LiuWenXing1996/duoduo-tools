@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="formRef" :model="model">
                 <tool-area label="输入">
@@ -52,7 +52,7 @@
                 }))
             ]" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import type { SelectOption } from 'naive-ui';

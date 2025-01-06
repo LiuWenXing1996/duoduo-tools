@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :output="{
+    <tool-content :output="{
         scroll: {
             disabled: true
         },
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

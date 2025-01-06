@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
@@ -80,7 +80,7 @@
                 }
             ]" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

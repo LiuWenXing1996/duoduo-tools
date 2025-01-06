@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :output="{
+    <tool-content :output="{
         scroll: {
             disabled: true
         },
@@ -193,7 +193,7 @@
                 MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
             ]" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

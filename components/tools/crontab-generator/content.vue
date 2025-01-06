@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="基础">
@@ -51,7 +51,7 @@
                 { label: '下次执行时间', value: result?.nextRuns?.map((item) => item.toLocaleString()).join('\n') || '' },
             ]" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="tsx">
 import { cronGenerator, type CronOptions } from './utils'

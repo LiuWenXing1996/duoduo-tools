@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model">
                 <tool-area label="输入">
@@ -28,7 +28,7 @@
                 <n-button size="small" @click="copy(res)">复制</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="ts">

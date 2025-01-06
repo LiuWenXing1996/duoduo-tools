@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model">
                 <tool-area label="配置">
@@ -51,7 +51,7 @@
                 <n-button size="small" @click="handleRefresh">重新生成</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
                 <tool-area label="头部(Header)">
@@ -195,7 +195,7 @@
                 {{ result }}
             </div>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';

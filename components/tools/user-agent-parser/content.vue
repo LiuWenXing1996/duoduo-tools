@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model">
                 <tool-area label="配置">
@@ -25,7 +25,7 @@
         <template #output>
             <group-list :data="result"></group-list>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
                 <tool-area label="配置" :label-actions="[
@@ -21,7 +21,7 @@
         <template #output>
             <common-rich-text :content="result.content" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import bcrypt from "bcryptjs";

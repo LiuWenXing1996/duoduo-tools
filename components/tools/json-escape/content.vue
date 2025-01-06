@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :output="{
+    <tool-content :output="{
         area: {
             labelActions: [
                 {
@@ -49,7 +49,7 @@
         <template #output>
             <common-rich-text :content="result?.content" />
         </template>s
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

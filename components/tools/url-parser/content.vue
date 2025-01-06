@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model" :rules="rules">
                 <tool-area label="输入">
@@ -71,7 +71,7 @@
                 <n-empty>没有参数</n-empty>
             </template>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import type { FormRules } from 'naive-ui';

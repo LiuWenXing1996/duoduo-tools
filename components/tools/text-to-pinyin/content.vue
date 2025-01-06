@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
                 <tool-area label="文本">
@@ -52,7 +52,7 @@
                 <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import { pinyin } from 'pinyin-pro';

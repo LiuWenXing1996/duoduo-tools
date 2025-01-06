@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
@@ -18,7 +18,7 @@
         <template #output>
             {{ resRequest.data.value?.content }}
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form :model="model">
                 <tool-area label="配置">
@@ -44,7 +44,7 @@
                 <n-button size="small" @click="copy(textRes)">复制</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import { AES, RC4, Rabbit, TripleDES, enc } from "crypto-js"

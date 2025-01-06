@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :vertical="{
+    <tool-content :vertical="{
         enabled: true,
         top: {
             class: '!h-[15%]'
@@ -60,7 +60,7 @@
         <template #actions>
             <n-input size="small" placeholder="搜索Emoji, 支持中文、英文、code" v-model:value="searchKey" clearable></n-input>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

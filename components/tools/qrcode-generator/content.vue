@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper>
+    <tool-content>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules" require-mark-placement="left">
                 <tool-area label="内容">
@@ -67,7 +67,7 @@
                 <n-button size="small" @click="scaleSub">缩小</n-button>
             </n-space>
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui';

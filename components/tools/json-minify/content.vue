@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :output="{
+    <tool-content :output="{
         area: {
             labelActions: [
                 {
@@ -29,7 +29,7 @@
         <template #output>
             {{ resRequest.data.value?.content }}
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 
 <script setup lang="tsx">

@@ -1,5 +1,5 @@
 <template>
-    <tool-wrapper :vertical="{
+    <tool-content :vertical="{
         enabled: true,
         top: {
             class: '!h-[15%]'
@@ -21,7 +21,7 @@
         <template #output>
             <group-list :data="result" />
         </template>
-    </tool-wrapper>
+    </tool-content>
 </template>
 <script setup lang="ts">
 import { UAParser } from 'ua-parser-js';
