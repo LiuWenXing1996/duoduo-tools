@@ -16,7 +16,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="内容">
+                <tool-area label="内容">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '输入',
@@ -30,8 +30,8 @@
                             }
                         }
                     }" />
-                </define-tool-area>
-                <define-tool-area label="美化配置">
+                </tool-area>
+                <tool-area label="美化配置">
                     <common-form-item-select type="common" :custom="{
                         formItem: {
                             label: 'SQL 方言',
@@ -183,7 +183,7 @@
                             }
                         }
                     }" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

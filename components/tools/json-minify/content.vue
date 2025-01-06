@@ -11,7 +11,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '原始 Json',
@@ -23,7 +23,7 @@
                             onUpdateValue: (val) => { model.content = val }
                         }
                     }" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

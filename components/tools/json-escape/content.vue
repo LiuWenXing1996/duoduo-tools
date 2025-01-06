@@ -13,7 +13,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item :="commonFormItemProps" path="content" :rule="[
                         {
                             required: true,
@@ -43,7 +43,7 @@
                             <template #unchecked>去转义</template>
                         </n-switch>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

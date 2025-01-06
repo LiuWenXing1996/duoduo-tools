@@ -2,14 +2,14 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="文本">
+                <tool-area label="文本">
                     <n-form-item path="text" first label="消息">
                         <n-input clearable placeholder="输入单词" type="textarea" v-model:value="model.text" :rows="3" />
                     </n-form-item>
                     <n-form-item path="key" first label="密钥">
                         <n-input clearable placeholder="输入单词" v-model:value="model.key" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -2,14 +2,14 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <n-form-item path="dateType" label="温度类型" first>
                         <n-select :options="dataTypeOptions" v-model:value="model.type" />
                     </n-form-item>
                     <n-form-item path="text" label="温度" first>
                         <n-input-number placeholder="输入温度" v-model:value="model.text" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

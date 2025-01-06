@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" require-mark-placement="left">
-                <define-tool-area label="WIFI">
+                <tool-area label="WIFI">
                     <n-form-item v-bind="formItemPropsMap['wifi.ssid']">
                         <n-input clearable v-model:value="model.wifi.ssid" />
                     </n-form-item>
@@ -18,8 +18,8 @@
                     <n-form-item v-bind="formItemPropsMap['wifi.isHidden']">
                         <n-switch v-model:value="model.wifi.isHidden" />
                     </n-form-item>
-                </define-tool-area>
-                <define-tool-area label="基础">
+                </tool-area>
+                <tool-area label="基础">
 
                     <n-form-item path="qr.width" first label="宽度">
                         <n-input-number v-model:value="model.qr.width" :min="1" :step="50">
@@ -46,22 +46,22 @@
                         <n-select v-model:value="model.qr.errorCorrectionLevel"
                             :options="errorCorrectionLevelOptions" />
                     </n-form-item>
-                </define-tool-area>
-                <define-tool-area label="图标">
+                </tool-area>
+                <tool-area label="图标">
                     <tools-qrcode-generator-logo-options-form ref="logoOptions" />
-                </define-tool-area>
-                <define-tool-area label="背景">
+                </tool-area>
+                <tool-area label="背景">
                     <tools-qrcode-generator-background-options-form ref="backgroundOptions" />
-                </define-tool-area>
-                <define-tool-area label="信息点">
+                </tool-area>
+                <tool-area label="信息点">
                     <tools-qrcode-generator-dots-options-form ref="dotsOptions" />
-                </define-tool-area>
-                <define-tool-area label="定位点">
+                </tool-area>
+                <tool-area label="定位点">
                     <tools-qrcode-generator-corners-options-form ref="cornersOptions" />
-                </define-tool-area>
-                <define-tool-area label="定位点边框">
+                </tool-area>
+                <tool-area label="定位点边框">
                     <tools-qrcode-generator-corners-square-options-form ref="cornersSquareOptions" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -2,11 +2,11 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" :rules="rules">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <n-form-item path="text" label="url" first>
                         <n-input clearable placeholder="输入url" v-model:value="model.text" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

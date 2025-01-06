@@ -11,7 +11,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <common-form-item-input-number type="common" :custom="{
                         formItem: {
                             label: '数量',
@@ -70,7 +70,7 @@
                             onUpdateValue: (val) => { model.case = val }
                         }
                     }" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

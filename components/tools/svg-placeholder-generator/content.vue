@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item :="formItemPropsMap.width">
                         <n-input-number v-model:value="model.width" :min="0" />
                     </n-form-item>
@@ -21,7 +21,7 @@
                     <n-form-item :="formItemPropsMap.fgColor">
                         <n-color-picker :render-label="() => ''" v-model:value="model.fgColor" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="count" first>
                         <template #label>
                             <div class="inline-flex">
@@ -13,7 +13,7 @@
                         </template>
                         <n-input-number v-model:value="model.count" :min="1" :step="1"></n-input-number>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

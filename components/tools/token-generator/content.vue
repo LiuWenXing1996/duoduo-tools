@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="withUppercase" first label="大写字母">
                         <n-switch v-model:value="model.withUppercase" />
                     </n-form-item>
@@ -18,7 +18,7 @@
                     <n-form-item path="length" first label="长度">
                         <n-input-number v-model:value="model.length" :min="1" :step="8" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -1,8 +1,8 @@
 <template>
-    <define-tool-wrapper>
+    <tool-wrapper>
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '内容',
@@ -12,13 +12,13 @@
                             onUpdateValue: (val) => { model.content = val }
                         }
                     }" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
             {{ resRequest.data.value?.content }}
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">

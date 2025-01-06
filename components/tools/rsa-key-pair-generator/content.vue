@@ -9,39 +9,45 @@
     }">
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules" require-mark-placement="left">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="bits" first label="长度">
                         <n-input-number v-model:value="model.bits" :min="256" :step="8" :max="16384" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
             <div class="relative size-full">
                 <div class="absolute top-0 bottom-0 left-0 right-0 pb-[10px]">
                     <div class="size-full">
-                        <define-tool-area label="公钥" class="h-[50%]" fold-disabled>
-                            <template #actions>
-                                <svg-icon name="common-copy" class="cursor-pointer"
-                                    @click="copy(genRequest.data.value?.publicKeyPem || '')"></svg-icon>
-                            </template>
+                        <tool-area label="公钥" class="h-[50%]" fold-disabled :label-actions="[
+                            {
+                                name: 'common-copy',
+                                onClick: () => {
+                                    copy(genRequest.data.value?.publicKeyPem || '')
+                                }
+                            }
+                        ]">
                             <custom-scrollbar>
                                 <div class=" whitespace-pre-wrap">
                                     {{ genRequest.data.value?.publicKeyPem }}
                                 </div>
                             </custom-scrollbar>
-                        </define-tool-area>
-                        <define-tool-area label="私钥" class="h-[50%]" fold-disabled>
-                            <template #actions>
-                                <svg-icon name="common-copy" class="cursor-pointer"
-                                    @click="copy(genRequest.data.value?.privateKeyPem || '')"></svg-icon>
-                            </template>
+                        </tool-area>
+                        <tool-area label="私钥" class="h-[50%]" fold-disabled :label-actions="[
+                            {
+                                name: 'common-copy',
+                                onClick: () => {
+                                    copy(genRequest.data.value?.privateKeyPem || '')
+                                }
+                            }
+                        ]">
                             <custom-scrollbar>
                                 <div class="whitespace-pre-wrap">
                                     {{ genRequest.data.value?.privateKeyPem }}
                                 </div>
                             </custom-scrollbar>
-                        </define-tool-area>
+                        </tool-area>
                     </div>
                 </div>
             </div>

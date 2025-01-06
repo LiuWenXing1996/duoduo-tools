@@ -18,28 +18,32 @@
         <template #output>
             <div class="relative size-full flex ">
                 <div class="relative h-[100%] w-[50%] mr-[5px]">
-                    <define-tool-area class="h-[100%]" label="YAML" fold-disabled>
-                        <template #actions>
-                            <svg-icon name="common-copy" class="cursor-pointer" @click="handleCopyInput"></svg-icon>
-                        </template>
+                    <tool-area class="h-[100%]" label="YAML" fold-disabled :label-actions="[
+                        {
+                            name: 'common-copy',
+                            onClick: handleCopyInput
+                        }
+                    ]">
                         <monaco-editor :init="initInputEditor" :context-menu-actions="[
                             MonacoEditorContextMenuAction['editor.action.clipboardCopyAction'],
                             MonacoEditorContextMenuAction['editor.action.clipboardCutAction'],
                             MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
                         ]" />
-                    </define-tool-area>
+                    </tool-area>
                 </div>
                 <div class="relative h-[100%] w-[50%] ml-[5px]">
-                    <define-tool-area class="h-[100%]" label="JSON" fold-disabled>
-                        <template #actions>
-                            <svg-icon name="common-copy" class="cursor-pointer" @click="handleCopyOutput"></svg-icon>
-                        </template>
+                    <tool-area class="h-[100%]" label="JSON" fold-disabled :label-actions="[
+                        {
+                            name: 'common-copy',
+                            onClick: handleCopyInput
+                        }
+                    ]">
                         <monaco-editor :init="initOutputEditor" :context-menu-actions="[
                             MonacoEditorContextMenuAction['editor.action.clipboardCopyAction'],
                             MonacoEditorContextMenuAction['editor.action.clipboardCutAction'],
                             MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
                         ]" />
-                    </define-tool-area>
+                    </tool-area>
                 </div>
             </div>
         </template>

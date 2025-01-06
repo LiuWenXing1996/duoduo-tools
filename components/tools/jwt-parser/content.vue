@@ -2,11 +2,11 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
-                <define-tool-area label="内容">
+                <tool-area label="内容">
                     <n-form-item label="输入" path="jwt" first>
                         <n-input type="textarea" clearable v-model:value="model.jwt" :rows="5" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="version" first>
                         <template #label>
                             <div class="inline-flex">
@@ -45,7 +45,7 @@
                             <n-input v-model:value="model.options.name"></n-input>
                         </n-form-item>
                     </template>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

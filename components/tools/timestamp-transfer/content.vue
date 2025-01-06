@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <n-form-item path="transferType" first label="转换类型">
                         <n-select :options="transferTypeOptions" v-model:value="model.transferType"></n-select>
                     </n-form-item>
@@ -15,7 +15,7 @@
                     <n-form-item path="date" first label="日期" v-if="model.transferType === TransferType.timestamp">
                         <n-input v-model:value="model.date"></n-input>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

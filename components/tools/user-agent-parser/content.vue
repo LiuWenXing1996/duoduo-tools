@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="content" label="输入 UA" first>
                         <n-input type="textarea" :rows="5" v-model:value="model.content" />
                     </n-form-item>
@@ -19,7 +19,7 @@
                     ]">
                         <n-input disabled type="textarea" :rows="5" :value="clientUserAgent" />
                     </common-empty-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

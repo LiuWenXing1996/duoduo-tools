@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <n-form-item path="count" first label="段落数量">
                         <n-input-number v-model:value="model.count" :min="1" />
                     </n-form-item>
@@ -30,7 +30,7 @@
                             </n-space>
                         </n-radio-group>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

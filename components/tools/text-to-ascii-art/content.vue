@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="文本">
+                <tool-area label="文本">
                     <n-form-item path="text" first>
                         <template #label>
                             <div class="inline-flex">
@@ -13,15 +13,15 @@
                         </template>
                         <n-input clearable placeholder="输入文本" v-model:value="model.text" type="textarea" :rows="8" />
                     </n-form-item>
-                </define-tool-area>
-                <define-tool-area label="配置">
+                </tool-area>
+                <tool-area label="配置">
                     <n-form-item path="font" first label="字体">
                         <n-select filterable v-model:value="model.font" :options="fontSelectOptions" />
                     </n-form-item>
                     <n-form-item path="width" first label="宽度">
                         <n-input-number v-model:value="model.width" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

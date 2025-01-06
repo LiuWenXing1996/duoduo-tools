@@ -2,11 +2,11 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" require-mark-placement="left">
-                <define-tool-area label="密码">
+                <tool-area label="密码">
                     <n-form-item path="text" label="输入" first>
                         <n-input clearable placeholder="输入密码" v-model:value="model.text" />
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

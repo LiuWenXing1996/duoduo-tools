@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="配置">
+                <tool-area label="配置">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '正则',
@@ -56,8 +56,8 @@
                             onUpdateValue: (val) => { model.content = val }
                         }
                     }" />
-                </define-tool-area>
-                <define-tool-area label="常用正则">
+                </tool-area>
+                <tool-area label="常用正则">
                     <n-space>
                         <n-button size="small" @click="() => {
                             model.regStr = item.value
@@ -65,7 +65,7 @@
                             {{ item.label }}
                         </n-button>
                     </n-space>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

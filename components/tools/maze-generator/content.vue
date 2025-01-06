@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model">
-                <define-tool-area label="基础">
+                <tool-area label="基础">
                     <n-form-item path="text" first>
                         <template #label>
                             <div class="inline-flex">
@@ -23,8 +23,8 @@
                         </template>
                         <n-input-number v-model:value="model.col" :min="1" />
                     </n-form-item>
-                </define-tool-area>
-                <define-tool-area label="绘制">
+                </tool-area>
+                <tool-area label="绘制">
                     <n-form-item path="bgColor" first>
                         <template #label>
                             <div class="inline-flex">
@@ -96,7 +96,7 @@
                         </template>
                         <n-color-picker v-model:value="model.point.color" :render-label="() => ''"></n-color-picker>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

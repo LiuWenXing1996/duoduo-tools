@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
-                <define-tool-area label="头部(Header)">
+                <tool-area label="头部(Header)">
                     <n-form-item label="加密算法(alg)" path="data.header.alg" first>
                         <n-select :options="algorithmOptions" v-model:value="model.data.header.alg" />
                     </n-form-item>
@@ -51,8 +51,8 @@
                             </div>
                         </div>
                     </common-empty-form-item>
-                </define-tool-area>
-                <define-tool-area label="载荷(Payload)">
+                </tool-area>
+                <tool-area label="载荷(Payload)">
                     <n-form-item label="签发人(iss)" path="data.payload.iss" first>
                         <n-input clearable v-model:value="model.data.payload.iss" />
                     </n-form-item>
@@ -172,8 +172,8 @@
                             </div>
                         </div>
                     </common-empty-form-item>
-                </define-tool-area>
-                <define-tool-area label="秘钥">
+                </tool-area>
+                <tool-area label="秘钥">
                     <template v-if="NeedRsaKeyJwtAlgorithmList.includes(model.data.header.alg)">
                         <n-form-item label="私钥" path="append.rsaKeyPairs.privateKey" first>
                             <n-input type="textarea" clearable v-model:value="model.append.rsaKeyPairs.privateKey" />
@@ -187,7 +187,7 @@
                             <n-input clearable v-model:value="model.data.secret" />
                         </n-form-item>
                     </template>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

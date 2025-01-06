@@ -2,7 +2,7 @@
     <tool-wrapper>
         <template #input>
             <n-form :model="model" :rules="rules">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <n-form-item path="transferType" first label="转换类型">
                         <n-select :options="transferTypeOptions" v-model:value="model.transferType"></n-select>
                     </n-form-item>
@@ -12,7 +12,7 @@
                     <n-form-item path="text" first label="文本" v-if="model.transferType === TransferType.entity">
                         <n-input type="textarea" v-model:value="model.html" :rows="3"></n-input>
                     </n-form-item>
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>

@@ -14,7 +14,7 @@
     }">
         <template #input>
             <n-form ref="form" :model="model">
-                <define-tool-area label="输入">
+                <tool-area label="输入">
                     <common-form-item-input type="common" :custom="{
                         formItem: {
                             label: '原始 Yaml',
@@ -44,7 +44,7 @@
                             onUpdateValue: (val) => { model.intent = val ?? 0 }
                         }
                     }" />
-                </define-tool-area>
+                </tool-area>
             </n-form>
         </template>
         <template #output>
