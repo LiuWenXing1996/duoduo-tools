@@ -6,19 +6,19 @@
                     <n-form-item path="content" label="输入 UA" first>
                         <n-input type="textarea" :rows="5" v-model:value="model.content" />
                     </n-form-item>
-                    <common-empty-form-item label="当前浏览器 UA" :actions="[
-                        {
-                            type: 'common',
-                            shortcut: {
-                                'icon.name': 'common-copy',
-                                'button.onClick': () => {
-                                    copy(clientUserAgent)
-                                },
-                            }
-                        }
-                    ]">
+                    <n-form-item :="commonFormItemProps">
+                        <template #label>
+                            <tool-label label="当前浏览器 UA" :actions="[
+                                {
+                                    name: 'common-copy',
+                                    onClick: () => {
+                                        copy(clientUserAgent)
+                                    }
+                                }
+                            ]" />
+                        </template>
                         <n-input disabled type="textarea" :rows="5" :value="clientUserAgent" />
-                    </common-empty-form-item>
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>

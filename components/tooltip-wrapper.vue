@@ -8,7 +8,7 @@
                 <slot name="content"></slot>
             </template>
             <template v-else-if="props.content">
-                <common-rich-text :content="props.content" />
+                <rich-text :content="props.content" />
             </template>
         </n-tooltip>
     </template>

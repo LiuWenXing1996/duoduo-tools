@@ -11,7 +11,7 @@
             <custom-scrollbar out-bar>
                 <div class="relative">
                     <tool-area v-if="tool?.meta?.description" label="描述" class=" mb-[10px]">
-                        <common-rich-text :content="tool.meta.description" />
+                        <rich-text :content="tool.meta.description" />
                     </tool-area>
                     <slot name="input"></slot>
                     <tool-area v-if="toolRelated.length > 0" label="相关工具">
@@ -36,11 +36,11 @@
                 <div class="grow">
                     <tool-area class="size-full" v-bind="propsLocal.output?.area">
                         <div class="size-full relative">
-                            <common-loading-wrapper v-bind="props.output?.loadingWrapper">
+                            <loading-wrapper v-bind="props.output?.loadingWrapper">
                                 <custom-scrollbar v-bind="propsLocal.output?.scroll">
                                     <slot name="output"></slot>
                                 </custom-scrollbar>
-                            </common-loading-wrapper>
+                            </loading-wrapper>
                         </div>
                     </tool-area>
                 </div>

@@ -42,7 +42,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-key-value :item-label-width="70" :data="[
+            <key-value :item-label-width="70" :data="[
                 {
                     label: '匹配数量',
                     value: (resRequest.data?.value?.matchNum || 0).toString()

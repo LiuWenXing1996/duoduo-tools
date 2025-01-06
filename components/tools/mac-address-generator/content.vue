@@ -43,7 +43,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-key-value :item-label-width="30" :data="[
+            <key-value :item-label-width="30" :data="[
                 ...resRequest.data.value?.content.map((item, index) => {
                     return {
                         label: `${index + 1}`,
@@ -82,17 +82,14 @@ onMounted(() => {
     addPrefixDemo()
 })
 const copy = useCopy()
-const commonCopyAction = (content: string): CommonIconButtonComponentProps | undefined => {
+const commonCopyAction = (content: string): IconButtonComponentProps | undefined => {
     if (!content) {
         return undefined
     }
     return {
-        type: 'simple',
-        shortcut: {
-            'icon.name': 'common-copy',
-            'button.onClick': () => {
-                copy(content)
-            }
+        name: 'common-copy',
+        onClick: () => {
+            copy(content)
         }
     }
 }

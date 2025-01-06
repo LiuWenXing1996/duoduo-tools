@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-center">
         <span>
-            <common-rich-text :content="label" />
+            <rich-text :content="label" />
         </span>
         <div class="ml-[2px]" v-if="actions.length > 0">
             <n-space :size="2">

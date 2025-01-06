@@ -13,7 +13,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-key-value :item-label-width="140" :data="[
+            <key-value :item-label-width="140" :data="[
                 ...textRes.map(item => ({ label: item.label, value: item.result, valueActions: [commonCopyAction(item.result)] }))
             ]" />
         </template>
@@ -29,18 +29,15 @@ export type Model = {
 }
 
 const copy = useCopy()
-const commonCopyAction = (content: string): CommonIconButtonComponentProps | undefined => {
+const commonCopyAction = (content: string): IconButtonComponentProps | undefined => {
     if (!content) {
         return undefined
     }
     return {
-        type: 'simple',
-        shortcut: {
-            'icon.name': 'common-copy',
-            'button.onClick': () => {
-                copy(content)
-            }
-        }
+        name: 'common-copy',
+        onClick: () => {
+            copy(content)
+        },
     }
 }
 const model = reactive<Model>({

@@ -1,5 +1,14 @@
 <template>
-    <tool-content>
+    <tool-content :output="{
+        area: {
+            labelActions: [
+                {
+                    name: 'common-copy',
+                    onClick: () => { copy(result || '') }
+                }
+            ]
+        }
+    }">
         <template #input>
             <n-form ref="formRef" :model="model" :rules="rules">
                 <tool-area label="头部(Header)">
@@ -9,17 +18,13 @@
                     <n-form-item label="类型(typ)" path="data.header.typ" first>
                         <n-input disabled v-model:value="model.data.header.typ" />
                     </n-form-item>
-                    <common-empty-form-item label="自定义数据" :show-feedback="(model.data.custom?.header || []).length > 0"
+                    <form-item-empty label="自定义数据" :show-feedback="(model.data.custom?.header || []).length > 0"
                         :actions="[
                             {
-                                type: 'common',
-                                shortcut: {
-                                    'icon.name': 'common-add',
-                                    'button.onClick': () => {
-                                        customHeaderHandler.addNew()
-                                    },
-                                    'tooltipWrapper.content': '添加',
-                                    'tooltipWrapper.enabled': true
+                                name: 'common-add',
+                                tooltip: '添加',
+                                onClick: () => {
+                                    customHeaderHandler.addNew()
                                 }
                             },
                         ]">
@@ -42,15 +47,11 @@
                                 </div>
                             </div>
                             <div class="ml-[10px] h-[34px] flex items-center">
-                                <common-icon-button type="common" :shortcut="{
-                                    'icon.name': 'common-delete',
-                                    'button.onClick': () => { customHeaderHandler.del(index) },
-                                    'tooltipWrapper.content': '移除',
-                                    'tooltipWrapper.enabled': true
-                                }" />
+                                <icon-button name="common-delete" @click="() => { customHeaderHandler.del(index) }"
+                                    tooltip="移除" />
                             </div>
                         </div>
-                    </common-empty-form-item>
+                    </form-item-empty>
                 </tool-area>
                 <tool-area label="载荷(Payload)">
                     <n-form-item label="签发人(iss)" path="data.payload.iss" first>
@@ -62,18 +63,14 @@
                     <n-form-item label="主题(sub)" path="data.payload.sub" first>
                         <n-input clearable v-model:value="model.data.payload.sub" />
                     </n-form-item>
-                    <common-empty-form-item label="受众(aud)"
+                    <form-item-empty label="受众(aud)"
                         :show-feedback="(!model.append.payloadAud.isSingle) && (model.append.payloadAud.list || []).length > 0"
                         :actions="[
                             {
-                                type: 'common',
-                                shortcut: {
-                                    'icon.name': 'common-list',
-                                    'button.onClick': () => {
-                                        model.append.payloadAud.isSingle = !model.append.payloadAud.isSingle
-                                    },
-                                    'tooltipWrapper.content': `${model.append.payloadAud.isSingle ? '切换列表' : '切换单个'}`,
-                                    'tooltipWrapper.enabled': true
+                                name: 'common-list',
+                                tooltip: `${model.append.payloadAud.isSingle ? '切换列表' : '切换单个'}`,
+                                onClick: () => {
+                                    model.append.payloadAud.isSingle = !model.append.payloadAud.isSingle
                                 },
                                 custom: {
                                     icon: {
@@ -83,15 +80,11 @@
                                 }
                             },
                             (!model.append.payloadAud.isSingle) ? {
-                                type: 'common',
-                                shortcut: {
-                                    'icon.name': 'common-add',
-                                    'button.onClick': () => {
-                                        payloadAudListHandler.addNew()
-                                    },
-                                    'tooltipWrapper.content': '添加',
-                                    'tooltipWrapper.enabled': true
-                                },
+                                name: 'common-add',
+                                tooltip: '添加',
+                                onClick: () => {
+                                    payloadAudListHandler.addNew()
+                                }
                             } : undefined,
                         ]">
                         <template v-if="model.append.payloadAud.isSingle">
@@ -111,16 +104,12 @@
                                     </div>
                                 </div>
                                 <div class="ml-[10px] h-[34px] flex items-center">
-                                    <common-icon-button type="common" :shortcut="{
-                                        'icon.name': 'common-delete',
-                                        'button.onClick': () => { payloadAudListHandler.del(index) },
-                                        'tooltipWrapper.content': '移除',
-                                        'tooltipWrapper.enabled': true
-                                    }" />
+                                    <icon-button name="common-delete"
+                                        @click="() => { payloadAudListHandler.del(index) }" tooltip="移除" />
                                 </div>
                             </div>
                         </template>
-                    </common-empty-form-item>
+                    </form-item-empty>
                     <n-form-item label="生效时间(nbf)" path="data.payload.nbf" first>
                         <n-date-picker v-model:value="model.data.payload.nbf" type="datetime" clearable />
                     </n-form-item>
@@ -130,17 +119,13 @@
                     <n-form-item label="编号(jti)" path="data.payload.jti" first>
                         <n-input clearable v-model:value="model.data.payload.jti" />
                     </n-form-item>
-                    <common-empty-form-item label="自定义数据" :show-feedback="(model.data.custom?.payload || []).length > 0"
+                    <form-item-empty label="自定义数据" :show-feedback="(model.data.custom?.payload || []).length > 0"
                         :actions="[
                             {
-                                type: 'common',
-                                shortcut: {
-                                    'icon.name': 'common-add',
-                                    'button.onClick': () => {
-                                        customPayloadHandler.addNew()
-                                    },
-                                    'tooltipWrapper.content': '添加',
-                                    'tooltipWrapper.enabled': true
+                                name: 'common-add',
+                                tooltip: '添加',
+                                onClick: () => {
+                                    customPayloadHandler.addNew()
                                 }
                             },
                         ]">
@@ -163,15 +148,11 @@
                                 </div>
                             </div>
                             <div class="ml-[10px] h-[34px] flex items-center">
-                                <common-icon-button type="common" :shortcut="{
-                                    'icon.name': 'common-delete',
-                                    'button.onClick': () => { customPayloadHandler.del(index) },
-                                    'tooltipWrapper.content': '移除',
-                                    'tooltipWrapper.enabled': true
-                                }" />
+                                <icon-button name="common-delete" @click="() => { customPayloadHandler.del(index) }"
+                                    tooltip="移除" />
                             </div>
                         </div>
-                    </common-empty-form-item>
+                    </form-item-empty>
                 </tool-area>
                 <tool-area label="秘钥">
                     <template v-if="NeedRsaKeyJwtAlgorithmList.includes(model.data.header.alg)">
@@ -191,9 +172,7 @@
             </n-form>
         </template>
         <template #output>
-            <div class=" break-all">
-                {{ result }}
-            </div>
+            <rich-text :content="result" />
         </template>
     </tool-content>
 </template>
@@ -220,7 +199,7 @@ export type Model = {
 }
 
 const message = useMessage()
-
+const copy = useCopy()
 const model = reactive<Model>({
     data: {
         header: {

@@ -17,15 +17,25 @@
         }
     }">
         <template #output>
-            <common-group :data="result" :config="{
-                list: {
-                    bordered: true
-                }
-            }">
-                <template #item="item">
-                    <common-group-list :item-label-width="50" :data="item.groupList" />
-                </template>
-            </common-group>
+            <n-list bordered>
+                <n-list-item v-for="groupItem in result.group" class="!p-[10px]">
+                    <n-thing content-style="margin-top: 0px;">
+                        <template #header>
+                            <rich-text :content="groupItem.label" />
+                        </template>
+                        <n-list hoverable clickable>
+                            <n-list-item v-for="listItem in groupItem.list" class="!p-[10px]">
+                                <n-thing content-class="ml-[10px] !mt-[5px]">
+                                    <template #header>
+                                        <rich-text :content="listItem.label" />
+                                    </template>
+                                    <key-value :item-label-width="50" :data="listItem.items" />
+                                </n-thing>
+                            </n-list-item>
+                        </n-list>
+                    </n-thing>
+                </n-list-item>
+            </n-list>
         </template>
         <template #actions>
             <n-input placeholder="搜索状态码" v-model:value="searchKey"></n-input>
@@ -58,17 +68,23 @@ const httpCodeListSearched = computed(() => {
     return list
 })
 
-const result: ComputedRef<CommonGroupComponentProps<{
-    groupList: CommonGroupListComponentProps['data']
-}>['data']> = computed(() => {
+export type Result = {
+    group: {
+        label: string,
+        list: {
+            label: string,
+            items: KeyValueComponentProps['data']
+        }[]
+    }[]
+}
+
+const result: ComputedRef<Result> = computed(() => {
     const rawGroup = group(httpCodeListSearched.value, e => e.group);
 
-    const groups: CommonGroupComponentProps<{
-        groupList: CommonGroupListComponentProps['data']
-    }>['data'] = Object.entries(HttpCodeGroupDisplayMap)
+    const data = Object.entries(HttpCodeGroupDisplayMap)
         .map(([key, val]) => {
             const rawItems = rawGroup[key as HttpCodeGroup] || []
-            const groupList: CommonGroupListComponentProps['data'] = rawItems
+            const data = rawItems
                 .map((httpCode) => {
                     return {
                         label: `${httpCode.code} (${httpCode.enName})`,
@@ -98,12 +114,13 @@ const result: ComputedRef<CommonGroupComponentProps<{
                 })
             return {
                 label: val.label,
-                content: {
-                    groupList
-                }
+                list: data
             }
         })
 
-    return groups
+    return {
+        group: data
+    }
 })
+
 </script>

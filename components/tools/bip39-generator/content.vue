@@ -52,7 +52,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-rich-text :content="result?.content" />
+            <rich-text :content="result?.content" />
         </template>
     </tool-content>
 </template>

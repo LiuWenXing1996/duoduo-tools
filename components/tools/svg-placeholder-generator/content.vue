@@ -25,7 +25,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-key-value v-if="resKeyValueList" :item-label-width="70" :data="resKeyValueList" />
+            <key-value v-if="resKeyValueList" :item-label-width="70" :data="resKeyValueList" />
         </template>
         <template #actions>
             <n-space>
@@ -132,12 +132,12 @@ watch(() => model, () => {
     immediate: true,
     deep: true
 })
-const resKeyValueList = computed<CommonKeyValueComponentProps['data'] | undefined>(() => {
+const resKeyValueList = computed<KeyValueComponentProps['data'] | undefined>(() => {
     if (!resRequest.data.value) {
         return
     };
     const data = resRequest.data.value
-    const kvList: CommonKeyValueComponentProps['data'] = [
+    const kvList: KeyValueComponentProps['data'] = [
         {
             label: "图片",
             value: () => {
@@ -149,12 +149,9 @@ const resKeyValueList = computed<CommonKeyValueComponentProps['data'] | undefine
             value: data.svgString,
             valueActions: [
                 {
-                    type: 'common',
-                    shortcut: {
-                        'icon.name': "common-copy",
-                        "button.onClick": () => {
-                            copy(data.svgString)
-                        }
+                    name: 'common-copy',
+                    onClick: () => {
+                        copy(data.svgString)
                     }
                 }
             ]
@@ -164,12 +161,21 @@ const resKeyValueList = computed<CommonKeyValueComponentProps['data'] | undefine
             value: data.base64,
             valueActions: [
                 {
-                    type: 'common',
-                    shortcut: {
-                        'icon.name': "common-copy",
-                        "button.onClick": () => {
-                            copy(data.base64)
-                        }
+                    name: 'common-copy',
+                    onClick: () => {
+                        copy(data.base64)
+                    }
+                }
+            ]
+        },
+        {
+            label: "dataUrl",
+            value: data.dataUrl,
+            valueActions: [
+                {
+                    name: 'common-copy',
+                    onClick: () => {
+                        copy(data.dataUrl)
                     }
                 }
             ]

@@ -21,7 +21,7 @@
             </n-form>
         </template>
         <template #output>
-            <common-key-value :data="[
+            <key-value :data="[
                 () => {
                     const value = resRequest.data.value?.content?.toString() || ''
                     return {
@@ -134,18 +134,15 @@ const copy = useCopy()
 onMounted(() => {
     addExample()
 })
-const commonCopyAction = (content: string): CommonIconButtonComponentProps | undefined => {
+const commonCopyAction = (content: string): IconButtonComponentProps | undefined => {
     if (!content) {
         return undefined
     }
     return {
-        type: 'simple',
-        shortcut: {
-            'icon.name': 'common-copy',
-            'button.onClick': () => {
-                copy(content)
-            }
-        }
+        name: 'common-copy',
+        onClick: () => {
+            copy(content)
+        },
     }
 }
 const formRef = useTemplateRef("form")

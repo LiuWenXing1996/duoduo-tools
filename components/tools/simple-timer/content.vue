@@ -26,18 +26,8 @@
                     <n-card title="历史记录" class="size-full" size="small">
                         <template #header-extra>
                             <n-space>
-                                <common-icon-button type="common" :shortcut="{
-                                    'icon.name': 'common-clear',
-                                    'button.onClick': () => { history = [] },
-                                    'tooltipWrapper.content': '清空历史',
-                                    'tooltipWrapper.enabled': true,
-                                }" />
-                                <common-icon-button type="common" :shortcut="{
-                                    'icon.name': 'common-copy',
-                                    'button.onClick': () => { copyHistory() },
-                                    'tooltipWrapper.content': '复制历史',
-                                    'tooltipWrapper.enabled': true,
-                                }" />
+                                <icon-button name="common-clear" @click="() => { history = [] }" tooltip="清空历史s" />
+                                <icon-button name="common-copy" @click="() => { copyHistory() }" tooltip="复制历史" />
                             </n-space>
                         </template>
                         <custom-scrollbar>
