@@ -1,5 +1,5 @@
 <template>
-    <define-tool-wrapper :vertical="{
+    <tool-wrapper :vertical="{
         enabled: true,
         top: {
             class: '!h-[15%]'
@@ -14,7 +14,8 @@
         area: {
             label: '列表'
         },
-        actions: {
+    }" :actions="{
+        area: {
             label: '搜索'
         }
     }">
@@ -59,7 +60,7 @@
         <template #actions>
             <n-input size="small" placeholder="搜索Emoji, 支持中文、英文、code" v-model:value="searchKey" clearable></n-input>
         </template>
-    </define-tool-wrapper>
+    </tool-wrapper>
 </template>
 
 <script setup lang="tsx">
