@@ -6,16 +6,18 @@ import {
   parseISO,
 } from "date-fns";
 
-export enum DateType {
-  "Unix-Timestamp" = "Unix-Timestamp",
-  "Unix-Timestamp-Second" = "Unix-Timestamp-Second",
-  "ISO-8601" = "ISO-8601",
-  "ISO-9075" = "ISO-9075",
-  "RFC 3339" = "RFC 3339",
-  "RFC 7231" = "RFC 7231",
-  "UTC format" = "UTC format",
-  "Javascript-Date" = "Javascript-Date",
-}
+const DateTypeList = [
+  "Unix-Timestamp",
+  "Unix-Timestamp-Second",
+  "ISO-8601",
+  "ISO-9075",
+  "RFC 3339",
+  "RFC 7231",
+  "UTC format",
+  "Javascript-Date",
+] as const;
+
+export type DateType = (typeof DateTypeList)[number];
 
 const ISO8601_REGEX =
   /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/;
@@ -36,7 +38,7 @@ export type DateTransfer = {
 };
 
 export const dateTransferMap: Record<DateType, DateTransfer> = {
-  [DateType["ISO-8601"]]: {
+  ["ISO-8601"]: {
     label: "ISO 8601",
     to: (date: Date): string => {
       return date.toISOString();
@@ -51,7 +53,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return dayjs(val).toDate();
     },
   },
-  [DateType["ISO-9075"]]: {
+  ["ISO-9075"]: {
     label: "ISO 9075",
     to: (date: Date): string => {
       return formatISO9075(date);
@@ -66,7 +68,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return parseISO(val);
     },
   },
-  [DateType["Unix-Timestamp-Second"]]: {
+  ["Unix-Timestamp-Second"]: {
     label: "Unix 时间戳(秒)",
     to: (date: Date): string => {
       return dayjs(date).unix().toString();
@@ -81,7 +83,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return dayjs.unix(Number(val)).toDate();
     },
   },
-  [DateType["Unix-Timestamp"]]: {
+  ["Unix-Timestamp"]: {
     label: "Unix 时间戳(毫秒)",
     to: (date: Date): string => {
       return date.valueOf().toString();
@@ -96,7 +98,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return dayjs(Number(val)).toDate();
     },
   },
-  [DateType["RFC 3339"]]: {
+  ["RFC 3339"]: {
     label: "RFC 3339",
     to: (date: Date): string => {
       return formatRFC3339(date);
@@ -111,7 +113,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return new Date(date);
     },
   },
-  [DateType["RFC 7231"]]: {
+  ["RFC 7231"]: {
     label: "RFC 7231",
     to: (date: Date): string => {
       return formatRFC7231(date);
@@ -126,7 +128,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return new Date(date);
     },
   },
-  [DateType["UTC format"]]: {
+  ["UTC format"]: {
     label: "UTC 格式",
     to: (date: Date): string => {
       return date.toUTCString();
@@ -145,7 +147,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       return new Date(date);
     },
   },
-  [DateType["Javascript-Date"]]: {
+  ["Javascript-Date"]: {
     label: "Javascript Date toString",
     to: (date: Date): string => {
       return date.toString();

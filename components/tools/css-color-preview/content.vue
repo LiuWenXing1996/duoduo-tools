@@ -7,20 +7,21 @@
                         {
                             required: true,
                             message: '请输入色值',
-                            trigger: ['input', 'change', 'blur', 'focus']
+                            trigger: allFormItemTrigger
                         },
                         {
                             validator: (_rule, value: string) => {
                                 return isValidColor(value)
                             },
                             message: '请输入合法色值',
-                            trigger: ['input', 'change', 'blur', 'focus']
+                            trigger: allFormItemTrigger
                         }
                     ]">
                         <template #label>
                             <tool-label label="输入" :actions="[
                                 {
                                     name: 'common-demo',
+                                    tooltip: '使用示例',
                                     onClick: () => {
                                         model.color = initialColor
                                     }

@@ -14,7 +14,7 @@
                             <n-select :options="inputColorTypeOptions" v-model:value="model.inputColorType" />
                         </n-form-item>
                         <n-form-item :="commonFormItemProps" path="colorInput" :rule="[
-                            { required: true, message: '请输入颜色', trigger: ['input', 'change', 'blur', 'focus'] },
+                            { required: true, message: '请输入颜色', trigger: allFormItemTrigger },
                             {
                                 validator: (rule, value) => {
                                     let res = false;
@@ -24,13 +24,14 @@
                                         res = false
                                     }
                                     return res
-                                }, message: '无效的颜色类型', trigger: ['input', 'change', 'blur', 'focus']
+                                }, message: '无效的颜色类型', trigger: allFormItemTrigger
                             }
                         ]">
                             <template #label>
                                 <tool-label label="文本" :actions="[
                                     {
                                         name: 'common-demo',
+                                        tooltip: '使用示例',
                                         onClick: addInputExample
                                     }
                                 ]" />
