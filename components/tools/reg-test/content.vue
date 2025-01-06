@@ -3,17 +3,12 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '正则',
-                        },
-                        input: {
-                            type: 'textarea',
-                            rows: 2,
-                            value: model.regStr,
-                            onUpdateValue: (val) => { model.regStr = val }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="regStr">
+                        <template #label>
+                            <tool-label label="正则" />
+                        </template>
+                        <n-input type="textarea" :rows="2" clearable v-model:value="model.regStr" />
+                    </n-form-item>
                     <common-form-item-switch type="common" :custom="{
                         formItem: {
                             label: '是否忽略大小写',
@@ -32,30 +27,20 @@
                             onUpdateValue: (val) => { model.isAll = val }
                         }
                     }" />
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '内容',
-                            labelActions: [
+                    <n-form-item :="commonFormItemProps" path="content">
+                        <template #label>
+                            <tool-label label="内容" :actions="[
                                 {
-                                    type: 'common',
-                                    shortcut: {
-                                        'icon.name': 'common-demo',
-                                        'button.onClick': () => {
-                                            model.content = testStr
-                                        },
-                                        'tooltipWrapper.content': '使用测试数据',
-                                        'tooltipWrapper.enabled': true
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        model.content = testStr
                                     }
                                 }
-                            ]
-                        },
-                        input: {
-                            type: 'textarea',
-                            rows: 4,
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
+                            ]" />
+                        </template>
+                        <n-input type="textarea" :rows="4" clearable v-model:value="model.content" />
+                    </n-form-item>
                 </tool-area>
                 <tool-area label="常用正则">
                     <n-space>

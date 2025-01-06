@@ -3,29 +3,20 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '内容',
-                            labelActions: [
+                    <n-form-item :="commonFormItemProps" path="content">
+                        <template #label>
+                            <tool-label label="内容" :actions="[
                                 {
-                                    type: 'simple',
-                                    shortcut: {
-                                        'icon.name': 'common-demo',
-                                        'button.onClick': () => {
-                                            addExample()
-                                        },
-                                        'tooltipWrapper.content': '使用示例',
-                                        'tooltipWrapper.enabled': true
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        addExample()
                                     }
                                 }
-                            ]
-                        },
-                        input: {
-                            clearable: true,
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
+                            ]" />
+                        </template>
+                        <n-input clearable v-model:value="model.content" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>

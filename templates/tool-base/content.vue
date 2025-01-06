@@ -3,15 +3,20 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '内容',
-                        },
-                        input: {
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="content">
+                        <template #label>
+                            <tool-label label="内容" :actions="[
+                                {
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        addExample()
+                                    }
+                                }
+                            ]" />
+                        </template>
+                        <n-input clearable v-model:value="model.content" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>
@@ -30,10 +35,13 @@ export type Model = {
 export type Result = {
     content: string,
 }
+const exampleText = "我是一个测试文本"
 const model = reactive<Model>({
-    content: ""
+    content: exampleText
 })
-
+const addExample = () => {
+    model.content = exampleText
+}
 const formRef = useTemplateRef("form")
 const resRequest = useCustomRequest<Result | undefined>(async () => {
     let res: Result | undefined = undefined;

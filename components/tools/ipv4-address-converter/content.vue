@@ -3,42 +3,31 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="配置">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: 'IPv4 地址',
-                            labelActions: [
+                    <n-form-item :="commonFormItemProps" path="content" label="类型" :rule="[
+                        { required: true, message: '请输入 IPv4 地址', trigger: allFormItemTrigger },
+                        {
+                            validator: (_, val) => {
+                                if (isValidIpv4({ ip: val })) {
+                                    return true
+                                } else {
+                                    return false
+                                }
+                            }, message: '请输入正确的 IPv4 地址', trigger: allFormItemTrigger
+                        }
+                    ]">
+                        <template #label>
+                            <tool-label label="IPv4 地址" :actions="[
                                 {
-                                    type: 'simple',
-                                    shortcut: {
-                                        'icon.name': 'common-demo',
-                                        'button.onClick': () => {
-                                            addExample()
-                                        },
-                                        'tooltipWrapper.content': '使用示例',
-                                        'tooltipWrapper.enabled': true
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => {
+                                        addExample()
                                     }
                                 }
-                            ],
-                            path: 'content',
-                            rule: [
-                                { required: true, message: '请输入 IPv4 地址', trigger: allFormItemTrigger },
-                                {
-                                    validator: (_, val) => {
-                                        if (isValidIpv4({ ip: val })) {
-                                            return true
-                                        } else {
-                                            return false
-                                        }
-                                    }, message: '请输入正确的 IPv4 地址', trigger: allFormItemTrigger
-                                }
-                            ]
-                        },
-                        input: {
-                            clearable: true,
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
+                            ]" />
+                        </template>
+                        <n-input clearable v-model:value="model.content" />
+                    </n-form-item>
                 </tool-area>
             </n-form>
         </template>

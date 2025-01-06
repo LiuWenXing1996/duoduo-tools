@@ -21,21 +21,17 @@
                         }
                     ]">
                         <template #label>
-                            <common-form-item-label label="Json" :actions="[
+                            <tool-label label="Json" :actions="[
                                 {
-                                    type: 'common',
-                                    shortcut: {
-                                        'icon.name': 'common-demo',
-                                        'button.onClick': () => {
-                                            model.content = example
-                                        },
-                                        'tooltipWrapper.content': '使用测试数据',
-                                        'tooltipWrapper.enabled': true
+                                    name: 'common-demo',
+                                    tooltip: '使用测试数据',
+                                    onClick: () => {
+                                        model.content = example
                                     }
                                 }
                             ]" />
                         </template>
-                        <n-input v-model:value="model.content" type="textarea" rows="4" />
+                        <n-input clearable v-model:value="model.content" type="textarea" rows="4" />
                     </n-form-item>
                     <n-form-item :bind="commonFormItemProps" label="转义/去转义">
                         <n-switch v-model:value="model.isEscape">

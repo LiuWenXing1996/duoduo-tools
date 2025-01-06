@@ -15,17 +15,12 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="输入">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '原始 Json',
-                        },
-                        input: {
-                            type: 'textarea',
-                            rows: 4,
-                            value: model.content,
-                            onUpdateValue: (val) => { model.content = val }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="content">
+                        <template #label>
+                            <tool-label label="原始 Json" />
+                        </template>
+                        <n-input type="textarea" :rows="4" clearable v-model:value="model.content" />
+                    </n-form-item>
                     <common-form-item-switch type="common" :custom="{
                         formItem: {
                             label: '是否排序',

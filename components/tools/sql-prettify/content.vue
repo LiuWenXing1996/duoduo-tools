@@ -17,19 +17,9 @@
         <template #input>
             <n-form ref="form" :model="model">
                 <tool-area label="内容">
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '输入',
-                        },
-                        input: {
-                            type: 'textarea',
-                            rows: 6,
-                            value: model.content,
-                            onUpdateValue: (value) => {
-                                model.content = value
-                            }
-                        }
-                    }" />
+                    <n-form-item :="commonFormItemProps" path="content" label="输入">
+                        <n-input clearable type="textarea" :rows="6" v-model:value="model.content" />
+                    </n-form-item>
                 </tool-area>
                 <tool-area label="美化配置">
                     <common-form-item-select type="common" :custom="{

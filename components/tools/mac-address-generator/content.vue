@@ -30,26 +30,18 @@
                             onUpdateValue: (val) => { model.count = val ?? 0 }
                         }
                     }" />
-                    <common-form-item-input type="common" :custom="{
-                        formItem: {
-                            label: '前缀',
-                            labelActions: [
+                    <n-form-item :="commonFormItemProps" path="prefix">
+                        <template #label>
+                            <tool-label label="前缀" :actions="[
                                 {
-                                    type: 'simple',
-                                    shortcut: {
-                                        'icon.name': 'common-demo',
-                                        'button.onClick': () => { addPrefixDemo() },
-                                        'tooltipWrapper.content': '点击使用示例',
-                                        'tooltipWrapper.enabled': true,
-                                    }
+                                    name: 'common-demo',
+                                    tooltip: '使用示例',
+                                    onClick: () => { addPrefixDemo() }
                                 }
-                            ],
-                        },
-                        input: {
-                            value: model.prefix,
-                            onUpdateValue: (val) => { model.prefix = val }
-                        }
-                    }" />
+                            ]" />
+                        </template>
+                        <n-input v-model:value="model.prefix" />
+                    </n-form-item>
                     <common-form-item-select type="common" :custom="{
                         formItem: {
                             label: '分隔符',
