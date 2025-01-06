@@ -1,6 +1,6 @@
 <template>
     <div class="w-[200px]">
-        <n-auto-complete v-model:value="selectVal" :placeholder="`搜索工具(共${allTools.length}个)`"
+        <n-auto-complete clearable v-model:value="selectVal" :placeholder="`搜索工具(共${allTools.length}个)`"
             :options="toolsSearchOptions" clear-after-select blur-after-select @select="handleSearch" />
     </div>
 </template>
@@ -24,8 +24,9 @@ const sortedTools = sortByPinyin(allTools, (tool) => tool.meta?.title || tool.na
     }
 });
 const findTools = (val: string) => {
-    const lowerVal = (val || "").trim().toLowerCase();
-    return sortedTools.filter(tool => tool.title.includes(lowerVal) || tool.pinyinList.some(pin => {
+    const valTrim = val.trim();
+    const lowerVal = valTrim.toLowerCase();
+    return sortedTools.filter(tool => tool.title.includes(valTrim) || tool.title.includes(lowerVal) || tool.pinyinList.some(pin => {
         return pin.includes(lowerVal)
     })).map(tool => tool.content)
 }
