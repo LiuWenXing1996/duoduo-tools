@@ -49,7 +49,8 @@ const model = reactive<Model>({
 })
 
 onMounted(() => {
-    const text = "你好";
+    // cSpell:disable-next-line
+    const text = "你好 123 haha";
     model.text = text;
     model.unicode = convertTextToUnicode(text)
 })
@@ -65,11 +66,19 @@ const rules: FormRules = {
 }
 
 const convertTextToUnicode = (text: string): string => {
-    return text.split('').map(value => `&#${value.charCodeAt(0)};`).join('');
+    return text.split('').map(value => {
+        const index = value.charCodeAt(0);
+        const hex = index.toString(16);
+        return `\\u${hex.padStart(4, '0')}`;
+    }).join('');
 }
 
 const convertUnicodeToText = (unicodeStr: string): string => {
-    return unicodeStr.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+    const unicodePattern = /\\u([\dA-Fa-f]{4})/g;
+    return unicodeStr.replace(unicodePattern, (match, hex) => {
+        const dec = parseInt(hex, 16);
+        return String.fromCharCode(dec)
+    });
 }
 
 const res = computed(() => {
