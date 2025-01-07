@@ -98,7 +98,6 @@ const [
     ReuseItemDialogTemplate,
 ] = createReusableTemplate<{ item: AsciiItem }>()
 const searchKey = ref("");
-const copy = useCopy();
 const listSearched = computed(() => {
     const searchKeyVal = searchKey.value;
     if (!searchKeyVal) {
