@@ -34,7 +34,7 @@ export type DateTransfer = {
   label: string;
   to: (date: Date) => string;
   validate: (val: string) => boolean;
-  form: (val: string) => Date;
+  from: (val: string) => Date;
 };
 
 export const dateTransferMap: Record<DateType, DateTransfer> = {
@@ -49,7 +49,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return ISO8601_REGEX.test(val);
     },
-    form: (val: string): Date => {
+    from: (val: string): Date => {
       return dayjs(val).toDate();
     },
   },
@@ -64,7 +64,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return ISO9075_REGEX.test(val);
     },
-    form: (val: string): Date => {
+    from: (val: string): Date => {
       return parseISO(val);
     },
   },
@@ -79,7 +79,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return /^[0-9]{1,10}$/.test(val);
     },
-    form: (val: string): Date => {
+    from: (val: string): Date => {
       return dayjs.unix(Number(val)).toDate();
     },
   },
@@ -94,7 +94,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return /^[0-9]{1,13}$/.test(val);
     },
-    form: (val: string): Date => {
+    from: (val: string): Date => {
       return dayjs(Number(val)).toDate();
     },
   },
@@ -109,7 +109,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return RFC3339_REGEX.test(val);
     },
-    form: (date: string): Date => {
+    from: (date: string): Date => {
       return new Date(date);
     },
   },
@@ -124,7 +124,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
       }
       return RFC7231_REGEX.test(val);
     },
-    form: (date: string): Date => {
+    from: (date: string): Date => {
       return new Date(date);
     },
   },
@@ -143,7 +143,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
         return false;
       }
     },
-    form: (date: string): Date => {
+    from: (date: string): Date => {
       return new Date(date);
     },
   },
@@ -159,7 +159,7 @@ export const dateTransferMap: Record<DateType, DateTransfer> = {
         return false;
       }
     },
-    form: (date: string): Date => {
+    from: (date: string): Date => {
       return new Date(date);
     },
   },

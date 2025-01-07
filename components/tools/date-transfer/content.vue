@@ -103,7 +103,7 @@ const result = computedAsync(async () => {
         const m = dateTransferMap[dateType]
         const isValid = m.validate(text);
         if (isValid) {
-            dateInstance = m.form(text)
+            dateInstance = m.from(text)
         }
         const list = Object.values(dateTransferMap).map(m => {
             let res = "";

@@ -3,7 +3,7 @@ import { isPlainObject, isArray, toString } from "lodash-es";
 import {
   dateTransferDetect,
   dateTransferMap,
-  DateType,
+  type DateType,
   type DateTransfer,
 } from "./date";
 import { unSafeObjectWrapper } from "./common";
@@ -57,7 +57,7 @@ export const displayHandlers = {
           throw new Error(`无法自动匹配到时间类型 ${value}`);
         }
       }
-      const date = dateTransfer.form(value);
+      const date = dateTransfer.from(value);
       displayValue = dayjs(date).format(template);
     } catch (error) {
       console.log(error);
@@ -116,7 +116,7 @@ export const displayDateValue = (
         throw new Error(`无法自动匹配到时间类型 ${value}`);
       }
     }
-    const date = dateTransfer.form(value);
+    const date = dateTransfer.from(value);
     displayValue = dayjs(date).format(template);
   } catch (error) {
     console.log(error);
