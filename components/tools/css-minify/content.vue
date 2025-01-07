@@ -1,8 +1,5 @@
 <template>
     <tool-content :output="{
-        scroll: {
-            disabled: true
-        },
         area: {
             labelActions: [
                 {
@@ -33,19 +30,13 @@
             </n-form>
         </template>
         <template #output>
-            <monaco-editor :init="initOutputEditor" :context-menu-actions="[
-                MonacoEditorContextMenuAction['editor.action.clipboardCopyAction'],
-                MonacoEditorContextMenuAction['editor.action.clipboardCutAction'],
-                MonacoEditorContextMenuAction['editor.action.clipboardPasteAction']
-            ]" />
+            {{ resRequest.data.value?.content }}
         </template>
     </tool-content>
 </template>
 
 <script setup lang="tsx">
-import type * as monacoType from 'monaco-editor';
-import * as prettier from "prettier";
-import postcssPlugin from "prettier/plugins/postcss"
+import { minify } from 'csso';
 export type Model = {
     content: string,
 }
@@ -53,47 +44,48 @@ export type Model = {
 export type Result = {
     content: string,
 }
-const example = `body{background-color:#add8e6}h1{color:#fff;text-align:center}p{font-family:verdana;font-size:20px}`
 const model = reactive<Model>({
-    content: example,
+    content: ""
 })
-const copy = useCopy()
-const formRef = useTemplateRef("form")
-const outputEditor = shallowRef<monacoType.editor.IStandaloneCodeEditor>();
-const initOutputEditor: MonacoEditorComponentProps<monacoType.editor.IStandaloneCodeEditor>['init'] = (params) => {
-    const { monaco, editorContainer } = params;
-    const model = monaco.editor.createModel('', 'css');
-    const editor = monaco.editor.create(editorContainer, {
-        model: model,
-        readOnly: true,
-        minimap: {
-            enabled: false,
-        },
-    });
-    outputEditor.value = editor
-    const initText = resRequest.data.value?.content || "";
-    editor.setValue(initText)
-    return editor
+const example = `body {
+  background-color: lightblue;
 }
 
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+`
+onMounted(() => {
+    model.content = example
+})
+const copy = useCopy()
+const transformer = (value: string) => {
+    const val = (value ?? "").trim();
+    if (!val) {
+        return ""
+    }
+    const minifiedCss = minify(val).css;
+    return minifiedCss
+}
+
+const formRef = useTemplateRef("form")
 const resRequest = useCustomRequest<Result | undefined>(async () => {
     let res: Result | undefined = undefined;
     try {
         await formRef.value?.validate();
-        const content = model.content;
-        const formatContent = await prettier.format(content, {
-            parser: 'css',
-            plugins: [postcssPlugin]
-        })
         res = {
-            content: formatContent
+            content: transformer(model.content)
         }
     } catch (error) {
         resRequest.mutate(undefined)
-        outputEditor.value?.setValue("")
         throw error
     }
-    outputEditor.value?.setValue(res.content || "")
     return res;
 }, {
     loadingKeep: 0,
