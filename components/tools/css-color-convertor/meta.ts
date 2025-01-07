@@ -1,7 +1,7 @@
 import { methods } from "./utils";
 
 const getAllMethods = () => {
-  const colordInstance = methods["ColorName"].form("red");
+  const colordInstance = methods["ColorName"].from("red");
   return Object.values(methods)
     .map((e) => {
       const example = e.to(colordInstance);

@@ -21,14 +21,14 @@ export const methods: Record<
   ColorType,
   {
     label: string;
-    form: (val: string) => Colord;
+    from: (val: string) => Colord;
     validate: (val: string) => boolean;
     to: (val: Colord) => string;
   }
 > = {
   Hexadecimal: {
     label: "Hexadecimal",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -47,7 +47,7 @@ export const methods: Record<
   },
   RGB: {
     label: "RGB",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -66,7 +66,7 @@ export const methods: Record<
   },
   HSL: {
     label: "HSL",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -85,7 +85,7 @@ export const methods: Record<
   },
   HWB: {
     label: "HWB",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -104,7 +104,7 @@ export const methods: Record<
   },
   CMYK: {
     label: "CMYK",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -123,7 +123,7 @@ export const methods: Record<
   },
   LCH: {
     label: "LCH",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {
@@ -142,7 +142,7 @@ export const methods: Record<
   },
   ColorName: {
     label: "ColorName",
-    form: (val) => {
+    from: (val) => {
       return colord(val);
     },
     validate: (val: string) => {

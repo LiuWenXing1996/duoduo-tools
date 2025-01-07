@@ -106,14 +106,14 @@ const model = reactive<Model>({
 const initialColor = '#18a058';
 onMounted(() => {
     const inputColorType = model.inputColorType
-    const colordInstance = methods[inputColorType].form(initialColor);
+    const colordInstance = methods[inputColorType].from(initialColor);
     model.colorInput = methods[inputColorType].to(colordInstance)
     model.colorPick = methods[inputColorType].to(colordInstance)
 })
 
 const addInputExample = () => {
     const inputColorType = model.inputColorType
-    const colordInstance = methods[inputColorType].form(initialColor);
+    const colordInstance = methods[inputColorType].from(initialColor);
     model.colorInput = methods[inputColorType].to(colordInstance)
 }
 
@@ -159,7 +159,7 @@ const result = computedAsync(async () => {
         const m = methods[inputColorType]
         const isValid = m.validate(text);
         if (isValid) {
-            colordInstance = m.form(text)
+            colordInstance = m.from(text)
         }
         const list = Object.values(methods).map(m => {
             let res = "";
