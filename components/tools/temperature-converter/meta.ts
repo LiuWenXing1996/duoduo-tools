@@ -4,7 +4,7 @@ const getAllMethods = () => {
   const baseK = 100;
   return Object.values(temperatureTransferMap)
     .map((e) => {
-      const example = e.formKelvin(baseK);
+      const example = e.fromKelvin(baseK);
       return `    ${e.label} : ${e.display(example)}`;
     })
     .join(";\n");

@@ -46,7 +46,7 @@ const model = reactive<Model>({
 })
 onMounted(() => {
     const base = 100;
-    model.text = temperatureTransferMap[model.type].formKelvin(base)
+    model.text = temperatureTransferMap[model.type].fromKelvin(base)
 })
 
 const dataTypeOptions: SelectOption[] = Object.entries(temperatureTransferMap).map(([key, value]) => {
@@ -71,7 +71,7 @@ const textRes = computed(() => {
         let res = 0;
         try {
             if (kelvinVal !== undefined) {
-                res = m.formKelvin(kelvinVal)
+                res = m.fromKelvin(kelvinVal)
             }
         } catch (error) {
 
