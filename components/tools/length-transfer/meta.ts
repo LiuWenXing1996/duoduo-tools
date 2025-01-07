@@ -4,7 +4,7 @@ const getAllMethods = () => {
   const baseKm = 1;
   return Object.values(lengthTransferMap)
     .map((e) => {
-      const example = e.formKm(baseKm);
+      const example = e.fromKm(baseKm);
       return `    ${e.label} : ${e.display(example)}`;
     })
     .join(";\n");
