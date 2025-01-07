@@ -46,6 +46,7 @@
     "figlet": "^1.8.0",
     "fs-extra": "^11.2.0",
     "html-escaper": "^3.0.3",
+    "htmlfy": "^0.5.0",
     "iarna-toml-esm": "^3.0.5",
     "jose": "^5.9.6",
     "js-base64": "^3.7.7",
