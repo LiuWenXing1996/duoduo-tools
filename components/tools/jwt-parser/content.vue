@@ -81,68 +81,70 @@ const result = computedAsync(
 
         try {
             await formRef.value?.validate();
-            let decodeJwtRes = decodeJwt(jwt);
-            const group: Result = [
-                {
-                    label: "header(头部)",
-                    items: Object.entries(decodeJwtRes?.header || {}).map(([key, value]) => {
-                        let displayKey = displayTextValue(key)
-                        let displayValue = displayTextValue(value)
-                        if (key === "alg") {
-                            displayKey = `alg(签名算法)`
-                        }
-                        if (key === "typ") {
-                            displayKey = `typ(类型)`
-                        }
-                        if (key === "kid") {
-                            displayKey = `kid(密钥标识符)`
-                        }
-                        return {
-                            label: displayKey,
-                            value: displayValue,
-                            valueCopy: true
-                        }
-                    })
-                },
-                {
-                    label: "payload(负载)",
-                    items: Object.entries(decodeJwtRes?.payload || {}).map(([key, value]) => {
-                        let displayKey = displayTextValue(key)
-                        let displayValue = displayTextValue(value)
-                        if (key === "iss") {
-                            displayKey = `iss(签发人)`
-                        }
-                        if (key === "exp") {
-                            displayKey = `exp(过期时间)`
-                            displayValue = `${displayValue}(${displayDateValue(value)})`
-                        }
-                        if (key === "sub") {
-                            displayKey = `sub(主题)`
-                        }
-                        if (key === "aud") {
-                            displayKey = `aud(受众)`
-                        }
-                        if (key === "nbf") {
-                            displayKey = `nbf(生效时间)`
-                            displayValue = `${displayValue}(${displayDateValue(value)})`
-                        }
-                        if (key === "iat") {
-                            displayKey = `iat(签发时间)`
-                            displayValue = `${displayValue}(${displayDateValue(value)})`
-                        }
-                        if (key === "jti") {
-                            displayKey = `jti(编号)`
-                        }
-                        return {
-                            label: displayKey,
-                            value: displayValue,
-                            valueCopy: true
-                        }
-                    })
-                }
-            ]
+            if (jwt) {
+                let decodeJwtRes = decodeJwt(jwt);
+                const group: Result = [
+                    {
+                        label: "header(头部)",
+                        items: Object.entries(decodeJwtRes?.header || {}).map(([key, value]) => {
+                            let displayKey = displayTextValue(key)
+                            let displayValue = displayTextValue(value)
+                            if (key === "alg") {
+                                displayKey = `alg(签名算法)`
+                            }
+                            if (key === "typ") {
+                                displayKey = `typ(类型)`
+                            }
+                            if (key === "kid") {
+                                displayKey = `kid(密钥标识符)`
+                            }
+                            return {
+                                label: displayKey,
+                                value: displayValue,
+                                valueCopy: true
+                            }
+                        })
+                    },
+                    {
+                        label: "payload(负载)",
+                        items: Object.entries(decodeJwtRes?.payload || {}).map(([key, value]) => {
+                            let displayKey = displayTextValue(key)
+                            let displayValue = displayTextValue(value)
+                            if (key === "iss") {
+                                displayKey = `iss(签发人)`
+                            }
+                            if (key === "exp") {
+                                displayKey = `exp(过期时间)`
+                                displayValue = `${displayValue}(${displayDateValue(value)})`
+                            }
+                            if (key === "sub") {
+                                displayKey = `sub(主题)`
+                            }
+                            if (key === "aud") {
+                                displayKey = `aud(受众)`
+                            }
+                            if (key === "nbf") {
+                                displayKey = `nbf(生效时间)`
+                                displayValue = `${displayValue}(${displayDateValue(value)})`
+                            }
+                            if (key === "iat") {
+                                displayKey = `iat(签发时间)`
+                                displayValue = `${displayValue}(${displayDateValue(value)})`
+                            }
+                            if (key === "jti") {
+                                displayKey = `jti(编号)`
+                            }
+                            return {
+                                label: displayKey,
+                                value: displayValue,
+                                valueCopy: true
+                            }
+                        })
+                    }
+                ]
 
-            res = group
+                res = group
+            }
         } catch (error) {
             message.anyError(error)
             res = undefined
