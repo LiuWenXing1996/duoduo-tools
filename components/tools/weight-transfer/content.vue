@@ -52,7 +52,7 @@ const model = reactive<Model>({
 })
 onMounted(() => {
     const base = 1;
-    model.text = weightTransferMap[model.type].formT(base)
+    model.text = weightTransferMap[model.type].fromT(base)
 })
 
 const dataTypeOptions: SelectOption[] = Object.entries(weightTransferMap).map(([key, value]) => {
@@ -77,7 +77,7 @@ const textRes = computed(() => {
         let res = 0;
         try {
             if (tVal !== undefined) {
-                res = m.formT(tVal)
+                res = m.fromT(tVal)
             }
         } catch (error) {
 

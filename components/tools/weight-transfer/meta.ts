@@ -4,7 +4,7 @@ const getAllMethods = () => {
   const base = 1;
   return Object.values(weightTransferMap)
     .map((e) => {
-      const example = e.formT(base);
+      const example = e.fromT(base);
       return `    ${e.label} : ${e.display(example)}`;
     })
     .join(";\n");
