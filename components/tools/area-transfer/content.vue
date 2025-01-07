@@ -52,7 +52,7 @@ const model = reactive<Model>({
 })
 onMounted(() => {
     const base = 1;
-    model.text = areaTransferMap[model.type].formKm(base)
+    model.text = areaTransferMap[model.type].fromKm(base)
 })
 
 const dataTypeOptions: SelectOption[] = Object.entries(areaTransferMap).map(([key, value]) => {
@@ -77,7 +77,7 @@ const textRes = computed(() => {
         let res = 0;
         try {
             if (kmVal !== undefined) {
-                res = m.formKm(kmVal)
+                res = m.fromKm(kmVal)
             }
         } catch (error) {
 

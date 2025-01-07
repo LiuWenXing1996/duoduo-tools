@@ -9,7 +9,7 @@ export default defineToolMeta({
       <span>
         <p>一个简单的面积转换器，支持的面积格式：</p>
         {Object.values(areaTransferMap).map((e) => {
-          const example = e.formKm(baseKm);
+          const example = e.fromKm(baseKm);
           return (
             <p>
               <span>
