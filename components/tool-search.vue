@@ -24,7 +24,7 @@ const sortedTools = sortByPinyin(allTools, (tool) => tool.meta?.title || tool.na
     }
 });
 const findTools = (val: string) => {
-    const valTrim = val.trim();
+    const valTrim = (val || '').trim();
     const lowerVal = valTrim.toLowerCase();
     return sortedTools.filter(tool => tool.title.includes(valTrim) || tool.title.includes(lowerVal) || tool.pinyinList.some(pin => {
         return pin.includes(lowerVal)
