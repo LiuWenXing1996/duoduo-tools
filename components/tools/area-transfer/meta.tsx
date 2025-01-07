@@ -23,5 +23,5 @@ export default defineToolMeta({
       </span>
     );
   },
-  category: ToolCategory.dev,
+  category: ToolCategory.unit,
 });

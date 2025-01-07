@@ -60,7 +60,7 @@ export const areaTransferMap: Record<AreaType, AreaTransfer> = {
     label: () => {
       return (
         <span>
-          平方千米(km<sup>2</sup>)
+          平方千米/平方公里(km<sup>2</sup>)
         </span>
       );
     },

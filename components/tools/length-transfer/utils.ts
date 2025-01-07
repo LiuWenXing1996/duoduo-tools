@@ -68,7 +68,7 @@ export type LengthTransfer = {
 
 export const lengthTransferMap: Record<LengthType, LengthTransfer> = {
   km: {
-    label: "千米(km,公里)",
+    label: "千米/公里(km)",
     toKm: (val) => val,
     formKm: (val) => val,
     display: (val) => `${val} 千米`,
