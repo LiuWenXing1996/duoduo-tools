@@ -5,7 +5,7 @@ const getAllMethods = () => {
   const base = timeTransferMap.year.toSecond(year);
   return Object.values(timeTransferMap)
     .map((e) => {
-      const example = e.formSecond(base);
+      const example = e.fromSecond(base);
       return `    ${e.label} : ${e.display(example)}`;
     })
     .join(";\n");

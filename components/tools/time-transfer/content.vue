@@ -46,7 +46,7 @@ const model = reactive<Model>({
 })
 onMounted(() => {
     const base = 3600;
-    model.text = timeTransferMap[model.type].formSecond(base)
+    model.text = timeTransferMap[model.type].fromSecond(base)
 })
 
 const dataTypeOptions: SelectOption[] = Object.entries(timeTransferMap).map(([key, value]) => {
@@ -71,7 +71,7 @@ const textRes = computed(() => {
         let res = 0;
         try {
             if (secondVal !== undefined) {
-                res = m.formSecond(secondVal)
+                res = m.fromSecond(secondVal)
             }
         } catch (error) {
 
