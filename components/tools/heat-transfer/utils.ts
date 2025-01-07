@@ -11,10 +11,10 @@ export type HeatTransfer = {
 
 export const heatTransferMap: Record<HeatType, HeatTransfer> = {
   wh: {
-    label: "瓦(Wh)",
+    label: "瓦时(Wh)",
     toWh: (val) => val,
     fromWh: (val) => val,
-    display: (val) => `${val} 瓦`,
+    display: (val) => `${val} 瓦时`,
   },
   mmwh: {
     label: "毫瓦时(mWh)",
