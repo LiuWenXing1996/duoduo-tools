@@ -46,7 +46,7 @@ const model = reactive<Model>({
 })
 onMounted(() => {
     const base = 1;
-    model.text = pressureTransferMap[model.type].formPa(base)
+    model.text = pressureTransferMap[model.type].fromPa(base)
 })
 
 const dataTypeOptions: SelectOption[] = Object.entries(pressureTransferMap).map(([key, value]) => {
@@ -71,7 +71,7 @@ const textRes = computed(() => {
         let res = 0;
         try {
             if (paVal !== undefined) {
-                res = m.formPa(paVal)
+                res = m.fromPa(paVal)
             }
         } catch (error) {
 

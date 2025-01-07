@@ -4,7 +4,7 @@ const getAllMethods = () => {
   const baseK = 1;
   return Object.values(pressureTransferMap)
     .map((e) => {
-      const example = e.formPa(baseK);
+      const example = e.fromPa(baseK);
       return `    ${e.label} : ${e.display(example)}`;
     })
     .join(";\n");
