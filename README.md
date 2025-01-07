@@ -13,7 +13,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] 单位转换，可以按类别拆成多个工具   https://tools.ranblogs.com/unit/
 - [ ] 摩斯电码
 - [ ] ASCII码表 https://tools.ranblogs.com/ascii/
 - [ ] 宫格切图
