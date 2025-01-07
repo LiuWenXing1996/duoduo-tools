@@ -16,7 +16,7 @@ export default defineToolMeta({
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 {isFunction(e.label) ? e.label() : e.label}
               </span>
-              :<span>{e.display(example)}</span>
+              :<span>{e.display(example)}</span>;
             </p>
           );
         })}
