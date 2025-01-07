@@ -13,7 +13,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] 摩斯电码
 - [ ] ASCII码表 https://tools.ranblogs.com/ascii/
 - [ ] 宫格切图
 - [ ] 生成随机数 https://tools.ranblogs.com/random/

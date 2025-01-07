@@ -15,7 +15,6 @@
     </DefinePreferenceTemplate>
 </template>
 <script setup lang="ts">
-import { NormalIcon } from '#components';
 import type { MenuOption } from 'naive-ui';
 const [
     DefinePreferenceTemplate,
