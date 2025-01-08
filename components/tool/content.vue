@@ -71,7 +71,7 @@ export type Props = {
     output?: {
         area?: ToolAreaComponentProps
         scroll?: CustomScrollbarComponentProps,
-        loadingWrapper?: CommonLoadingWrapperComponentProps,
+        loadingWrapper?: LoadingWrapperComponentProps,
     }
 }
 const props = defineProps<Props>()
