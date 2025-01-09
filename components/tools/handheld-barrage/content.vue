@@ -31,6 +31,12 @@
                     </template>
                     <n-input type="textarea" :rows="3" clearable v-model:value="model.content" />
                 </n-form-item>
+                <n-form-item :="commonFormItemProps" path="isHorizontal">
+                    <template #label>
+                        <tool-label label="是否横屏" />
+                    </template>
+                    <n-switch v-model:value="model.isHorizontal" />
+                </n-form-item>
                 <n-form-item :="commonFormItemProps" path="speed">
                     <template #label>
                         <tool-label label="弹幕速度" />
@@ -55,11 +61,13 @@
                     </template>
                     <n-color-picker v-model:value="model.bgColor" />
                 </n-form-item>
+
             </n-form>
             <template v-if="result">
                 <div ref="danmuContainer">
                     <div class=" z-10 fixed top-0 left-0 size-full" :class="[
-                        isFullPlay ? 'visible' : 'invisible'
+                        isFullPlay ? 'visible' : 'invisible',
+                        result.isHorizontal ? 'rotateToHorizontal' : ''
                     ]">
                         <vue-danmaku ref="danmakuFull" v-model:danmus="result.barrage" loop :autoplay="false"
                             :speeds="result.speed" :channels="result.channels" :extraStyle='result.extraStyle'
@@ -90,6 +98,7 @@ export type Model = {
     textSize: number,
     textColor: string,
     bgColor: string,
+    isHorizontal: boolean,
 }
 
 export type Result = {
@@ -97,7 +106,8 @@ export type Result = {
     speed: number,
     channels: number,
     extraStyle: string,
-    danmakuFullStyle: string
+    danmakuFullStyle: string,
+    isHorizontal: boolean,
 }
 const exampleText = `我是
 一个测试文本`
@@ -107,6 +117,7 @@ const model = reactive<Model>({
     textSize: 100,
     textColor: '#FFFFFF',
     bgColor: '#000000',
+    isHorizontal: false,
 })
 const isFullPlay = ref(false)
 const addExample = () => {
@@ -134,6 +145,7 @@ const result = computedAsync(async () => {
     const textSize = model.textSize;
     const bgColor = model.bgColor;
     const speed = model.speed;
+    const isHorizontal = model.isHorizontal;
 
     try {
         await formRef.value?.validate();
@@ -151,7 +163,8 @@ const result = computedAsync(async () => {
             width: 100%;
             height: 100%;
             background-color: ${bgColor};
-            `
+            `,
+            isHorizontal,
         }
     } catch (error) {
         res = undefined;
@@ -161,3 +174,10 @@ const result = computedAsync(async () => {
 })
 
 </script>
+
+<style lang="less" scoped>
+.rotateToHorizontal {
+    transform-origin: top left;
+    transform: rotate(90deg) translateY(-100%);
+}
+</style>
