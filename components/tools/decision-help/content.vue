@@ -27,7 +27,7 @@
         </template>
         <template #actions>
             <n-space>
-                <n-button size="small" @click="resRequest.run">开始决定</n-button>
+                <n-button size="small" :disabled="chooseStatus" @click="resRequest.run">开始决定</n-button>
                 <n-button size="small" @click="copy(result?.content)">复制结果</n-button>
             </n-space>
         </template>

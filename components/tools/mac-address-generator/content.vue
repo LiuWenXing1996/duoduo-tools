@@ -43,7 +43,7 @@
             </n-form>
         </template>
         <template #output>
-            <key-value :item-label-width="30" :data="[
+            <key-value :item-label-width="50" :data="[
                 ...resRequest.data.value?.content.map((item, index) => {
                     return {
                         label: `${index + 1}`,
