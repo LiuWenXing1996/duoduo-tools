@@ -60,7 +60,7 @@ export type Result = {
         result: string
     }[]
 }
-const exampleText = "12112"
+const exampleText = "1.101"
 const model = reactive<Model>({
     content: "",
     inputType: "num"

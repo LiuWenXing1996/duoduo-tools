@@ -85,6 +85,7 @@
     "vue": "latest",
     "vue-request": "^2.0.4",
     "vue-router": "latest",
+    "vue3-danmaku": "^1.6.1",
     "vueuc": "^0.4.64",
     "xml-formatter": "^3.6.3",
     "xmorse": "^1.0.0",
