@@ -13,8 +13,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] 生成随机数，单个，带动画 https://tools.ranblogs.com/random/
-- [ ] 数字转金额大写  https://tools.ranblogs.com/numbertochinese/
 - [ ] 手持弹幕 https://tools.ranblogs.com/barrage/
 - [ ] 文本转图片 https://tools.ranblogs.com/texttoimg/
 - [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/

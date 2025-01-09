@@ -68,6 +68,7 @@
     "nodemailer": "^6.9.16",
     "nuxt": "^3.13.0",
     "nuxtjs-naive-ui": "1.0.1",
+    "nzh": "^1.0.14",
     "opencc-js": "^1.0.5",
     "pinyin-pro": "^3.26.0",
     "prettier": "^3.4.2",
