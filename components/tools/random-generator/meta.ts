@@ -1,5 +1,6 @@
 export default defineToolMeta({
-  title: "随机数生成器",
-  description: `生成随机数`,
+  title: "多个随机数生成器",
+  description: `一次性生成多个随机数。`,
   category: ToolCategory.life,
+  related: [ToolName["random-single-generator"]],
 });

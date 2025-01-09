@@ -14,5 +14,5 @@ export default defineToolMeta({
   title: "重量转换器",
   description: `一个简单的重量转换器，支持的重量格式：
 ${getAllMethods()}; `,
-  category: ToolCategory.dev,
+  category: ToolCategory.unit,
 });
