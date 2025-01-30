@@ -71,7 +71,7 @@
                     ]">
                         <vue-danmaku ref="danmakuFull" v-model:danmus="result.barrage" loop :autoplay="false"
                             :speeds="result.speed" :channels="result.channels" :extraStyle='result.extraStyle'
-                            :style="result.danmakuFullStyle" @dblclick="exitFullPlay" useSlot>
+                            :style="result.danmakuFullStyle" useSlot>
                             <template v-slot:dm="{ danmu }">
                                 <div class="" :style="result.extraStyle">
                                     <span>{{ danmu }}</span>
@@ -92,6 +92,7 @@
 
 <script setup lang="tsx">
 import vueDanmaku from 'vue3-danmaku'
+import { RegisterDbltouchEvent } from './utils'
 export type Model = {
     content: string,
     speed: number,
@@ -124,18 +125,32 @@ const addExample = () => {
     model.content = exampleText
 }
 const exitFullPlay = () => {
-    document.exitFullscreen();
+    try {
+        danmuContainerFullscreen.exit();
+        unlockOrientation();
+    } catch (error) {
+    }
+    danmakuFullRef.value?.stop()
     isFullPlay.value = false
 }
 const fullPlay = () => {
     isFullPlay.value = true
-    danmuContainerRef?.value?.requestFullscreen();
+    try {
+        danmuContainerFullscreen.enter()
+        lockOrientation("landscape-primary")
+    } catch (error) {
+    }
     danmakuFullRef.value?.stop()
     danmakuFullRef.value?.resize()
     danmakuFullRef.value?.play()
 }
 const danmakuFullRef = useTemplateRef('danmakuFull')
 const danmuContainerRef = useTemplateRef('danmuContainer')
+const {
+    lockOrientation,
+    unlockOrientation,
+} = useScreenOrientation()
+const danmuContainerFullscreen = useFullscreen(danmuContainerRef)
 const formRef = useTemplateRef("form")
 const message = useAnyMessage()
 const result = computedAsync(async () => {
@@ -172,12 +187,19 @@ const result = computedAsync(async () => {
     }
     return res;
 })
-
+watch(() => danmuContainerRef.value, (val) => {
+    if (!val) return;
+    new RegisterDbltouchEvent(val, (evt) => {
+        exitFullPlay()
+    })
+})
 </script>
 
 <style lang="less" scoped>
 .rotateToHorizontal {
     transform-origin: top left;
     transform: rotate(90deg) translateY(-100%);
+    width: 100vh;
+    height: 100vw;
 }
 </style>
