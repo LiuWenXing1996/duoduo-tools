@@ -1,0 +1,10 @@
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * @tailwind base;
+ * 不要再这个文件中引入 tailwind base 相关的样式
+ * 要在相关的页面中引入，防止在某些情况下组件的样式被 tailwind 污染
+ * 比如：
+ * 1. 在 wangEditor 中使用 tailwind 样式会导致 wangEditor 样式被覆盖
+ */

@@ -7,3 +7,15 @@ definePageMeta({
     layout: "tool-workspace"
 })
 </script>
+<style lang="css">
+@tailwind base;
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color:var(--naive-border-color);
+  }
+}
+</style>
