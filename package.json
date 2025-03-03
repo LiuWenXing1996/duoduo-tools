@@ -103,6 +103,7 @@
     "@commitlint/prompt-cli": "19.4.1",
     "@commitlint/types": "^19.4.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@tauri-apps/cli": "^2.2.7",
     "@types/crypto-js": "^4.2.2",
     "@types/nodemailer": "^6.4.16",
     "@vue-macros/common": "^1.15.0",
