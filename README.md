@@ -13,7 +13,6 @@
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
 - [ ] 当没有找到工具实现时，推荐一些相似工具
-- [ ] 手持弹幕 移动端 chrome 和小米浏览器支持问题
 - [ ] 文本转图片 https://tools.ranblogs.com/texttoimg/
 - [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/
 - [ ] 图片编辑(2) https://tool.aoaostar.com/image_editor
