@@ -81,6 +81,7 @@
     "tailwindcss": "^3.4.14",
     "tiny-emitter": "^2.1.0",
     "ts-essentials": "^10.0.3",
+    "tui-image-editor": "^3.15.3",
     "type-fest": "^4.31.0",
     "ua-parser-js": "^2.0.0",
     "ulid": "^2.3.0",
