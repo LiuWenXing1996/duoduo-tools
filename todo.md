@@ -2,7 +2,6 @@
 
 - [ ] 将之前的 monaco 替换成封装后的 monaco
 - [ ] 常用英文单词查询？
-- [ ] 当没有找到工具实现时，推荐一些相似工具
 - [ ] 文本转图片 https://tools.ranblogs.com/texttoimg/
 - [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/
 - [ ] 图片编辑(2) https://tool.aoaostar.com/image_editor
@@ -37,5 +36,4 @@
 - [ ] 利用 prettier 实现更多代码格式化工具
 - [ ] 代码格式化类工具支持下载成文件
 - [ ] 代码格式化类工具支持读取本地文件
-- [ ] 工具刷新当前时不要重刷页面
 
