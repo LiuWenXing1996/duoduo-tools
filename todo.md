@@ -1,8 +1,6 @@
 # 待办事项
 
-- [ ] 将之前的 monaco 替换成封装后的 monaco
-- [ ] 常用英文单词查询？
-- [ ] 文本转图片 https://tools.ranblogs.com/texttoimg/
+- [ ] 常用英文单词查询
 - [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/
 - [ ] 图片编辑(2) https://tool.aoaostar.com/image_editor
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
