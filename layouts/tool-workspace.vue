@@ -90,8 +90,7 @@
                         </template>
                         <template v-else>
                             <div class="size-full flex items-center justify-center">
-                                <n-empty description="没有打开的工具">
-                                </n-empty>
+                                <tool-list/>
                             </div>
                         </template>
 

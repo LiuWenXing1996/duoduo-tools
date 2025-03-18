@@ -1,0 +1,37 @@
+# 待办事项
+
+- [ ] 常用英文单词查询
+- [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/
+- [ ] 图片编辑(2) https://tool.aoaostar.com/image_editor
+- [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
+- [ ] 文件哈希计算 https://tool.aoaostar.com/file_hash
+- [ ] 图片转base64 https://tool.aoaostar.com/image2base64
+- [ ] RSA公私钥生成、验证、加密和解密 补足剩余的 rsa 相关 https://tool.aoaostar.com/rsa
+- [ ] Linux命令查询 https://tool.aoaostar.com/linux_command
+- [ ] JavaScript 混淆 https://tool.aoaostar.com/code_js
+- [ ] 常用特殊符号大全 https://tool.aoaostar.com/special_symbols
+- [ ] MimeType文件格式速查表 https://tool.aoaostar.com/mime_type
+- [ ] SVG 在线编辑器 https://tool.aoaostar.com/svg_editor
+- [ ] 中文域名转码 https://tool.aoaostar.com/punycode
+- [ ] 字节计算器 https://tool.aoaostar.com/byte_calc
+- [ ] 文章生成器 https://tool.aoaostar.com/bullshit_generator
+- [ ] 随机点名 https://tool.aoaostar.com/roll_call
+- [ ] 语音合成 https://tool.aoaostar.com/speech_synthesis
+- [ ] 支付宝到账语音 https://tool.aoaostar.com/alipay_arrival
+- [ ] 国庆头像生成  https://tool.aoaostar.com/gq_avatar
+- [ ] Hits https://github.com/silentsoft/hits
+- [ ] json 转换支持 键 格式转换，缩进空格等 https://ctool.dev/tool.html#/tool/json?category=conversion
+- [ ] json 转实体类 https://ctool.dev/tool.html#/tool/json?category=conversion
+- [ ] csv ,html table 等转 JSON https://ctool.dev/tool.html#/tool/json?category=conversion
+- [ ] JSON 序列化 https://ctool.dev/tool.html#/tool/unit?category=conversion
+- [ ] 单位转换补足 https://ctool.dev/tool.html#/tool/unit?category=conversion
+- [ ] 时区转换  https://ctool.dev/tool.html#/tool/unit?category=conversion
+- [ ] 一些计算器  https://ctool.dev/tool.html#/tool/time/calculator?category=conversion
+- [ ] 根据 CTOOL 继续补充
+- [ ] cron 表达式生成器添加年字段
+- [ ] key-value 组件支持 labelCopy action 和 valueCopy action
+- [ ] 文本与 ASCII 二进制互转 缺少示例
+- [ ] 利用 prettier 实现更多代码格式化工具
+- [ ] 代码格式化类工具支持下载成文件
+- [ ] 代码格式化类工具支持读取本地文件
+
