@@ -1,8 +1,6 @@
 # 待办事项
 
 - [ ] 常用英文单词查询
-- [ ] 在线编辑图片(1) https://tools.ranblogs.com/signimage/
-- [ ] 图片编辑(2) https://tool.aoaostar.com/image_editor
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
 - [ ] 文件哈希计算 https://tool.aoaostar.com/file_hash
 - [ ] 图片转base64 https://tool.aoaostar.com/image2base64

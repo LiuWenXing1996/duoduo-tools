@@ -10,16 +10,23 @@
     }" :output="{
         area: {
             label: '配置'
+        },
+        scroll: {
+            disabled: true,
         }
     }">
-        
         <template #output>
-            <tui-image-editor/>
+            <div class="size-full absolute">
+                <tui-image-editor @on-inited="(v) => {
+                        imageEditorInstanceRef = v
+                    }" />
+            </div>
         </template>
     </tool-content>
 </template>
 
 <script setup lang="tsx">
+import type ImageEditor from 'tui-image-editor'
 
 export type Model = {
     content: string,
@@ -28,37 +35,7 @@ export type Model = {
 export type Result = {
     content: string,
 }
-const exampleText = "我是一个测试文本"
-const model = reactive<Model>({
-    content: exampleText
-})
-const addExample = () => {
-    model.content = exampleText
-}
-const formRef = useTemplateRef("form")
-const resRequest = useCustomRequest<Result | undefined>(async () => {
-    let res: Result | undefined = undefined;
-    try {
-        await formRef.value?.validate();
-        res = {
-            content: model.content
-        }
-    } catch (error) {
-        resRequest.mutate(undefined)
-        throw error
-    }
-    return res;
-}, {
-    loadingKeep: 0,
-    debounceOptions: {
-        leading: true
-    }
-})
-watch(() => model, () => {
-    resRequest.run()
-}, {
-    immediate: true,
-    deep: true
-})
+
+const imageEditorInstanceRef = shallowRef<ImageEditor | undefined>()
 
 </script>
