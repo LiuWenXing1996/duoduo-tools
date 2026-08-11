@@ -22,7 +22,21 @@ export default defineNuxtConfig({
   // devServer: {
   //   host: "0",
   // },
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@nuxtjs/color-mode"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@nuxtjs/color-mode",
+    "nuxt-electron",
+  ],
+  electron: {
+    build: [
+      {
+        // Main-Process entry file of the Electron App.
+        entry: "electron/main.ts",
+      },
+    ],
+    disableDefaultOptions: process.env.NODE_ENV === "development",
+  },
   ssr: false,
   routeRules: {
     "/tools/**": { ssr: false },
@@ -79,7 +93,7 @@ export default defineNuxtConfig({
       console.log("nitro:build:public-assets");
       const targetDir = path.join(
         nitro.options.output.publicDir,
-        "static/node_modules/monaco-editor/min/vs"
+        "static/node_modules/monaco-editor/min/vs",
       );
       console.log({ targetDir });
       cpSync("./node_modules/monaco-editor/min/vs", targetDir, {

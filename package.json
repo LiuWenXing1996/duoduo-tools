@@ -2,6 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "main": "dist-electron/main.js",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -107,12 +108,17 @@
     "@types/nodemailer": "^6.4.16",
     "@vue-macros/common": "^1.15.0",
     "create-code-easy": "^0.1.5",
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3",
     "husky": "^9.1.6",
     "less": "^4.2.0",
+    "nuxt-electron": "^0.7.0",
     "perfect-debounce": "^1.0.0",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-electron": "^1.1.1",
+    "vite-plugin-electron-renderer": "^1.0.0",
     "vite-plugin-node-polyfills": "^0.22.0"
   },
   "pnpm": {

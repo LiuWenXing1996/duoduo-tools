@@ -26,3 +26,5 @@ logs
 # Local files
 local
 
+# Electron build outputs
+dist-electron
