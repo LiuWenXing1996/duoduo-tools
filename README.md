@@ -1,21 +1,34 @@
-# 简介
+# duoduo-tools
 
-多多益善工具箱，一个希望实现很多工具的工具箱
+An Electron application with Vue and TypeScript
 
-# 网页地址
+## Recommended IDE Setup
 
-[多多益善](https://duoduo.work)
+- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
-# 开发指南
+## Project Setup
 
-[参照](./develop-guide.md)
+### Install
 
-# 感谢
+```bash
+$ pnpm install
+```
 
-在实现工具的过程中参考了以下网站
+### Development
 
-- [IT-TOOLS](https://www.aiotools.top/)
-- [Tools-Web](https://tools.ranblogs.com/)
-- [帮小忙](https://tool.browser.qq.com/)
-- [即时工具](https://www.67tool.com/)
-- [UU在线工具](https://uutool.cn/)
+```bash
+$ pnpm dev
+```
+
+### Build
+
+```bash
+# For windows
+$ pnpm build:win
+
+# For macOS
+$ pnpm build:mac
+
+# For Linux
+$ pnpm build:linux
+```
