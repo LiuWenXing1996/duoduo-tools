@@ -27,7 +27,7 @@ const Configuration: UserConfig = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     "scope-enum": async () => {
-      const toolPaths = path.resolve("./components/tools");
+      const toolPaths = path.resolve("./app/components/tools");
       const files = await listFiles(toolPaths);
 
       const toolFileInfoList: ToolFileInfo[] = files.map((f) => {
