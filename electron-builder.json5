@@ -9,6 +9,7 @@
   files: [".output/**/*", "dist-electron"],
   // build: {
   // FIXME:k可以打包，但是不能运行，闪退
+  // 用 electron-vite 项目测试在 windows 环境下打包 windows 版本的可执行文件似乎是正常的
   electronDownload: {
     mirror: "https://npmmirror.com/mirrors/electron/",
     customDir: "{{ version }}",
