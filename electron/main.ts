@@ -14,7 +14,10 @@ app.whenReady().then(() => {
   });
   win.webContents.openDevTools();
 
-  const distPath = path.join(__dirname, "../.output");
-  win.loadFile(path.join(distPath, "public/index.html"));
-  // win.webContents.openDevTools();
+  if (process.env.VITE_DEV_SERVER_URL) {
+    win.loadURL(process.env.VITE_DEV_SERVER_URL);
+  } else {
+    const distPath = path.join(__dirname, "../.output");
+    win.loadFile(path.join(distPath, "public/index.html"));
+  }
 });

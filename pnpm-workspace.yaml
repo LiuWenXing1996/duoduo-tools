@@ -1,0 +1,12 @@
+allowBuilds:
+  canvas: true
+  core-js-pure: true
+  create-code-easy: true
+  electron-winstaller: true
+  es5-ext: true
+  esbuild: true
+  vue-demi: true
+minimumReleaseAgeExclude:
+  - electron@43.4.0
+onlyBuiltDependencies: 
+  - electron
