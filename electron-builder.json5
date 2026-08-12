@@ -7,6 +7,13 @@
     output: "release/${version}",
   },
   files: [".output/**/*", "dist-electron"],
+  // build: {
+  // FIXME:k可以打包，但是不能运行，闪退
+  electronDownload: {
+    mirror: "https://npmmirror.com/mirrors/electron/",
+    customDir: "{{ version }}",
+  },
+  // },
   mac: {
     artifactName: "${productName}_${version}.${ext}",
     target: ["dmg"],

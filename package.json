@@ -13,6 +13,7 @@
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
     "commit": "commit",
+    "build:electron": "electron-builder --win --arm64",
     "test": "echo 1"
   },
   "dependencies": {
