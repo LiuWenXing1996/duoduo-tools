@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "main": "dist-electron/main.js",
+  "version": "1.0.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

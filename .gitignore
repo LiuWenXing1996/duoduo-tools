@@ -28,3 +28,4 @@ local
 
 # Electron build outputs
 dist-electron
+release

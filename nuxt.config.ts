@@ -38,12 +38,17 @@ export default defineNuxtConfig({
     disableDefaultOptions: process.env.NODE_ENV === "development",
   },
   ssr: false,
-  routeRules: {
-    "/tools/**": { ssr: false },
+  router: {
+    options: {
+      hashMode: true,
+    },
   },
+  // routeRules: {
+  //   "/tools/**": { ssr: false },
+  // },
   vite: {
     plugins: [
-      nodePolyfills(),
+      // nodePolyfills(),
       viteCompression(),
       AutoImport({
         dts: true,
@@ -85,7 +90,7 @@ export default defineNuxtConfig({
   //       : ["@juggle/resize-observer"],
   // },
   experimental: {
-    payloadExtraction: false,
+    // payloadExtraction: false,
     asyncContext: true,
   },
   hooks: {
@@ -99,6 +104,9 @@ export default defineNuxtConfig({
       cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
         recursive: true,
       });
+    },
+    "prerender:routes"({ routes }) {
+      routes.clear(); // Do not generate any routes (except the defaults)
     },
   },
   autoImportTypes: {
