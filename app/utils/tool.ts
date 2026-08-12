@@ -13,10 +13,9 @@ export interface ToolMeta {
   )[];
   v2?: {
     input: Record<string, unknown>;
-    operator: Component | RenderFunction;
     output: Record<string, unknown>;
     service: Function;
-    preview: Component | RenderFunction;
+    content: Component | RenderFunction;
   };
 }
 

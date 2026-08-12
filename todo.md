@@ -1,5 +1,9 @@
 # 待办事项
 
+- 两件事
+  - 先把已实现的工具都转为新版布局
+  - 然后尝试工具链功能
+
 - [ ] 常用英文单词查询
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/
 - [ ] 文件哈希计算 https://tool.aoaostar.com/file_hash
