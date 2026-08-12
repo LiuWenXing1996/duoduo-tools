@@ -48,6 +48,9 @@ pnpm dev
 - `./components`：组件目录
 - `./components/tools/xxx`：工具实现目录，`xxx`为工具名称，如`base64`、`uuid`等
 - 其余的目录可以参照`Nuxt3`的目录结构
+- 组件自动导入
+  - 所有组件都需要在`./components`目录下，会按照目录结构自动导入，无需手动注册
+    - 例如，`./components/a/b.vue `会被自动导入为`a-b`
   
 ## 单个工具目录结构
 

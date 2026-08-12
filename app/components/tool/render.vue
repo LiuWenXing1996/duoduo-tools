@@ -5,7 +5,8 @@
             loading ? '!opacity-0' : ''
         ].join(' ')">
             <template v-if="tool">
-                <component :is="contentComponentRequest.data.value"></component>
+                <tool-render-v2 v-if="tool.meta?.v2" :name="name" />
+                <component v-else :is="contentComponentRequest.data.value"></component> 
             </template>
             <template v-else>
                 {{ `工具 ${name} 未实现` }}

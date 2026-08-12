@@ -10,8 +10,9 @@
                             <svg-icon :size="16" name="logo" />
                         </div>
                     </a>
-                    <div class="ml-[10px]">
+                    <div class="ml-[10px] flex gap-1">
                         <tool-search />
+                        <n-button type="primary" @click="goToNewTools">去新版</n-button>
                     </div>
                 </div>
                 <div class="pr-[10px] flex">
@@ -90,7 +91,7 @@
                         </template>
                         <template v-else>
                             <div class="size-full flex items-center justify-center">
-                                <tool-list/>
+                                <tool-list />
                             </div>
                         </template>
 
@@ -122,6 +123,7 @@ useHead({
 })
 const allTools = getAllTools();
 
+const goToNewTools = () => { router.push("/workspace") }
 const sideBarOptions = computed(() => {
     const defaultList = sortByPinyin(Object.entries(ToolCategoryMap), ([name]) => name)
         .map(([name, meta]) => {
