@@ -55,11 +55,12 @@
 </template>
 <script setup lang="tsx">
 import { cronGenerator, type CronOptions } from './utils'
-import cronValidate from "cron-validate"
+import cronValidateMaybeDefault from "cron-validate"
 import cronstrue from "cronstrue"
 import 'cronstrue/locales/zh_CN';
 import { CronosExpression } from 'cronosjs'
-
+// @ts-ignore
+const cronValidate = cronValidateMaybeDefault.default || cronValidateMaybeDefault
 export type Model = {
     config: {
         second?: ToolsCrontabGeneratorSecondComponentModel,
@@ -173,6 +174,7 @@ const result = computedAsync(async () => {
             nextRuns: dateList
         }
     } catch (error) {
+        console.error(error)
         message.anyError(error)
         res = undefined
     }
