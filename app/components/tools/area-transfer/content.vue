@@ -23,6 +23,11 @@
                 </n-list-item>
             </n-list>
         </template>
+        <template #actions>
+            <n-space>
+                <n-button size="small" @click="copyAll">复制所有</n-button>
+            </n-space>
+        </template>
     </tool-content>
 </template>
 <script setup lang="ts">
@@ -89,4 +94,8 @@ const textRes = computed(() => {
         }
     })
 })
+const copyAll = () => {
+    const results = textRes.value.map(item => item.result).join('\n')
+    copy(results)
+}
 </script>

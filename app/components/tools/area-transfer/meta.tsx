@@ -1,6 +1,5 @@
 import { isFunction } from "radash";
 import { areaTransferMap } from "./utils";
-import Content from "./content-v2.vue";
 
 export default defineToolMeta({
   title: "面积转换器",
@@ -25,10 +24,4 @@ export default defineToolMeta({
     );
   },
   category: ToolCategory.unit,
-  v2: {
-    input: {},
-    output: {},
-    service: () => {},
-    content: Content,
-  },
 });

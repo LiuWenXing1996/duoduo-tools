@@ -1,13 +1,6 @@
 <template>
-    <div :class="[
-        'size-full flex flex-col-reverse ',
-        propsLocal.vertical?.enabled ? '' : 'md:flex-row'
-    ]">
-        <div :class="[
-            'w-full h-[50%] mt-[5px] rounded-[12px] border p-[10px]  ',
-            propsLocal.vertical?.enabled ? '' : 'md:w-[50%] md:h-full md:mr-[5px] md:mt-[0px]',
-            propsLocal.vertical?.top?.class
-        ]">
+    <div class="size-full flex flex-row">
+        <div class="w-[30%] h-full rounded-[12px] border p-[10px] mr-[5px] mt-[0px]">
             <custom-scrollbar out-bar>
                 <div class="relative">
                     <tool-area v-if="tool?.meta?.description" label="描述" class=" mb-[10px]">
@@ -27,11 +20,7 @@
                 </div>
             </custom-scrollbar>
         </div>
-        <div :class="[
-            'w-full h-[50%] mb-[5px]  rounded-[12px] border ',
-            propsLocal.vertical?.enabled ? '' : 'md:w-[50%] md:h-full md:ml-[5px] md:mb-[0px]',
-            propsLocal.vertical?.bottom?.class
-        ]">
+        <div class="w-[70%] h-full rounded-[12px] border ml-[5px]">
             <div class="size-full flex flex-col p-[10px]">
                 <div class="grow">
                     <tool-area class="size-full" v-bind="propsLocal.output?.area">

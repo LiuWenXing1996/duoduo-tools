@@ -1,13 +1,5 @@
 <template>
-    <tool-content :vertical="{
-        enabled: true,
-        top: {
-            class: '!h-[15%]'
-        },
-        bottom: {
-            class: '!h-[85%]'
-        }
-    }" :output="{
+    <tool-content :output="{
         scroll: {
             disabled: true
         },
@@ -19,6 +11,12 @@
             label: '搜索'
         }
     }">
+        <template #input>
+            <tool-area label="输入">
+                <n-input size="small" placeholder="搜索ASCII码, 支持十进制、16 进制、八进制、二进制、code" v-model:value="searchKey"
+                    clearable />
+            </tool-area>
+        </template>
         <template #output>
             <div class="relative size-full">
                 <div :class="[
@@ -50,10 +48,6 @@
                     </n-virtual-list>
                 </div>
             </div>
-        </template>
-        <template #actions>
-            <n-input size="small" placeholder="搜索ASCII码, 支持十进制、16 进制、八进制、二进制、code" v-model:value="searchKey"
-                clearable />
         </template>
     </tool-content>
     <DefineItemTemplate v-slot="{ item }">
@@ -127,7 +121,7 @@ const containerRef = useTemplateRef("container");
 const containerRect = shallowRef<DOMRectReadOnly | undefined>()
 useResizeObserver(containerRef, async (entries) => {
     const entry = entries[0]
-    containerRect.value = entry.contentRect
+    containerRect.value = entry?.contentRect
 });
 
 const groupMetaMap: Record<AsciiGroup, {
