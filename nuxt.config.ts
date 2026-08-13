@@ -5,7 +5,7 @@ import { cpSync } from "node:fs";
 import path from "node:path";
 import viteCompression from "vite-plugin-compression";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
-
+import { fileURLToPath } from 'node:url'
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
@@ -42,6 +42,17 @@ export default defineNuxtConfig({
     options: {
       hashMode: true,
     },
+  },
+  nitro: {
+    publicAssets: [
+      {
+        // 访问时的 URL 前缀，例如 /vendor/xx.js 或 /my-assets/xx.png
+        baseURL: "/static/node_modules/monaco-editor/min/vs",
+        dir: fileURLToPath(
+          new URL("./node_modules/monaco-editor/min/vs", import.meta.url),
+        ),
+      },
+    ],
   },
   // routeRules: {
   //   "/tools/**": { ssr: false },
@@ -94,20 +105,20 @@ export default defineNuxtConfig({
     asyncContext: true,
   },
   hooks: {
-    "nitro:build:public-assets": (nitro) => {
-      console.log("nitro:build:public-assets");
-      const targetDir = path.join(
-        nitro.options.output.publicDir,
-        "static/node_modules/monaco-editor/min/vs",
-      );
-      console.log({ targetDir });
-      cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
-        recursive: true,
-      });
-    },
-    "prerender:routes"({ routes }) {
-      routes.clear(); // Do not generate any routes (except the defaults)
-    },
+    // "nitro:build:public-assets": (nitro) => {
+    //   console.log("nitro:build:public-assets");
+    //   const targetDir = path.join(
+    //     nitro.options.output.publicDir,
+    //     "static/node_modules/monaco-editor/min/vs",
+    //   );
+    //   console.log({ targetDir });
+    //   cpSync("./node_modules/monaco-editor/min/vs", targetDir, {
+    //     recursive: true,
+    //   });
+    // },
+    // "prerender:routes"({ routes }) {
+    //   routes.clear(); // Do not generate any routes (except the defaults)
+    // },
   },
   autoImportTypes: {
     dirs: [
