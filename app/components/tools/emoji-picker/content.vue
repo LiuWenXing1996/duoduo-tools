@@ -1,24 +1,17 @@
 <template>
-    <tool-content :vertical="{
-        enabled: true,
-        top: {
-            class: '!h-[15%]'
-        },
-        bottom: {
-            class: '!h-[85%]'
-        }
-    }" :output="{
+    <tool-content :output="{
         scroll: {
             disabled: true
         },
         area: {
             label: '列表'
         },
-    }" :actions="{
-        area: {
-            label: '搜索'
-        }
     }">
+        <template #input>
+            <tool-area label="搜索">
+                <n-input size="small" placeholder="搜索Emoji, 支持中文、英文、code" v-model:value="searchKey" clearable></n-input>
+            </tool-area>
+        </template>
         <template #output>
             <div class="relative size-full">
                 <div :class="[
@@ -50,9 +43,6 @@
                     </n-virtual-list>
                 </div>
             </div>
-        </template>
-        <template #actions>
-            <n-input size="small" placeholder="搜索Emoji, 支持中文、英文、code" v-model:value="searchKey" clearable></n-input>
         </template>
     </tool-content>
     <DefineItemTemplate v-slot="{ item }">

@@ -1,21 +1,14 @@
 <template>
-    <tool-content :vertical="{
-        enabled: true,
-        top: {
-            class: '!h-[15%]'
-        },
-        bottom: {
-            class: '!h-[85%]'
-        }
-    }" :output="{
+    <tool-content :output="{
         area: {
             label: '列表'
         },
-    }" :actions="{
-        area: {
-            label: '搜索'
-        }
     }">
+        <template #input>
+            <tool-area label="搜索">
+                <n-input size="small" placeholder="搜索状态码" v-model:value="searchKey" clearable />
+            </tool-area>
+        </template>
         <template #output>
             <n-list bordered>
                 <n-list-item v-for="groupItem in result.group" class="!p-[10px]">
@@ -36,9 +29,6 @@
                     </n-thing>
                 </n-list-item>
             </n-list>
-        </template>
-        <template #actions>
-            <n-input placeholder="搜索状态码" v-model:value="searchKey"></n-input>
         </template>
     </tool-content>
 </template>

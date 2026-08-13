@@ -6,13 +6,9 @@
         area: {
             label: '列表'
         },
-    }" :actions="{
-        area: {
-            label: '搜索'
-        }
     }">
         <template #input>
-            <tool-area label="输入">
+            <tool-area label="搜索">
                 <n-input size="small" placeholder="搜索ASCII码, 支持十进制、16 进制、八进制、二进制、code" v-model:value="searchKey"
                     clearable />
             </tool-area>

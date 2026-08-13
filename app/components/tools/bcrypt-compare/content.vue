@@ -25,6 +25,8 @@
 </template>
 <script setup lang="ts">
 import bcrypt from "bcryptjs";
+// //@ts-ignore
+// const bcrypt = bcryptMaybeDefault.default || bcryptMaybeDefault;
 export type Model = {
     text: string,
     hash: string,
