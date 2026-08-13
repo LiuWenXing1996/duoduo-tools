@@ -1,23 +1,34 @@
-import loader, { type Monaco } from "@monaco-editor/loader";
+import "monaco-editor/esm/nls.messages.zh-cn.js";
+import * as monaco from "monaco-editor";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
+import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker";
+import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker";
+import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker";
+import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
+let MonacoEnvironment = self.MonacoEnvironment || {};
+// console.log(a);
+MonacoEnvironment = {
+  ...MonacoEnvironment,
+  getWorker(_, label) {
+    if (label === "json") {
+      return new jsonWorker();
+    }
+    if (label === "css" || label === "scss" || label === "less") {
+      return new cssWorker();
+    }
+    if (label === "html" || label === "handlebars" || label === "razor") {
+      return new htmlWorker();
+    }
+    if (label === "typescript" || label === "javascript") {
+      return new tsWorker();
+    }
+    return new editorWorker();
+  },
+};
 
 export const useMonacoLoader = () => {
-  const router = useRouter();
-  const monacoLibUrl = "/static/node_modules/monaco-editor/min/vs";
-  // const halfUrlRouter = router.resolve(monacoLibUrl);
-  const absoluteFullUrl = new URL(
-    monacoLibUrl,
-    window.location.origin,
-  ).toString();
-  loader.config({
-    "vs/nls": { availableLanguages: { "*": "zh-cn" } },
-    paths: {
-      vs: absoluteFullUrl,
-      // vs: monacoLibUrl,
-      // vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/dev/vs",
-    },
-  });
   const store = shallowRef<{
-    lib: Monaco | undefined;
+    lib: typeof monaco | undefined;
     loading: boolean;
   }>({
     lib: undefined,
@@ -39,14 +50,13 @@ export const useMonacoLoader = () => {
         }
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
   const get = async () => {
     store.value = {
       ...store.value,
       loading: true,
     };
-    const monaco = await loader.init();
     store.value = {
       ...store.value,
       lib: monaco,
