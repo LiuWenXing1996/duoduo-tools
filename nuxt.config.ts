@@ -48,7 +48,7 @@ export default defineNuxtConfig({
   // },
   vite: {
     plugins: [
-      // nodePolyfills(),
+      nodePolyfills(),
       viteCompression(),
       AutoImport({
         dts: true,
