@@ -11,12 +11,6 @@ export interface ToolMeta {
       }
     | string
   )[];
-  v2?: {
-    input: Record<string, unknown>;
-    output: Record<string, unknown>;
-    service: Function;
-    content: Component | RenderFunction;
-  };
 }
 
 export const defineToolMeta = (meta: ToolMeta) => meta;

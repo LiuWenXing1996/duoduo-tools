@@ -5,7 +5,6 @@
     <global-css-vars />
     <n-message-provider>
       <n-dialog-provider>
-
         <NuxtLayout>
           <NuxtPage keepalive />
         </NuxtLayout>

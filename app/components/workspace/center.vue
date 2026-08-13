@@ -34,7 +34,7 @@
                     <div class="size-full p-[10px]">
                         <template v-for="item in editTabs.openedTabNames.value" :key="item">
                             <div class="size-full" v-show="item === editTabs.currentTabName.value">
-                                <tool-render enableV2 :name="item" />
+                                <tool-render :name="item" />
                             </div>
                         </template>
                     </div>

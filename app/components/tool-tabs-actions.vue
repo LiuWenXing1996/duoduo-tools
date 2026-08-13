@@ -20,19 +20,9 @@ const [
     DefinePreferenceTemplate,
     ReusePreferenceTemplate
 ] = createReusableTemplate<{ iconName: string, label: string }>()
-const router = useRouter();
 const editTabs = useEditTabs();
 const options: ComputedRef<MenuOption[]> = computed(() => {
     return [
-        {
-            label: () => {
-                return h(ReusePreferenceTemplate, {
-                    iconName: "tool-tabs-actions-refresh",
-                    label: "刷新当前",
-                })
-            },
-            key: 'refresh',
-        },
         {
             label: () => {
                 return h(ReusePreferenceTemplate, {
@@ -64,9 +54,6 @@ const options: ComputedRef<MenuOption[]> = computed(() => {
 })
 
 const handleSelect = (key: string) => {
-    if (key === "refresh") {
-        router.go(0)
-    }
     if (key === "close") {
         editTabs.closeCurrentTab()
     }

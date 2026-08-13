@@ -5,10 +5,7 @@
             loading ? '!opacity-0' : ''
         ].join(' ')">
             <template v-if="tool">
-                <template v-if="enableV2">
-                    <component :is="tool.meta?.v2?.content"></component>
-                </template>
-                <component v-else :is="contentComponentRequest.data.value"></component>
+                <component :is="contentComponentRequest.data.value"></component>
             </template>
             <template v-else>
                 {{ `工具 ${name} 未实现` }}
@@ -19,7 +16,6 @@
 <script setup lang="ts">
 const props = defineProps<{
     name: string,
-    enableV2?: boolean
 }>()
 const refs = toRefs(props)
 const loadingKeep = useAutoBoolean({

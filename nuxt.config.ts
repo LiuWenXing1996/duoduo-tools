@@ -54,9 +54,6 @@ export default defineNuxtConfig({
       },
     ],
   },
-  // routeRules: {
-  //   "/tools/**": { ssr: false },
-  // },
   vite: {
     plugins: [
       nodePolyfills(),
