@@ -38,7 +38,7 @@
                                     <div class="size-full flex">
                                         <div v-for="i in itemPer" class="p-[5px] flex-1">
                                             <template v-if="item.items[i - 1]">
-                                                <ReuseItemTemplate :item="item.items[i - 1]" />
+                                                <ReuseItemTemplate :item="item.items[i - 1]!" />
                                             </template>
                                         </div>
                                     </div>
@@ -189,20 +189,25 @@ const result = computed(() => {
         data: Record<string, AsciiItem>
     }> = {};
     listSearched.value.forEach(e => {
-        if (!groups[e.group]) {
-            groups[e.group] = {
+        let targetGroup = groups[e.group];
+        if (!targetGroup) {
+            targetGroup = {
                 meta: groupMetaMap[e.group],
                 data: {}
             }
         }
-        groups[e.group].data[e.hex] = {
+        targetGroup.data[e.hex] = {
             ...e
         }
+        groups[e.group] = targetGroup;
     })
     const list: VirtualListItem[] = [];
     let keyIndex = 0;
     for (const key in groups) {
         const group = groups[key];
+        if (!group) {
+            continue;
+        }
 
         const dataList = Object.values(group.data);
         list.push({
@@ -215,7 +220,7 @@ const result = computed(() => {
         })
         const dataListCluster = chunk(dataList, itemPerVal);
         for (const key in dataListCluster) {
-            const items = dataListCluster[key];
+            const items = dataListCluster[key] || [];
             list.push({
                 keyIndex: keyIndex++,
                 type: "items",
