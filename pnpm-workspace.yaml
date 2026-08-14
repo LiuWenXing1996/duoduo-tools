@@ -1,4 +1,5 @@
 allowBuilds:
+  '@logicflow/core': true
   canvas: true
   core-js-pure: true
   create-code-easy: true
@@ -8,5 +9,5 @@ allowBuilds:
   vue-demi: true
 minimumReleaseAgeExclude:
   - electron@43.4.0
-onlyBuiltDependencies: 
+onlyBuiltDependencies:
   - electron

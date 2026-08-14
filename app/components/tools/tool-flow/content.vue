@@ -1,0 +1,190 @@
+<template>
+    <tool-content :output="{
+        scroll: {
+            disabled: true
+        },
+        area: {
+            label: '编辑'
+        }
+    }">
+        <template #input>
+
+        </template>
+        <template #output>
+            <div class="relative size-full ">
+                <div class="absolute top-0 bottom-0 left-0 right-0">
+                    <div ref="editorContainer" class="size-full tool-flow-container"></div>
+                </div>
+            </div>
+        </template>
+    </tool-content>
+</template>
+
+<script setup lang="tsx">
+
+import { createToolFlow } from './flow';
+import { areaTransferTool } from "~/components/tools/area-transfer/meta";
+import { z } from "zod";
+import { zodJsonSchemaToLogicFlowNodeProperties } from "~/core/tool";
+
+const editorContainerRef = useTemplateRef("editorContainer");
+const inputSchema = areaTransferTool.inputSchema;
+const outputSchema = areaTransferTool.outputSchema;
+const inputJsonSchema = z.toJSONSchema(inputSchema);
+const outputJsonSchema = z.toJSONSchema(outputSchema);
+
+
+console.log(JSON.stringify(inputJsonSchema, null, 2));
+const inputNodeProperties = zodJsonSchemaToLogicFlowNodeProperties(inputJsonSchema);
+const outputNodeProperties = zodJsonSchemaToLogicFlowNodeProperties(outputJsonSchema);
+watch([
+    () => editorContainerRef.value
+], async ([editorContainer]) => {
+    if (editorContainer) {
+
+        const lf = createToolFlow({ container: editorContainer });
+        lf.render({
+            nodes: [
+                {
+                    id: 'node_1',
+                    type: 'tool-node',
+                    x: 200,
+                    y: 160,
+                    properties: {
+                        tableName: 'Settings',
+                        inputFields: inputNodeProperties.fields,
+                        outputFields: outputNodeProperties.fields,
+                    },
+                },
+                {
+                    id: 'node_2',
+                    type: 'tool-node',
+                    x: 400,
+                    y: 160,
+                    properties: {
+                        tableName: 'Settingsdd',
+                        inputFields: inputNodeProperties.fields,
+                        outputFields: outputNodeProperties.fields,
+                        fields: [
+                            {
+                                key: 'id',
+                                type: 'string',
+                            },
+                            {
+                                key: 'key',
+                                type: 'integer',
+                            },
+                            {
+                                key: 'value',
+                                type: 'string',
+                            },
+                        ],
+                    },
+                },
+            ],
+            edges: [],
+        })
+    }
+})
+
+</script>
+<style lang="less">
+.tool-flow-container {
+    .table-container {
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .table-fields-container {
+        display: flex;
+
+        .table-fields {
+            width: 50%;
+        }
+    }
+
+    .table-node {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+    }
+
+    .table-node::before {
+        display: block;
+        width: 100%;
+        height: 8px;
+        background: #d79b00;
+        content: '';
+    }
+
+    .table-node.table-color-1::before {
+        background: #9673a6;
+    }
+
+    .table-node.table-color-2::before {
+        background: #dae8fc;
+    }
+
+    .table-node.table-color-3::before {
+        background: #82b366;
+    }
+
+    .table-node.table-color-4::before {
+        background: #f8cecc;
+    }
+
+    .table-name {
+        height: 28px;
+        font-size: 14px;
+        line-height: 28px;
+        text-align: center;
+        background: #f5f5f5;
+    }
+
+    .table-feild {
+        display: flex;
+        justify-content: space-between;
+        height: 24px;
+        padding: 0 10px;
+        font-size: 12px;
+        line-height: 24px;
+    }
+
+    .feild-type {
+        color: #9f9c9f;
+    }
+
+    /* 自定义锚点样式 */
+
+    .custom-anchor {
+        cursor: crosshair;
+        fill: #d9d9d9;
+        stroke: #999;
+        stroke-width: 1;
+        rx: 3;
+        ry: 3;
+    }
+
+    .custom-anchor:hover {
+        fill: #ff7f0e;
+        stroke: #ff7f0e;
+    }
+
+    .lf-node-not-allow .custom-anchor:hover {
+        cursor: not-allowed;
+        fill: #d9d9d9;
+        stroke: #999;
+    }
+
+    .incomming-anchor {
+        stroke: #d79b00;
+    }
+
+    .outgoing-anchor {
+        stroke: #82b366;
+    }
+}
+</style>

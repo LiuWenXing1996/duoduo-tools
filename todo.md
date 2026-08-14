@@ -1,8 +1,10 @@
 # 待办事项
 
 - 两件事
-  - 先把已实现的工具都转为新版布局
+  - 先把已实现的工具都转为新版布局( 已完成 )
   - 然后尝试工具链功能
+- [ ] 探索如何在 electron 中使用 vue-router 的 history 模式
+  - [ ] 似乎只要在 electron 中实现类似于 Nginx 的 try_files 效果就行了
 
 - [ ] 常用英文单词查询
 - [ ] uuid 生成支持设置是否大写 https://uutool.cn/uuid/

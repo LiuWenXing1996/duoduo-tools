@@ -1,5 +1,27 @@
 import { isFunction } from "radash";
-import { areaTransferMap } from "./utils";
+import { areaTransferMap, areaTypes } from "./utils";
+import { defineTool } from "~/core/tool";
+import { z } from "zod";
+
+export const areaTransferTool = defineTool({
+  name: "area-transfer",
+  inputSchema: z.object({
+    area: z.number().int().positive().describe("要转换的面积"),
+    unit: z.enum(areaTypes).describe("面积单位"),
+    targetUnit: z.enum(areaTypes).describe("目标面积单位"),
+  }),
+  outputSchema: z.object({
+    area: z.number().int().positive().describe("转换后的面积"),
+  }),
+  run: (input) => {
+    const { area, unit, targetUnit } = input;
+    const km = areaTransferMap[unit].toKm(area);
+    const targetArea = areaTransferMap[targetUnit].fromKm(km);
+    return {
+      area: targetArea,
+    };
+  },
+});
 
 export default defineToolMeta({
   title: "面积转换器",
