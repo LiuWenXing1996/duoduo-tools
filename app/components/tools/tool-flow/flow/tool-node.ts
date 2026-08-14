@@ -8,6 +8,7 @@ import {
   type Model,
 } from "@logicflow/core";
 import type { ToolEdgeModel } from "./tool-edge";
+import { max } from "radash";
 // TODO:继续实现工具自定义节点
 interface ToolNodeProps extends IHtmlNodeProps {
   model: ToolNodeModel;
@@ -34,7 +35,7 @@ class ToolNode extends HtmlNode<ToolNodeProps> {
   override setHtml(rootEl: SVGForeignObjectElement) {
     rootEl.innerHTML = "";
     const {
-      properties: { inputFields, outputFields, tableName },
+      properties: { inputFields = [], outputFields = [], tableName },
     } = this.props.model;
     rootEl.setAttribute("class", "table-container");
     const container = document.createElement("div");
@@ -138,9 +139,10 @@ class ToolNodeModel extends HtmlNodeModel<ToolNodeModelProperties> {
   override setAttributes() {
     this.width = 200;
     const {
-      properties: { inputFields, outputFields },
+      properties: { inputFields = [], outputFields = [] },
     } = this;
-    this.height = 60 + inputFields.length * 24;
+    const length = max([inputFields.length, outputFields.length]);
+    this.height = 60 + length * 24;
     const circleOnlyAsTarget = {
       message: "只允许从右边的锚点连出",
       validate: (sourceNode, targetNode, sourceAnchor) => {
@@ -165,7 +167,7 @@ class ToolNodeModel extends HtmlNodeModel<ToolNodeModelProperties> {
       height,
       isHovered,
       isSelected,
-      properties: { fields, inputFields, outputFields, isConnection },
+      properties: { fields, inputFields = [], outputFields = [], isConnection },
     } = this;
     const anchors: Model.AnchorConfig[] = [];
     inputFields.forEach((field, index) => {
@@ -175,6 +177,7 @@ class ToolNodeModel extends HtmlNodeModel<ToolNodeModelProperties> {
         id: `${id}_${field.key}_left`,
         edgeAddable: false,
         type: "left",
+        name: field.key,
       });
     });
     outputFields.forEach((field, index) => {
@@ -183,6 +186,7 @@ class ToolNodeModel extends HtmlNodeModel<ToolNodeModelProperties> {
         y: y - height / 2 + 60 + index * 24,
         id: `${id}_${field.key}_right`,
         type: "right",
+        name: field.key,
       });
     });
     // fields.forEach((feild, index) => {

@@ -8,7 +8,20 @@
         }
     }">
         <template #input>
-
+            <tool-area>
+                <n-button size="small" type="primary" @click="getGraphData">
+                    获取图数据
+                </n-button>
+                <n-button size="small" type="primary" @click="run">
+                    运行
+                </n-button>
+                <n-button size="small" type="primary" @click="getRecords">
+                    获取记录
+                </n-button>
+            </tool-area>
+            <tool-area>
+                <n-log :rows="5" :log="log" />
+            </tool-area>
         </template>
         <template #output>
             <div class="relative size-full ">
@@ -26,67 +39,62 @@ import { createToolFlow } from './flow';
 import { areaTransferTool } from "~/components/tools/area-transfer/meta";
 import { z } from "zod";
 import { zodJsonSchemaToLogicFlowNodeProperties } from "~/core/tool";
+import type LogicFlow from '@logicflow/core';
+import { Chain, createChainFromFLow } from '~/core/chain';
+import { createFlowGraphNode, type FlowGraphData } from '~/core/flow';
+import { create } from 'lodash';
+import { allDuoTools } from './all-tools';
 
 const editorContainerRef = useTemplateRef("editorContainer");
-const inputSchema = areaTransferTool.inputSchema;
-const outputSchema = areaTransferTool.outputSchema;
-const inputJsonSchema = z.toJSONSchema(inputSchema);
-const outputJsonSchema = z.toJSONSchema(outputSchema);
 
+let lf: LogicFlow | null = null;
 
-console.log(JSON.stringify(inputJsonSchema, null, 2));
-const inputNodeProperties = zodJsonSchemaToLogicFlowNodeProperties(inputJsonSchema);
-const outputNodeProperties = zodJsonSchemaToLogicFlowNodeProperties(outputJsonSchema);
 watch([
     () => editorContainerRef.value
 ], async ([editorContainer]) => {
     if (editorContainer) {
 
-        const lf = createToolFlow({ container: editorContainer });
-        lf.render({
-            nodes: [
-                {
-                    id: 'node_1',
-                    type: 'tool-node',
-                    x: 200,
-                    y: 160,
-                    properties: {
-                        tableName: 'Settings',
-                        inputFields: inputNodeProperties.fields,
-                        outputFields: outputNodeProperties.fields,
-                    },
-                },
-                {
-                    id: 'node_2',
-                    type: 'tool-node',
-                    x: 400,
-                    y: 160,
-                    properties: {
-                        tableName: 'Settingsdd',
-                        inputFields: inputNodeProperties.fields,
-                        outputFields: outputNodeProperties.fields,
-                        fields: [
-                            {
-                                key: 'id',
-                                type: 'string',
-                            },
-                            {
-                                key: 'key',
-                                type: 'integer',
-                            },
-                            {
-                                key: 'value',
-                                type: 'string',
-                            },
-                        ],
-                    },
-                },
-            ],
-            edges: [],
-        })
+        lf = createToolFlow({ container: editorContainer });
+        lf.render({})
     }
 })
+const getGraphData = () => {
+    if (!lf) {
+        return
+    }
 
+    const graphData = lf.getGraphRawData();
+    console.log(graphData);
+
+}
+const chains: Chain[] = []
+const run = () => {
+    if (!lf) {
+        return
+    }
+    const graphData = lf.getGraphRawData() as FlowGraphData;
+    const chain = createChainFromFLow(graphData, allDuoTools);
+    chains.push(chain);
+    chain.run();
+    const records = chain.getRecords();
+    records.map(record => {
+        const list = record.records
+        list.map((item) => {
+            const { time, node, description, returns } = item;
+            const r = `${time} ${description}`
+            logList.value.push(r);
+        })
+
+    })
+}
+const log = computed(() => {
+    return logList.value.join('\n');
+})
+const logList = ref<string[]>([]);
+const getRecords = () => {
+    const records = chains.map((item) => item.getRecords());
+    console.log(records);
+}
 </script>
 <style lang="less">
 .tool-flow-container {

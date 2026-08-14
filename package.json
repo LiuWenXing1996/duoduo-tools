@@ -20,6 +20,7 @@
     "@angelofana/emoji-json": "^15.1.1",
     "@css-render/vue3-ssr": "^0.15.14",
     "@logicflow/core": "^2.2.5",
+    "@logicflow/extension": "^2.3.1",
     "@monaco-editor/loader": "^1.4.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@types/bcryptjs": "^2.4.6",

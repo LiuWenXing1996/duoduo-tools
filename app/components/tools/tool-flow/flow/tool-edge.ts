@@ -18,6 +18,38 @@ export class ToolEdgeModel extends BezierEdgeModel {
     const data = super.getData();
     data.sourceAnchorId = this.sourceAnchorId;
     data.targetAnchorId = this.targetAnchorId;
+
+    if (this.sourceAnchorId) {
+      const sourceNode = this.graphModel.getNodeModelById(this.sourceNodeId);
+      if (sourceNode) {
+        // 从节点的锚点数据中查找对应的锚点
+        const anchorData = sourceNode.anchors?.find(
+          (anchor) => anchor.id === this.sourceAnchorId,
+        );
+        if (anchorData) {
+          // 将锚点的业务数据合并到边的properties中，或者单独存储
+          data.properties = data.properties || {};
+          data.properties.data = data.properties.data || {};
+          data.properties.data.sourceKey = anchorData.name;
+        }
+      }
+    }
+    if (this.targetAnchorId) {
+      const targetNode = this.graphModel.getNodeModelById(this.targetNodeId);
+      if (targetNode) {
+        // 从节点的锚点数据中查找对应的锚点
+        const anchorData = targetNode.anchors?.find(
+          (anchor) => anchor.id === this.targetAnchorId,
+        );
+        if (anchorData) {
+          // 将锚点的业务数据合并到边的properties中，或者单独存储
+          data.properties = data.properties || {};
+          data.properties.data = data.properties.data || {};
+          data.properties.data.targetKey = anchorData.name;
+        }
+      }
+    }
+
     return data;
   }
 

@@ -1,13 +1,16 @@
 import { z } from "zod";
 
-export interface Tool<I extends z.ZodTypeAny, O extends z.ZodTypeAny> {
+export interface Tool<
+  I extends z.ZodObject = z.ZodObject,
+  O extends z.ZodObject = z.ZodObject,
+> {
   name: string;
   inputSchema: I;
   outputSchema: O;
   run: (inputs: z.infer<I>) => z.infer<O>;
 }
 
-export const defineTool = <I extends z.ZodTypeAny, O extends z.ZodTypeAny>(
+export const defineTool = <I extends z.ZodObject, O extends z.ZodObject>(
   tool: Tool<I, O>,
 ): Tool<I, O> => tool;
 
